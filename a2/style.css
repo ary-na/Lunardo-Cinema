@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Ballet&family=Inter:wght@200;300;400;600;700&family=Quicksand:wght@300;400;500&display=swap');
+/*  * Code sourced and adapted from:
+    * https://fonts.google.com/?sort=popularity */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700&family=Quicksand:wght@300;400;500&display=swap');
+
+/* font-family: 'Cormorant Garamond', serif; */
 
 * {
     margin: 0;
@@ -6,17 +10,20 @@
     box-sizing: border-box;
 }
 
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss3_var */
 :root {
     --font-size-h1: 30px;
     --font-size-h2: 20px;
     --font-size-body: 15px;
     --padding: 24px 40px;
     --margin: 0 40px;
-    --radius: 10px;
+    --radius: 2px;
     --color-black: #000000;
     --color-white: #ffffff;
     --color-grey-primary: #969C9C;
     --color-grey-secondary: #DBEDF3;
+    --color-grey-tertiary: #0000001E;
     --color-blue-primary: #283149;
     --color-blue-secondary: #262E45;
     --color-blue-tertiary: #404B69;
@@ -27,6 +34,9 @@ body {
     background-color: var(--color-blue-primary);
     font-family: 'Inter', sans-serif;
 }
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named */
 
 /* Grid layout */
 .grid-container {
@@ -40,11 +50,13 @@ body {
     'footer footer footer footer';
 }
 
+/*  * Code sourced and adapted from:
+    * https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+
 /* Header */
 header {
     grid-area: header;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -68,18 +80,26 @@ header h1 {
     display: none;
 }
 
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_navbar_on_image
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sticky_element */
+
 /* Nav */
 nav {
     grid-area: nav;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    /* Negative top to resolve issue with Safari's compact tab layout */
+    top: -0.3px;
     z-index: 4;
     background-color: var(--color-blue-primary);
 }
 
+/*  * Code sourced and adapted from:
+    * https://www.tutorialrepublic.com/faq/how-to-remove-the-space-between-inline-block-elements-in-css.php */
 nav ul {
     font-size: 0;
 }
@@ -99,6 +119,8 @@ nav ul li a:link, nav ul li a:visited {
     font-size: 14px;
 }
 
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
 nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
     color: var(--color-grey-secondary);
     border-bottom: 2px var(--color-grey-secondary) solid;
@@ -126,7 +148,8 @@ main section {
     'article article';
 }
 
-
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/CSS/css_grid_item.asp */
 .about-us img {
     margin: 0 auto;
     grid-area: background;
@@ -136,6 +159,8 @@ main section {
 
 }
 
+/*  * Code sourced and adapted from:
+    * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout */
 .about-us article:first-of-type {
     grid-area: about;
     margin: auto auto;
@@ -144,6 +169,8 @@ main section {
     border: #99FFFF solid 2px;
 }
 
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_font_responsive */
 .about-us article:first-of-type h1 {
     font-size: 4vmin;
     font-family: 'Quicksand', sans-serif;
@@ -172,6 +199,16 @@ main section {
 
 }
 
+/* Movie Trailer */
+.movie-trailer {
+
+}
+
+/* Book Ticket */
+.book-ticket {
+    background-color: var(--color-grey-secondary);
+}
+
 /* Footer */
 footer {
     grid-area: footer;
@@ -182,7 +219,8 @@ footer {
     padding: var(--padding);
 }
 
-
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/csS/css3_buttons.asp */
 footer button {
     border: none;
     border-radius: var(--radius);
@@ -190,41 +228,67 @@ footer button {
     padding: 10px;
     background-color: var(--color-blue-primary);
     color: var(--color-grey-primary);
+    transition-duration: 0.4s;
 }
 
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/csS/tryit.asp?filename=trycss_buttons_shadow */
 footer button:hover {
     color: var(--color-grey-secondary);
+    box-shadow: 0 6px 8px 0 var(--color-grey-tertiary), 0 6px 8px 0 var(--color-grey-tertiary);
 }
 
+/* Aside */
+aside {
+    background-color: var(--color-grey-secondary);
+    padding: var(--padding);
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_template2_grid */
 
 /* Tablet: responsive layout */
 @media (max-width: 1000px) {
+
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+      'header header'
+      'nav nav'
+      'main main'
+      'footer footer';
+    }
 }
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
 
 /* Mobile: responsive layout */
 @media screen and (max-width: 600px) {
 
     /* Mobile: layout */
     .grid-container {
+        grid-template-columns: 1fr;
         grid-template-areas:
-      'header header header header'
-      'nav nav nav nav'
-      'main main main main'
-      'first-article first-article first-article first-article'
-      'second-article second-article second-article second-article'
-      'third-article third-article third-article third-article'
-      'fourth-article fourth-article fourth-article fourth-article'
-      'footer footer footer footer';
+      'header'
+      'nav'
+      'main'
+      'footer';
     }
+
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_justify-content_flex-end
+        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2 */
 
     /* Mobile: Header */
     header {
         flex-direction: row;
         justify-content: space-between;
         align-content: baseline;
+        position: -webkit-sticky;
         position: sticky;
-        z-index: 5;
         top: 0;
+        z-index: 5;
     }
 
     header img {
@@ -244,11 +308,7 @@ footer button:hover {
         padding: 12px;
     }
 
-    .fa-bars:hover {
-        color: var(--color-grey-secondary);
-    }
-
-    .fa-close:hover {
+    .fa-bars:hover, .fa-close:hover {
         color: var(--color-grey-secondary);
     }
 
@@ -257,11 +317,14 @@ footer button:hover {
         display: none;
     }
 
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_overlay */
     nav.responsive {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
+        top: 0;
         bottom: 0;
     }
 

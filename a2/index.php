@@ -7,41 +7,43 @@
 
     <!-- Keep wireframe.css for debugging, add your css to style.css -->
     <link id='wireframecss' type='text/css' rel='stylesheet' href='../wireframe.css' disabled>
-    <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t=<?= filemtime("style.css"); ?>">
+    <link id='stylecss' type="text/css" rel="stylesheet" href='style.css?t=<?= filemtime("style.css"); ?>'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link rel='icon' href='../../media/logo.png' type='image/x-icon'>
     <script src='../wireframe.js'></script>
+    <!-- Code sourced and adapted from: https://api.jquery.com/ready/ -->
+    <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
     <script src='lunardo.js'></script>
 </head>
-<body>
 
+<body>
 <div class='grid-container'>
 
     <header>
         <img src='../../media/logo.png' alt='Lunardo Cinema Logo'/>
         <h1>LUNARDO</h1>
         <div class='icon'>
-            <a href='javascript:void(0);' id='iconMenu' onclick='mobileTopNav("menu")'>
+            <a href='javascript:void(0);' id='iconBars' onclick='mobileNav()'>
                 <i class='fa fa-bars'></i>
             </a>
-            <a href='javascript:void(0);' id='iconClose' onclick='mobileTopNav("close")'>
+            <a href='javascript:void(0);' id='iconClose' onclick='mobileNav()'>
                 <i class='fa fa-close'></i>
             </a>
         </div>
     </header>
 
-    <nav class='top-nav' id='topNav'>
+    <nav id='topNav' class='top-nav'>
         <ul>
-            <li><a href='#link'>Now Showing</a></li>
-            <li><a href='#link'>Seats & Prices</a></li>
-            <li><a href='booking.php'>Booking</a></li>
-            <li><a href='#link'>About Us</a></li>
+            <li><a href='#aboutUs' onclick='mobileNav()'>About Us</a></li>
+            <li><a href='#seatsAndPrices' onclick='mobileNav()'>Seats & Prices</a></li>
+            <li><a href="#nowShowing" onclick='mobileNav()'>Now Showing</a></li>
+            <li><a href='booking.php' onclick='mobileNav()'>Booking</a></li>
         </ul>
     </nav>
 
     <main>
-        <section class="about-us">
-            <img src="../../media/lunar.png" alt='Background image of a dark moon'>
+        <section id='aboutUs' class='about-us'>
+            <img src='../../media/lunar.png' alt='Image of a dark moon'>
             <article>
                 <h1>Welcome to LUNARDO Cinema</h1>
                 <p>We are proud to bring you the best expirience when it comes to Cinema</p>
@@ -58,12 +60,12 @@
             </article>
         </section>
 
-        <section class="seats-and-prices">
-            sdfsdfdsf
+        <section id='seatsAndPrices' class='seats-and-prices'>
+            Seats and Prices
         </section>
 
-        <section class="now-showing">
-            sdfdsfdsf
+        <section id='nowShowing' class='now-showing'>
+            Now Showing
         </section>
 
 

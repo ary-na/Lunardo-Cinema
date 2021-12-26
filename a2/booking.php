@@ -1,43 +1,71 @@
 <!DOCTYPE html>
 <html lang='en'>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lunardo Booking Page</title>
-    
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Lunardo Cinema - Booking</title>
+
     <!-- Keep wireframe.css for debugging, add your css to style.css -->
-    <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
-    <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t=<?= filemtime("style.css"); ?>">
+    <link id='wireframecss' type='text/css' rel='stylesheet' href='../wireframe.css' disabled>
+    <link id='stylecss' type='text/css' rel='stylesheet' href='style.css?t=<?= filemtime("style.css"); ?>'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='icon' href='../../media/logo.png' type='image/x-icon'>
     <script src='../wireframe.js'></script>
-  </head>
+    <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+    <script src='lunardo.js'></script>
+</head>
 
-  <body>
+<body>
 
-    <header>
-      <div>Put company logo and name here</div>
-    </header>
+<header>
+    <img src='../../media/logo.png' alt='Lunardo Cinema Logo'/>
+    <h1>LUNARDO</h1>
+    <div class='icon'>
+        <a href='javascript:void(0);' id='iconBars' onclick='mobileNav()'>
+            <i class='fa fa-bars'></i>
+        </a>
+        <a href='javascript:void(0);' id='iconClose' onclick='mobileNav()'>
+            <i class='fa fa-close'></i>
+        </a>
+    </div>
+</header>
 
-    <nav>
-      <div>Put website navigation links here</div>
-    </nav>
+<nav class='top-nav' id='topNav'>
+    <ul>
+        <li><a href='index.php' onclick='mobileNav()'>Home</a></li>
+    </ul>
+</nav>
 
-    <main>
-      <article id='Website Under Construction'>
-    <!-- Creative Commons image sourced from https://pixabay.com/en/maintenance-under-construction-2422173/ and used for educational purposes only -->
-        <img src='../../media/website-under-construction.png' alt='Website Under Construction' />
-      </article>
-    </main>
-    <footer>
-      <div>&copy;<script>
-        document.write(new Date().getFullYear());
-      </script> Put your name(s), student number(s) and group name here. Last modified <?= date ("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])); ?>.</div>
-      <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
-      <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
-    </footer>
-    <aside id="debug">
-      <hr>
-      <h3>Debug Area</h3>
-      <pre>
+<main>
+    <section id='movieTrailer' class='movie-trailer'>
+        Movie trailer
+    </section>
+
+    <section id='bookTicket' class='book-ticket'>
+        Book ticket
+    </section>
+
+
+</main>
+<footer>
+    <div>&copy;<script>
+            document.write(new Date().getFullYear());
+        </script>
+        Arian Najafi Yamchelo, s3910902. Last
+        modified <?= date('Y F d  H:i', filemtime($_SERVER['SCRIPT_FILENAME'])); ?>.
+    </div>
+    <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web
+        Programming course at RMIT University in Melbourne, Australia.
+    </div>
+    <div>
+        <button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button>
+    </div>
+</footer>
+
+<aside id='debug'>
+    <hr>
+    <h3>Debug Area</h3>
+    <pre>
 GET Contains:
 <?php print_r($_GET) ?>
 POST Contains:
@@ -45,7 +73,8 @@ POST Contains:
 SESSION Contains:
 <?php print_r($_SESSION) ?>
       </pre>
-    </aside>
+</aside>
 
-  </body>
+
+</body>
 </html>
