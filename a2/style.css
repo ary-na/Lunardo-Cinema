@@ -1,13 +1,11 @@
 /*  * Code sourced and adapted from:
     * https://fonts.google.com/?sort=popularity */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700&family=Quicksand:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* font-family: 'Cormorant Garamond', serif; */
-
-* {
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 /*  * Code sourced and adapted from:
@@ -28,102 +26,124 @@
     --color-blue-secondary: #262E45;
     --color-blue-tertiary: #404B69;
     --color-green: #00818A;
+    --font-family-primary: 'Inter', sans-serif;
+    --font-family-secondary: 'Raleway', sans-serif;
+    --font-family-tertiary: 'Quicksand', sans-serif;
 }
 
 body {
     background-color: var(--color-blue-primary);
-    font-family: 'Inter', sans-serif;
+    color: var(--color-grey-secondary);
+    line-height: 2;
+    font-family: var(--font-family-primary);
+    font-weight: 300;
 }
 
-/*  * Code sourced and adapted from:
-    * https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named */
-
-/* Grid layout */
+/* Mobile: layout */
 .grid-container {
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-    'header header header header'
-    'nav nav nav nav'
-    'main main main main'
-    'footer footer footer footer';
+      'header'
+      'nav'
+      'main'
+      'footer';
 }
 
 /*  * Code sourced and adapted from:
-    * https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_justify-content_flex-end
+        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2 */
 
-/* Header */
+/* Mobile: Header */
 header {
     grid-area: header;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 1em;
     background-color: var(--color-blue-primary);
-    padding: var(--padding);
-    gap: 10px;
 }
 
 header img {
-    width: 65px;
+    display: none;
 }
 
 header h1 {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 100;
-    font-size: 20px;
+    font-family: var(--font-family-tertiary);
+    font-weight: 400;
+    font-size: 1.5rem;
     color: var(--color-grey-secondary);
 }
 
 .icon {
+    display: block;
+    font-size: 18px;
+}
+
+#iconClose {
     display: none;
 }
 
-/*  * Code sourced and adapted from:
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_navbar_on_image
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sticky_element */
+.fa-bars, .fa-close {
+    color: var(--color-grey-primary);
+    padding: 10px 0 10px 10px;
+}
 
-/* Nav */
+.fa-bars:hover, .fa-close:hover {
+    color: var(--color-grey-secondary);
+}
+
+/* Mobile: Nav */
 nav {
     grid-area: nav;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: -webkit-sticky;
-    position: sticky;
-    /* Negative top to resolve issue with Safari's compact tab layout */
-    top: -0.3px;
+    display: none;
     z-index: 4;
-    background-color: var(--color-blue-primary);
-}
-
-/*  * Code sourced and adapted from:
-    * https://www.tutorialrepublic.com/faq/how-to-remove-the-space-between-inline-block-elements-in-css.php */
-nav ul {
-    font-size: 0;
-}
-
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    padding: 14px 10px;
+    padding: 10px 10px;
 }
 
 nav ul li a:link, nav ul li a:visited {
+    text-decoration: none;
     color: var(--color-grey-primary);
     text-align: center;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
     padding: 12px 16px;
-    font-size: 14px;
 }
 
 /*  * Code sourced and adapted from:
-    * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
-nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_overlay */
+nav.responsive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--color-blue-primary);
+    z-index: 4;
+    top: 0;
+}
+
+nav.responsive ul {
+    width: 100%;
+}
+
+nav.responsive ul li {
+    display: block;
+}
+
+nav.responsive ul li a:link, nav.responsive ul li a:visited {
+    display: block;
+    font-size: 20px;
+}
+
+nav.responsive ul li a:hover, nav.responsive ul li a:active, nav.responsive ul li a:focus {
     color: var(--color-grey-secondary);
-    border-bottom: 2px var(--color-grey-secondary) solid;
+    background-color: var(--color-blue-secondary);
+    border-radius: 5px;
+    transition: 0.5s;
 }
 
 /* Main */
@@ -138,65 +158,290 @@ main section {
 }
 
 /* About Us */
-.about-us {
+section.about-us {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-    'background background'
-    'about about'
-    'article article'
-    'article article';
+    'first-article'
+    'first-article'
+    'second-article'
+    'third-article';
 }
 
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/CSS/css_grid_item.asp */
-.about-us img {
-    margin: 0 auto;
-    grid-area: background;
-    grid-row: 2/3;
-    width: 50%;
-    border: #99FFFF solid 2px;
 
-}
 
 /*  * Code sourced and adapted from:
-    * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout */
-.about-us article:first-of-type {
-    grid-area: about;
-    margin: auto auto;
-    grid-row-start: 1;
+    * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
+    * https://www.w3schools.com/CSSref/tryit.asp?filename=trycss_background-position
+    * https://www.w3docs.com/snippets/css/how-to-center-the-content-in-grid.html */
+
+section.about-us article:nth-child(1) {
+    grid-area: first-article;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url("../../media/lunar.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
     color: var(--color-grey-secondary);
-    border: #99FFFF solid 2px;
 }
 
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_font_responsive */
-.about-us article:first-of-type h1 {
-    font-size: 4vmin;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 100;
+
+section.about-us article:nth-child(1) h1 {
+    font-size: 1.5rem;
+    font-family: var(--font-family-secondary);
+    font-weight: 200;
 }
 
-.about-us article:first-of-type p {
+section.about-us article:nth-child(1) h1 span {
+    font-size: 1.6rem;
+    font-family: var(--font-family-tertiary);
+    font-weight: 400;
+}
+
+section.about-us article:nth-child(1) p {
     font-size: 10px;
 }
 
-.about-us article:last-of-type {
+section.about-us article:nth-child(2) {
     padding: var(--padding);
-    grid-area: article;
+    grid-area: second-article;
     background-color: var(--color-blue-secondary);
-    column-span: 2;
-    border: #99FFFF solid 2px;
+}
+
+section.about-us article:nth-child(3) {
+    grid-area: third-article;
 }
 
 /* Seats and Prices */
 .seats-and-prices {
-    background-color: var(--color-grey-secondary);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    'article article'
+    'standard-seats first-class-seats'
+    'note note'
+    'prices prices';
+    background-color: var(--color-white);
 }
 
-/* Now Showing */
-.now-showing {
+.seats-and-prices article:nth-child(1) {
+    grid-area: article;
+    text-align: justify;
+    font-size: 1vh;
+    background-color: var(--color-white);
+    padding: 4em;
+    margin: 2vh;
+    border-radius: var(--radius);
+    box-shadow: 0 6px 8px 0 var(--color-grey-tertiary), 0 6px 8px 0 var(--color-grey-tertiary);
+}
 
+.seats-and-prices img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.seats-and-prices article:nth-child(2) {
+    grid-area: standard-seats;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.seats-and-prices article:nth-child(3) {
+    grid-area: first-class-seats;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.seats-and-prices article {
+    margin: 20px;
+}
+
+.seats-and-prices article:nth-child(3) span, .seats-and-prices article:nth-child(2) span {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-green);
+}
+
+.seats-and-prices article:nth-child(4) {
+    grid-area: note;
+    text-align: center;
+    font-style: italic;
+    border-bottom: 1px var(--color-blue-primary) solid;
+    margin: 2vmin;
+}
+
+.flex-prices ul li {
+    list-style: none;
+    padding: 20px 30px;
+    font-size: 1.4vmin;
+    font-weight: 200;
+    border: 1px var(--color-white) solid;
+    background-color: var(--color-grey-secondary);
+    color: var(--color-blue-primary);
+}
+
+.flex-prices > ul > li {
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    font-weight: 500;
+    font-size: 1.5vmin;
+}
+
+/*  * Code sourced and adapted from:
+    * https://stackoverflow.com/questions/36271967/how-to-prevent-content-from-re-sizing-a-flex-item */
+.flex-prices {
+    grid-area: prices;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Now Showing */
+section.now-showing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    gap: 2em;
+}
+
+section.now-showing > h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-grey-secondary);
+    font-weight: 400;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    background-color: var(--color-blue-secondary);
+}
+
+.grid-container-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+div.card {
+    width: 350px;
+    height: 800px;
+    position: relative;
+}
+
+div.card > article {
+    width: 350px;
+    height: 800px;
+    position: absolute;
+    transition: 0.5s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background-color: var(--color-blue-secondary);
+}
+
+div.card > article:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*  * Code sourced and adapted from:
+    * https://developer.mozilla.org/en-US/docs/Learn/CSS/Howto/Fill_a_box_with_an_image */
+div.card article > img {
+    width: 350px;
+    padding: 2px;
+}
+
+div.card article > h1 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+div.card article:nth-child(1) > h1 {
+    line-height: 0;
+}
+
+div.card article:nth-child(1) > h3 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 0.8em;
+    line-height: 0;
+}
+
+div.card article > ul {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: var(--color-blue-primary);
+    font-size: 14px;
+}
+
+div.card article > ul li {
+    list-style: none;
+    padding: 0 10px;
+    border: 2px var(--color-blue-secondary) solid;
+    color: var(--color-grey-secondary);
+}
+
+div.card article:nth-child(1) {
+    transform: rotateY(0deg);
+}
+
+div.card article:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--color-blue-secondary);
+    transform: rotateY(180deg);
+}
+
+div.card article:nth-child(2) h1 {
+    background-color: var(--color-green);
+    color: var(--color-grey-secondary);
+    padding: 1em;
+}
+
+div.card article:nth-child(2) p {
+    text-align: justify;
+    padding: 1em;
+}
+
+div.card article:nth-child(2) button {
+    display: block;
+    margin: auto 1em 1em;
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px;
+    background-color: var(--color-green);
+    color: var(--color-grey-secondary);
+    opacity: 0.6;
+    transition-duration: 0.4s;
+}
+
+div.card article:nth-child(2) button:hover, div.card article:nth-child(2) button:focus {
+    color: var(--color-grey-secondary);
+    opacity: 1;
+}
+
+
+div.card:hover article:nth-child(1), article.card:focus article:nth-child(1) {
+    transform: rotateY(180deg);
+}
+
+div.card:hover article:nth-child(2), div.card:focus article:nth-child(2) {
+    transform: rotateY(360deg);
 }
 
 /* Movie Trailer */
@@ -213,6 +458,7 @@ main section {
 footer {
     grid-area: footer;
     background-color: var(--color-grey-secondary);
+    color: var(--color-blue-secondary);
     height: auto;
     text-align: center;
     font-size: 12px;
@@ -233,7 +479,7 @@ footer button {
 
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/csS/tryit.asp?filename=trycss_buttons_shadow */
-footer button:hover {
+footer button:hover, footer button:focus {
     color: var(--color-grey-secondary);
     box-shadow: 0 6px 8px 0 var(--color-grey-tertiary), 0 6px 8px 0 var(--color-grey-tertiary);
 }
@@ -241,14 +487,37 @@ footer button:hover {
 /* Aside */
 aside {
     background-color: var(--color-grey-secondary);
-    padding: var(--padding);
+    color: var(--color-blue-secondary);
+    padding: 12px 16px;
 }
 
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_template2_grid */
 
+/* Desktop: responsive layout */
+@media (min-width: 1000px) {
+
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named */
+    /* Grid layout */
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+    'header header header header'
+    'nav nav nav nav'
+    'main main main main'
+    'footer footer footer footer';
+    }
+
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
+
 /* Tablet: responsive layout */
-@media (max-width: 1000px) {
+@media screen and (min-width: 600px) {
+
 
     .grid-container {
         grid-template-columns: 1fr 1fr;
@@ -258,93 +527,69 @@ aside {
       'main main'
       'footer footer';
     }
-}
-
-/*  * Code sourced and adapted from:
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
-
-/* Mobile: responsive layout */
-@media screen and (max-width: 600px) {
-
-    /* Mobile: layout */
-    .grid-container {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-      'header'
-      'nav'
-      'main'
-      'footer';
-    }
 
     /*  * Code sourced and adapted from:
-        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_justify-content_flex-end
-        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2 */
-
-    /* Mobile: Header */
+    * https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+    /* Header */
     header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-content: baseline;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        z-index: 5;
+        position: static;
+        flex-direction: column;
+        gap: 10px;
     }
 
     header img {
-        display: none;
+        width: 65px;
+        display: block;
     }
 
     .icon {
-        display: block;
-    }
-
-    #iconClose {
         display: none;
     }
 
-    .fa-bars, .fa-close {
-        color: var(--color-grey-primary);
-        padding: 12px;
-    }
-
-    .fa-bars:hover, .fa-close:hover {
-        color: var(--color-grey-secondary);
-    }
-
-    /* Mobile: Nav */
-    nav {
-        display: none;
-    }
 
     /*  * Code sourced and adapted from:
-        * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_overlay */
-    nav.responsive {
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_navbar_on_image
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sticky_element */
+    /* Nav */
+    nav {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
-        top: 0;
-        bottom: 0;
+        background-color: var(--color-blue-primary);
+        position: -webkit-sticky;
+        position: sticky;
+        /* Negative top to resolve issue with Safari's compact tab layout */
+        top: -0.3px;
     }
 
-    nav.responsive ul {
-        width: 100%;
+    /*  * Code sourced and adapted from:
+        * https://www.tutorialrepublic.com/faq/how-to-remove-the-space-between-inline-block-elements-in-css.php */
+    nav ul {
+        display: flex;
     }
 
-    nav.responsive ul li {
-        display: block;
+    nav ul li {
+        display: inline-block;
+        padding: 14px 10px;
     }
 
-    nav.responsive ul li a:link, nav.responsive ul li a:visited {
-        display: block;
-        font-size: 20px;
+    nav ul li a:link, nav ul li a:visited {
+        font-size: 14px;
     }
 
-    nav.responsive ul li a:hover, nav.responsive ul li a:active, nav.responsive ul li a:focus {
-        border-bottom: none;
-        background-color: var(--color-blue-secondary);
-        border-radius: 5px;
-        transition: 0.5s;
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
+    nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
+        color: var(--color-grey-secondary);
+        border-bottom: 2px var(--color-grey-secondary) solid;
+    }
+
+    .seats-and-prices {
+        grid-template-areas:
+    'article article'
+    'standard-seats standard-seats'
+    'first-class-seats first-class-seats'
+    'note note'
+    'prices prices';
     }
 }

@@ -21,7 +21,8 @@ $(function () {
 
 /*  * Code sourced and adapted from:
     * https://css-tricks.com/snippets/javascript/showhide-element/
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav
+    * https://www.javascripttutorial.net/dom/css/check-if-an-element-contains-a-class/ */
 
 // Mobile navigation menu
 function mobileNav() {
@@ -30,12 +31,12 @@ function mobileNav() {
     let bars = document.getElementById("iconBars");
     let close = document.getElementById("iconClose");
 
-    if (nav.className === "top-nav") {
-        nav.className += " responsive";
+    if (!nav.classList.contains("responsive")) {
+        nav.classList.add("responsive");
         bars.style.display = "none";
         close.style.display = "block";
     } else {
-        nav.className = "top-nav";
+        nav.classList.remove("responsive");
         close.style.display = "none";
         bars.style.display = "block";
     }
