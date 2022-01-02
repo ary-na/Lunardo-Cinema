@@ -40,7 +40,7 @@ body {
 }
 
 /* Mobile: layout */
-.grid-container {
+body.grid-container {
     margin: 0 auto;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -52,7 +52,8 @@ body {
 
 /*  * Code sourced and adapted from:
         * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_justify-content_flex-end
-        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2 */
+        * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2
+        * https://stackoverflow.com/questions/36271967/how-to-prevent-content-from-re-sizing-a-flex-item */
 
 /* Mobile: Header */
 header {
@@ -79,7 +80,7 @@ header h1 {
     color: var(--color-grey-secondary);
 }
 
-.icon {
+div.icon {
     display: block;
     font-size: 18px;
 }
@@ -88,12 +89,12 @@ header h1 {
     display: none;
 }
 
-.fa-bars, .fa-close {
+i.fa-bars, i.fa-close {
     color: var(--color-grey-primary);
     padding: 10px 0 10px 10px;
 }
 
-.fa-bars:hover, .fa-close:hover {
+i.fa-bars:hover, i.fa-close:hover {
     color: var(--color-grey-secondary);
 }
 
@@ -102,14 +103,14 @@ nav {
     grid-area: nav;
     display: none;
     z-index: 4;
-    padding: 10px 10px;
 }
 
-nav ul li a:link, nav ul li a:visited {
-    text-decoration: none;
-    color: var(--color-grey-primary);
-    text-align: center;
-    padding: 12px 16px;
+/*  * Code sourced and adapted from:
+    * https://www.tutorialrepublic.com/faq/how-to-remove-the-space-between-inline-block-elements-in-css.php */
+nav ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
 }
 
 /*  * Code sourced and adapted from:
@@ -124,6 +125,7 @@ nav.responsive {
     background-color: var(--color-blue-primary);
     z-index: 4;
     top: 0;
+    padding: 1em;
 }
 
 nav.responsive ul {
@@ -136,7 +138,11 @@ nav.responsive ul li {
 
 nav.responsive ul li a:link, nav.responsive ul li a:visited {
     display: block;
+    text-decoration: none;
+    color: var(--color-grey-primary);
+    text-align: center;
     font-size: 20px;
+    padding: 0.5em 0;
 }
 
 nav.responsive ul li a:hover, nav.responsive ul li a:active, nav.responsive ul li a:focus {
@@ -145,6 +151,7 @@ nav.responsive ul li a:hover, nav.responsive ul li a:active, nav.responsive ul l
     border-radius: 5px;
     transition: 0.5s;
 }
+
 
 /* Main */
 main {
@@ -157,6 +164,10 @@ main section {
     min-height: 100vh;
 }
 
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/CSS/css_grid_item.asp */
+
 /* About Us */
 section.about-us {
     display: grid;
@@ -164,20 +175,18 @@ section.about-us {
     grid-template-areas:
     'first-article'
     'first-article'
+    'first-article'
+    'first-article'
     'second-article'
     'third-article';
 }
-
-/*  * Code sourced and adapted from:
-    * https://www.w3schools.com/CSS/css_grid_item.asp */
-
 
 /*  * Code sourced and adapted from:
     * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
     * https://www.w3schools.com/CSSref/tryit.asp?filename=trycss_background-position
     * https://www.w3docs.com/snippets/css/how-to-center-the-content-in-grid.html */
 
-section.about-us article:nth-child(1) {
+section.about-us > :nth-child(1) {
     grid-area: first-article;
     display: flex;
     align-items: center;
@@ -187,125 +196,182 @@ section.about-us article:nth-child(1) {
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
+    padding: 8em 0;
     color: var(--color-grey-secondary);
 }
 
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_font_responsive */
 
-section.about-us article:nth-child(1) h1 {
+section.about-us > :nth-child(1) h1 {
     font-size: 1.5rem;
     font-family: var(--font-family-secondary);
     font-weight: 200;
 }
 
-section.about-us article:nth-child(1) h1 span {
+section.about-us > :nth-child(1) h1 span {
     font-size: 1.6rem;
     font-family: var(--font-family-tertiary);
     font-weight: 400;
 }
 
-section.about-us article:nth-child(1) p {
-    font-size: 10px;
+section.about-us > :nth-child(1) p {
+    font-size: 14px;
+    text-align: justify;
+    font-weight: 100;
 }
 
-section.about-us article:nth-child(2) {
-    padding: var(--padding);
+section.about-us > :nth-child(2) {
     grid-area: second-article;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3em;
+    gap: 1em;
     background-color: var(--color-blue-secondary);
 }
 
-section.about-us article:nth-child(3) {
-    grid-area: third-article;
+section.about-us > :nth-child(2) p {
+    text-align: justify;
 }
+
+section.about-us > :nth-child(3) {
+    grid-area: third-article;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+}
+
+section.about-us > :nth-child(3) img {
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+}
+
+section.about-us > :nth-child(3) p {
+    text-align: justify;
+}
+
 
 /* Seats and Prices */
-.seats-and-prices {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-    'article article'
-    'standard-seats first-class-seats'
-    'note note'
-    'prices prices';
+section.seats-and-prices {
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 1em;
+    gap: 2em;
 }
 
-.seats-and-prices article:nth-child(1) {
-    grid-area: article;
+section.seats-and-prices > :nth-child(1) h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-black);
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px var(--color-blue-secondary) solid;
+}
+
+section.seats-and-prices > :nth-child(1) p {
     text-align: justify;
-    font-size: 1vh;
-    background-color: var(--color-white);
-    padding: 4em;
-    margin: 2vh;
+    padding-top: 10px;
+}
+
+
+div.grid-container-seats {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    'standard-seat'
+    'first-class-seat';
+    gap: 2em;
+}
+
+
+section.seats-and-prices img {
+    width: 55%;
+    margin: 0 auto;
+}
+
+
+div.grid-container-seats > :nth-child(1) {
+    grid-area: standard-seat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 8px 0 var(--color-grey-tertiary), 0 6px 8px 0 var(--color-grey-tertiary);
+}
+
+div.grid-container-seats > :nth-child(2) {
+    grid-area: first-class-seat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 8px 0 var(--color-grey-tertiary), 0 6px 8px 0 var(--color-grey-tertiary);
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_image */
+div.grid-container-seats > :nth-child(2) img {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+div.grid-container-seats h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-black);
+    font-weight: 300;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 1em;
+}
+
+div.grid-container-seats span {
+    color: var(--color-green);
+    font-weight: 400;
+}
+
+
+div.grid-container-seats :nth-child(1) p, div.grid-container-seats :nth-child(2) p {
+    text-align: justify;
+    padding: 1em;
+}
+
+
+section.seats-and-prices > :nth-child(3) h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-black);
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px var(--color-blue-secondary) solid;
+}
+
+section.seats-and-prices > :nth-child(3) p {
+    text-align: justify;
+    padding-top: 10px;
+}
+
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_border */
+
+section.seats-and-prices table {
+    text-align: left;
+    font-size: 15px;
+    padding: 1em;
     border-radius: var(--radius);
     box-shadow: 0 6px 8px 0 var(--color-grey-tertiary), 0 6px 8px 0 var(--color-grey-tertiary);
 }
 
-.seats-and-prices img {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.seats-and-prices article:nth-child(2) {
-    grid-area: standard-seats;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.seats-and-prices article:nth-child(3) {
-    grid-area: first-class-seats;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: baseline;
-}
-
-.seats-and-prices article {
-    margin: 20px;
-}
-
-.seats-and-prices article:nth-child(3) span, .seats-and-prices article:nth-child(2) span {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--color-green);
-}
-
-.seats-and-prices article:nth-child(4) {
-    grid-area: note;
-    text-align: center;
-    font-style: italic;
-    border-bottom: 1px var(--color-blue-primary) solid;
-    margin: 2vmin;
-}
-
-.flex-prices ul li {
-    list-style: none;
-    padding: 20px 30px;
-    font-size: 1.4vmin;
-    font-weight: 200;
-    border: 1px var(--color-white) solid;
-    background-color: var(--color-grey-secondary);
-    color: var(--color-blue-primary);
-}
-
-.flex-prices > ul > li {
-    background-color: var(--color-blue-primary);
-    color: var(--color-white);
-    font-weight: 500;
-    font-size: 1.5vmin;
-}
-
-/*  * Code sourced and adapted from:
-    * https://stackoverflow.com/questions/36271967/how-to-prevent-content-from-re-sizing-a-flex-item */
-.flex-prices {
-    grid-area: prices;
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
+section.seats-and-prices table tr td {
+    padding: 1em 0;
 }
 
 
@@ -319,20 +385,28 @@ section.now-showing {
     gap: 2em;
 }
 
-section.now-showing > h1 {
+section.now-showing > article {
+    width: 100%;
+}
+
+section.now-showing > article > h1 {
     font-family: var(--font-family-secondary);
     color: var(--color-grey-secondary);
     font-weight: 400;
     font-size: 1.5rem;
-    width: 100%;
     text-align: center;
-    background-color: var(--color-blue-secondary);
+    border-bottom: 2px var(--color-green) solid;
 }
 
-.grid-container-card {
+section.now-showing > article > p {
+    padding-top: 10px;
+}
+
+div.grid-container-now-showing {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 5em;
+    margin: 3em 0;
 }
 
 div.card {
@@ -351,6 +425,9 @@ div.card > article {
     background-color: var(--color-blue-secondary);
 }
 
+/*  * Code sourced and adapted from:
+    * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/ */
+
 div.card > article:nth-child(1) {
     display: flex;
     flex-direction: column;
@@ -359,6 +436,7 @@ div.card > article:nth-child(1) {
 
 /*  * Code sourced and adapted from:
     * https://developer.mozilla.org/en-US/docs/Learn/CSS/Howto/Fill_a_box_with_an_image */
+
 div.card article > img {
     width: 350px;
     padding: 2px;
@@ -407,51 +485,218 @@ div.card article:nth-child(2) {
     transform: rotateY(180deg);
 }
 
-div.card article:nth-child(2) h1 {
+div.card article:nth-child(2) > h1 {
     background-color: var(--color-green);
     color: var(--color-grey-secondary);
     padding: 1em;
 }
 
-div.card article:nth-child(2) p {
+div.card article:nth-child(2) > p {
     text-align: justify;
     padding: 1em;
 }
 
+/*  * Code sourced and adapted from:
+    * https://stackoverflow.com/questions/3087975/how-to-change-the-cursor-into-a-hand-when-a-user-hovers-over-a-list-item
+    * https://www.w3schools.com/csS/css3_buttons.asp */
+
 div.card article:nth-child(2) button {
-    display: block;
+    cursor: pointer;
     margin: auto 1em 1em;
-    border: none;
     border-radius: var(--radius);
     padding: 10px;
-    background-color: var(--color-green);
-    color: var(--color-grey-secondary);
+    border: 1px var(--color-green) solid;
+    background-color: var(--color-blue-secondary);
+    color: var(--color-grey-primary);
     transition-duration: 0.4s;
+    opacity: 0.9;
 }
 
-div.card article:nth-child(2) button:hover, div.card article:nth-child(2) button:focus {
+div.card article:nth-child(2) button:hover, div.card article:nth-child(2) button:active, div.card article:nth-child(2) button:focus {
+    background-color: var(--color-green);
     color: var(--color-grey-secondary);
     opacity: 1;
 }
 
 
-div.card:hover article:nth-child(1), article.card:focus article:nth-child(1) {
+div.card:hover article:nth-child(1), article.card:active article:nth-child(1), article.card:focus article:nth-child(1) {
     transform: rotateY(180deg);
 }
 
-div.card:hover article:nth-child(2), div.card:focus article:nth-child(2) {
+div.card:hover article:nth-child(2), div.card:active article:nth-child(2), div.card:focus article:nth-child(2) {
     transform: rotateY(360deg);
 }
 
+
 /* Movie Trailer */
-.movie-trailer {
+section.movie-trailer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1em;
+}
+
+section.movie-trailer > h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-grey-secondary);
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px var(--color-green) solid;
+}
+
+section.movie-trailer video {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+}
+
+section.movie-trailer > article > h2 {
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+    padding: 1em;
+    background-color: var(--color-blue-secondary);
+    margin-top: 10px;
+}
+
+
+section.movie-trailer > article > h3 {
+    font-style: var(--font-family-tertiary);
+    font-size: 14px;
+    padding-top: 10px;
 
 }
+
+section.movie-trailer > article > p {
+    text-align: justify;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
 
 /* Book Ticket */
-.book-ticket {
-    background-color: var(--color-grey-secondary);
+section.book-ticket {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1em;
 }
+
+section.book-ticket > h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-black);
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px var(--color-blue-secondary) solid;
+}
+
+section.book-ticket form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+section.book-ticket form fieldset {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+
+section.book-ticket fieldset {
+    width: fit-content;
+    border-width: 0;
+    padding: 1em 0;
+}
+
+section.book-ticket form:nth-child(2) {
+    padding-top: 10px;
+}
+section.book-ticket fieldset legend {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+section.book-ticket fieldset label {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--color-grey-primary);
+}
+
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk05?module_item_id=3564997 */
+/* Type: Radio */
+section.book-ticket form > :nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+section.book-ticket fieldset input[type=radio] {
+    display: none;
+}
+
+section.book-ticket fieldset input[type=radio] + label {
+    text-align: center;
+    cursor: pointer;
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    padding: 12px 20px;
+    opacity: 0.9;
+}
+
+section.book-ticket fieldset input[type=radio]:checked + label {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    opacity: 1;
+    border-radius: var(--radius);
+}
+
+/* Type: Number */
+
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_form_focus2 */
+
+/* Type: Text */
+
+section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=number] {
+    border: 1px var(--color-grey-primary) solid;
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    margin: 4px 0;
+    outline: none;
+    transition: 0.5s;
+    opacity: 0.5;
+}
+
+section.book-ticket fieldset [type=text]:focus, section.book-ticket fieldset [type=number]:focus {
+    border: 1px var(--color-green) solid;
+    opacity: 1;
+}
+
+
+/* Type: Submit */
+section.book-ticket [type=submit] {
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: 10px;
+    border: 1px var(--color-green) solid;
+    background-color: var(--color-white);
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    opacity: 0.9;
+}
+
+section.book-ticket [type=submit]:hover, section.book-ticket [type=submit]:active, section.book-ticket [type=submit]:focus {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    opacity: 1;
+}
+
 
 /* Footer */
 footer {
@@ -467,6 +712,7 @@ footer {
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/csS/css3_buttons.asp */
 footer button {
+    cursor: pointer;
     border: none;
     border-radius: var(--radius);
     margin-top: 20px;
@@ -490,6 +736,81 @@ aside {
     padding: 12px 16px;
 }
 
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
+
+/* Tablet: responsive layout */
+@media screen and (min-width: 600px) {
+
+
+    /*  * Code sourced and adapted from:
+    * https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+    /* Header */
+    header {
+        position: static;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header img {
+        width: 65px;
+        display: block;
+    }
+
+    div.icon {
+        display: none;
+    }
+
+
+    /*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_navbar_on_image
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sticky_element */
+    /* Nav */
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-blue-primary);
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        padding: 0.8em;
+    }
+
+    nav ul {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav ul li a:link, nav ul li a:visited {
+        font-size: 14px;
+        text-decoration: none;
+        color: var(--color-grey-primary);
+        text-align: center;
+        padding: 1.23em 16px;
+        margin: 0 8px;
+    }
+
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
+    nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
+        color: var(--color-grey-secondary);
+        border-bottom: 2px var(--color-grey-secondary) solid;
+    }
+
+
+    .seats-and-prices {
+        grid-template-areas:
+    'article article'
+    'standard-seats standard-seats'
+    'first-class-seats first-class-seats'
+    'note note'
+    'prices prices';
+    }
+}
+
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_template2_grid */
 
@@ -509,86 +830,4 @@ aside {
     'footer footer footer footer';
     }
 
-}
-
-/*  * Code sourced and adapted from:
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
-
-/* Tablet: responsive layout */
-@media screen and (min-width: 600px) {
-
-
-    .grid-container {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-      'header header'
-      'nav nav'
-      'main main'
-      'footer footer';
-    }
-
-    /*  * Code sourced and adapted from:
-    * https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
-    /* Header */
-    header {
-        position: static;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    header img {
-        width: 65px;
-        display: block;
-    }
-
-    .icon {
-        display: none;
-    }
-
-
-    /*  * Code sourced and adapted from:
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_navbar_on_image
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sticky_element */
-    /* Nav */
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--color-blue-primary);
-        position: -webkit-sticky;
-        position: sticky;
-        /* Negative top to resolve issue with Safari's compact tab layout */
-        top: -0.3px;
-    }
-
-    /*  * Code sourced and adapted from:
-        * https://www.tutorialrepublic.com/faq/how-to-remove-the-space-between-inline-block-elements-in-css.php */
-    nav ul {
-        display: flex;
-    }
-
-    nav ul li {
-        display: inline-block;
-        padding: 14px 10px;
-    }
-
-    nav ul li a:link, nav ul li a:visited {
-        font-size: 14px;
-    }
-
-    /*  * Code sourced and adapted from:
-        * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
-    nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
-        color: var(--color-grey-secondary);
-        border-bottom: 2px var(--color-grey-secondary) solid;
-    }
-
-    .seats-and-prices {
-        grid-template-areas:
-    'article article'
-    'standard-seats standard-seats'
-    'first-class-seats first-class-seats'
-    'note note'
-    'prices prices';
-    }
 }

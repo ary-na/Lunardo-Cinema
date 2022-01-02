@@ -23,10 +23,10 @@
         <img src='../../media/logo.png' alt='Lunardo Cinema Logo'/>
         <h1>LUNARDO</h1>
         <div class='icon'>
-            <a href='javascript:void(0);' id='iconBars' onclick='mobileNav()'>
+            <a href='javascript:void(0);' id='iconBars' onclick='addResponsive()'>
                 <i class='fa fa-bars'></i>
             </a>
-            <a href='javascript:void(0);' id='iconClose' onclick='mobileNav()'>
+            <a href='javascript:void(0);' id='iconClose' onclick='addResponsive()'>
                 <i class='fa fa-close'></i>
             </a>
         </div>
@@ -34,10 +34,10 @@
 
     <nav id='topNav'>
         <ul>
-            <li><a href='#aboutUs' onclick='mobileNav()'>About Us</a></li>
-            <li><a href='#seatsAndPrices' onclick='mobileNav()'>Seats & Prices</a></li>
-            <li><a href="#nowShowing" onclick='mobileNav()'>Now Showing</a></li>
-            <li><a href='booking.php' onclick='mobileNav()'>Booking</a></li>
+            <li><a href='#aboutUs' onclick='removeResponsive()'>About Us</a></li>
+            <li><a href='#seatsAndPrices' onclick='removeResponsive()'>Seats & Prices</a></li>
+            <li><a href='#nowShowing' onclick='removeResponsive()'>Now Showing</a></li>
+            <li><a href='booking.php' onclick='removeResponsive()'>Booking</a></li>
         </ul>
     </nav>
 
@@ -45,103 +45,134 @@
         <section id='aboutUs' class='about-us'>
             <article>
                 <h1>Welcome to <span>LUNARDO</span> Cinema</h1>
-                <p>We are proud to bring you the best expirience when it comes to Cinema</p>
-            </article>
-
-            <article>
-                <p>
-                    Second
+                <p>We are back, and we are better
                 </p>
             </article>
 
             <article>
-                <p>Third Article</p>
+                <p>
+                    We have been hard at work to bring you the best cinema experience, and we believe we have done just
+                    that. Our team at Lunardo Cinema overhauled the sound system with the latest technologies to bring
+                    you the best Cinema experience.
+                </p>
+                <p>
+                    Lunardo is a small local cinema located south-east of Melbourne. We honour ourselves for serving
+                    residents for more than 15 years with entertainment and cinematic comfort, and we are thrilled to
+                    bring you an uncompromising experience with our cinema.
+                </p>
+            </article>
+
+            <article>
+                <img src="../../media/dolby-logo.png">
+                <p>
+                    We are proud to provide premium connection and fuller multidimensional sound when you're watching
+                    your movies with Dolby technology. Lunardo cinema halls are now fully equipped with 3D Dolby vision
+                    and Atmos Dolby sound to elevate your cinema experience and bring you closer to the world the
+                    filmmaker created for you.
+                </p>
             </article>
         </section>
 
         <section id='seatsAndPrices' class='seats-and-prices'>
             <article>
-                <p>Cinema halls are glorified with our new seats to ensure your comfort and the luxury of the cinematic
+                <h1>Seats</h1>
+                <p>
+                    Cinema halls are glorified with our new seats to ensure your comfort and the luxury of the cinematic
                     experience. Watch your favourite movies from the comfort of our new standard leather seats, or
                     upgrade to our new first-class recliner seats for maximum comfort and ergonomic to take your cinema
                     experience to the next level.
                 </p>
             </article>
-            <article>
-                <img src='../../media/standard-seats.png' alt='Picture of standard seats'/>
-                <p>
-                    <span>Standard Seats</span>
-                    provide an ergonomic design, foldable armrest and cup holder for convenience and peace of mind.
-                </p>
-            </article>
+
+            <div class="grid-container-seats">
+                <article>
+                    <h1>Standard Seats</h1>
+                    <img src='../../media/standard-seats.png' alt='Picture of standard seats'/>
+                    <p>
+                        Our brand new <span>Standard Seats</span> provide an ergonomic design, foldable armrest and cup
+                        holder for convenience and peace of mind.
+                    </p>
+                </article>
+
+                <article>
+                    <h1>First-Class Seats</h1>
+                    <img src='../../media/first-class-seats.png' alt='Picture of first-class seats'/>
+                    <p>
+                        Our brand new <span>First-class Seats</span> provide an ergonomic design, full leather, fully
+                        reclinable motor-operated seats that take your cinematic experience to the next level.
+                    </p>
+                </article>
+            </div>
 
             <article>
-                <img src='../../media/first-class-seats.png' alt='Picture of first-class seats'/>
-                <p>
-                    <span>First Class Seats</span>
-                    provide an ergonomic design, foldable armrest and cup holder for convenience and peace of mind.
-                </p>
-            </article>
-
-            <article>
+                <h1>Prices</h1>
                 <p>We offer discounted pricing during weekdays afternoons and all day on Mondays.</p>
             </article>
 
-            <div class='flex-prices'>
-                <ul>
-                    <li>Seat Type</li>
-                    <ul>
-                        <li>Standard Adult</li>
-                        <li>Standard Concession</li>
-                        <li>Standard Child</li>
-                        <li>First Class Adult</li>
-                        <li>First Class Concession</li>
-                        <li>First Class Child</li>
-                    </ul>
-                </ul>
-                <ul>
-                    <li>Seat Code</li>
-                    <ul>
-                        <li>STA</li>
-                        <li>STP</li>
-                        <li>STC</li>
-                        <li>FCA</li>
-                        <li>FCP</li>
-                        <li>FCC</li>
-                    </ul>
-                </ul>
-                <ul>
-                    <li>Discounted Price</li>
-                    <ul>
-                        <li>$15.00</li>
-                        <li>$13.50</li>
-                        <li>$12.00</li>
-                        <li>$24.00</li>
-                        <li>$22.50</li>
-                        <li>$21.00</li>
-                    </ul>
-                </ul>
-                <ul>
-                    <li>Normal Prices</li>
-                    <ul>
-                        <li>$20.50</li>
-                        <li>$18.00</li>
-                        <li>$16.50</li>
-                        <li>$30.00</li>
-                        <li>$27.00</li>
-                        <li>$24.00</li>
-                    </ul>
-                </ul>
-            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Seat Type</th>
+                    <th>Seat Code</th>
+                    <th>Discounted Price</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Standard Adult</td>
+                    <td>STA</td>
+                    <td>$15.00</td>
+                    <td>$20.50</td>
+                </tr>
 
+                <tr>
+                    <td>Standard Concession</td>
+                    <td>STP</td>
+                    <td>$13.50</td>
+                    <td>$18.00</td>
+                </tr>
+
+                <tr>
+                    <td>Standard Child</td>
+                    <td>STC</td>
+                    <td>$12.00</td>
+                    <td>$16.50</td>
+                </tr>
+
+                <tr>
+                    <td>First Class Adult</td>
+                    <td>FCA</td>
+                    <td>$24.00</td>
+                    <td>$30.00</td>
+                </tr>
+
+                <tr>
+                    <td>First Class Concession</td>
+                    <td>FCP</td>
+                    <td>$22.50</td>
+                    <td>$27.00</td>
+                </tr>
+
+                <tr>
+                    <td>First Class Child</td>
+                    <td>FCC</td>
+                    <td>$21.00</td>
+                    <td>$24.00</td>
+                </tr>
+                </tbody>
+            </table>
 
         </section>
 
         <section id='nowShowing' class='now-showing'>
 
-            <h1>NOW SHOWING</h1>
+            <article>
+                <h1>NOW SHOWING</h1>
+                <p>For more information, interact with the movie cover.</p>
+            </article>
 
-            <div class="grid-container-card">
+            <div class="grid-container-now-showing">
                 <div class="card">
                     <article>
                         <img src="../../media/Cyrano.png">

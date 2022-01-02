@@ -22,10 +22,11 @@ $(function () {
 /*  * Code sourced and adapted from:
     * https://css-tricks.com/snippets/javascript/showhide-element/
     * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav
-    * https://www.javascripttutorial.net/dom/css/check-if-an-element-contains-a-class/ */
+    * https://www.javascripttutorial.net/dom/css/check-if-an-element-contains-a-class/
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_remove_class */
 
-// Mobile navigation menu
-function mobileNav() {
+// Mobile navigation menu - Add responsive class to Nav
+function addResponsive() {
 
     let nav = document.getElementById("topNav");
     let bars = document.getElementById("iconBars");
@@ -40,4 +41,11 @@ function mobileNav() {
         close.style.display = "none";
         bars.style.display = "block";
     }
+}
+
+// Mobile navigation menu - Remove responsive class from Nav
+function removeResponsive() {
+    document.getElementById("topNav").classList.remove("responsive");
+    document.getElementById("iconClose").style.display = "none";
+    document.getElementById("iconBars").style.display = "block";
 }
