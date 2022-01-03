@@ -178,8 +178,8 @@
                         <img src="../../media/Cyrano.png">
 
                         <h1>Cyrano (2021)</h1>
-                        <h3>PG-13 | Drama, Musical, Romance</h3>
-
+                        <h2>PG-13 | Drama, Musical, Romance</h2>
+<h3>Times</h3>
                         <ul>
                             <li>Mon - Tue</li>
                             <li>6pm</li>
@@ -207,7 +207,8 @@
                     <article>
                         <img src="../../media/DUNE.png">
                         <h1>Dune (2021)</h1>
-                        <h3>M | Action, Adventure, Drama, Sci-Fi</h3>
+                        <h2>M | Action, Adventure, Drama, Sci-Fi</h2>
+                        <h3>Times</h3>
                         <ul>
                             <li>Mon - Tue</li>
                             <li>9pm</li>
@@ -236,7 +237,8 @@
                     <article>
                         <img src="../../media/Silent Night.png">
                         <h1>Silent Night (2021)</h1>
-                        <h3>MA15+ | Drama, Horror</h3>
+                        <h2>MA15+ | Drama, Horror</h2>
+                        <h3>Times</h3>
                         <ul>
                             <li>Mon - Tue</li>
                             <li>-</li>
@@ -262,7 +264,8 @@
                     <article>
                         <img src="../../media/Spider-Man No Way Home.png">
                         <h1>Spider-Man: No Way Home (2021)</h1>
-                        <h3>M | Action, Adventure, Fantasy, Sci-Fi</h3>
+                        <h2>M | Action, Adventure, Fantasy, Sci-Fi</h2>
+                        <h3>Times</h3>
                         <ul>
                             <li>Mon - Tue</li>
                             <li>12pm</li>

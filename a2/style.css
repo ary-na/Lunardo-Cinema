@@ -428,7 +428,7 @@ div.card > article {
 /*  * Code sourced and adapted from:
     * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/ */
 
-div.card > article:nth-child(1) {
+div.card article:nth-child(1) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -452,11 +452,15 @@ div.card article:nth-child(1) > h1 {
     line-height: 0;
 }
 
-div.card article:nth-child(1) > h3 {
+div.card article:nth-child(1) > h2 {
     text-align: center;
     font-weight: 200;
     font-size: 0.8em;
     line-height: 0;
+}
+
+div.card article:nth-child(1) > h3 {
+    display: none;
 }
 
 div.card article > ul {
@@ -464,6 +468,7 @@ div.card article > ul {
     grid-template-columns: auto auto;
     background-color: var(--color-blue-primary);
     font-size: 14px;
+    font-weight: 300;
 }
 
 div.card article > ul li {
@@ -473,25 +478,26 @@ div.card article > ul li {
     color: var(--color-grey-secondary);
 }
 
-div.card article:nth-child(1) {
+div.card > article:nth-child(1) {
     transform: rotateY(0deg);
 }
 
-div.card article:nth-child(2) {
+div.card > article:nth-child(2) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: var(--color-blue-secondary);
     transform: rotateY(180deg);
+    overflow-y: scroll;
 }
 
-div.card article:nth-child(2) > h1 {
+div.card > article:nth-child(2) > h1 {
     background-color: var(--color-green);
     color: var(--color-grey-secondary);
     padding: 1em;
 }
 
-div.card article:nth-child(2) > p {
+div.card > article:nth-child(2) > p {
     text-align: justify;
     padding: 1em;
 }
@@ -500,7 +506,7 @@ div.card article:nth-child(2) > p {
     * https://stackoverflow.com/questions/3087975/how-to-change-the-cursor-into-a-hand-when-a-user-hovers-over-a-list-item
     * https://www.w3schools.com/csS/css3_buttons.asp */
 
-div.card article:nth-child(2) button {
+div.card > article:nth-child(2) button {
     cursor: pointer;
     margin: auto 1em 1em;
     border-radius: var(--radius);
@@ -512,18 +518,18 @@ div.card article:nth-child(2) button {
     opacity: 0.9;
 }
 
-div.card article:nth-child(2) button:hover, div.card article:nth-child(2) button:active, div.card article:nth-child(2) button:focus {
+div.card > article:nth-child(2) button:hover, div.card > article:nth-child(2) button:active, div.card > article:nth-child(2) button:focus {
     background-color: var(--color-green);
     color: var(--color-grey-secondary);
     opacity: 1;
 }
 
 
-div.card:hover article:nth-child(1), article.card:active article:nth-child(1), article.card:focus article:nth-child(1) {
+div.card:hover > article:nth-child(1), article.card:active > article:nth-child(1), article.card:focus > article:nth-child(1) {
     transform: rotateY(180deg);
 }
 
-div.card:hover article:nth-child(2), div.card:active article:nth-child(2), div.card:focus article:nth-child(2) {
+div.card:hover > article:nth-child(2), div.card:active > article:nth-child(2), div.card:focus > article:nth-child(2) {
     transform: rotateY(360deg);
 }
 
@@ -809,13 +815,75 @@ aside {
     'note note'
     'prices prices';
     }
+
+
+    /* Now Showing */
+    div.grid-container-now-showing {
+        gap: 4em;
+    }
+
+    div.card {
+        width: 500px;
+        height: 400px;
+    }
+
+    div.card > article {
+        width: 500px;
+        height: 400px;
+    }
+
+    div.card article:nth-child(1) > img {
+        width: initial;
+        height: 396px;
+        grid-area: movie-poster;
+    }
+
+    div.card article:nth-child(1) > h1 {
+        grid-area: movie-title;
+        line-height: initial;
+    }
+
+    div.card article:nth-child(1) > h2 {
+        grid-area: movie-rating;
+        line-height: initial;
+        align-self: start;
+    }
+
+    div.card article:nth-child(1) > h3 {
+        display: initial;
+        grid-area: time-h3;
+        font-size: 0.8em;
+        font-weight: 300;
+        text-align: center;
+        align-self: end;
+    }
+
+    div.card article:nth-child(1) ul {
+        grid-area: movie-times;
+        align-self: end;
+    }
+
+    div.card article:nth-child(1) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+        'movie-poster movie-title'
+        'movie-poster movie-title'
+        'movie-poster movie-rating'
+        'movie-poster time-h3'
+        'movie-poster movie-times';
+        align-items: center;
+        justify-content: center;
+    }
+
+
 }
 
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_template2_grid */
 
 /* Desktop: responsive layout */
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
 
     /*  * Code sourced and adapted from:
         * https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named */
@@ -828,6 +896,14 @@ aside {
     'nav nav nav nav'
     'main main main main'
     'footer footer footer footer';
+    }
+
+
+
+
+    /* Now Showing */
+    div.grid-container-now-showing {
+        grid-template-columns: 1fr 1fr;
     }
 
 }
