@@ -1,25 +1,4 @@
 /*  * Code sourced and adapted from:
-    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_smooth_scroll_jquery
-    * https://api.jquery.com/ready/ */
-
-// Scroll behaviour
-$(function () {
-    $("a").on('click', function (event) {
-
-        if (this.hash !== "") {
-            event.preventDefault();
-            let hash = this.hash;
-
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top
-            }, 800, function () {
-                window.location.hash = hash;
-            });
-        }
-    });
-});
-
-/*  * Code sourced and adapted from:
     * https://css-tricks.com/snippets/javascript/showhide-element/
     * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav
     * https://www.javascripttutorial.net/dom/css/check-if-an-element-contains-a-class/
@@ -48,4 +27,34 @@ function removeResponsive() {
     document.getElementById("topNav").classList.remove("responsive");
     document.getElementById("iconClose").style.display = "none";
     document.getElementById("iconBars").style.display = "block";
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show */
+
+// Toggle (Hide/Show) Paragraph
+function toggleParagraph() {
+    let moreDiv = document.getElementById("readMoreDiv");
+    let moreAnchor = document.getElementById("readMoreAnchor");
+    if (moreDiv.style.display === "block") {
+        moreDiv.style.display = "none";
+        moreAnchor.innerText = "Read more";
+    } else {
+        moreDiv.style.display = "block";
+        moreAnchor.innerText = "Read less";
+
+    }
+}
+
+// Toggle (Hide/Show) Debug
+function toggleDebug() {
+    let debug = document.getElementById("debugArea");
+    let debugAnchor = document.getElementById("showDebugAnchor");
+    if (debug.style.display === "block") {
+        debug.style.display = "none";
+        debugAnchor.innerText = "show";
+    } else {
+        debug.style.display = "block";
+        debugAnchor.innerText = "hide";
+    }
 }
