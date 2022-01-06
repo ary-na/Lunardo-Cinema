@@ -184,7 +184,7 @@
                             to declare his feelings for her and Roxanne has fallen in love, at first sight, with
                             Christian.
                         </p>
-                        <a>Book Ticket</a>
+                        <a href='content/booking.php?movie=RMC'>Book Ticket</a>
                     </article>
                 </div>
 
@@ -241,7 +241,7 @@
                             their former school friends and their spouses. It is gradually revealed that there is an
                             imminent environmental catastrophe and that this dinner will be their last night alive.
                         </p>
-                        <a>Book Ticket</a>
+                        <a href='content/booking.php?movie=AHF'>Book Ticket</a>
                     </article>
                 </div>
 
@@ -270,7 +270,7 @@
                             horribly wrong and shatters the multiverse, bringing in monstrous villains that could
                             destroy the world.
                         </p>
-                        <a>Book Ticket</a>
+                        <a href='content/booking.php?movie=FAM'>Book Ticket</a>
                     </article>
                 </div>
             </div>
