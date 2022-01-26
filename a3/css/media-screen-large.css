@@ -1,0 +1,133 @@
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_template2_grid */
+
+/* Desktop: responsive layout ***************************************************************/
+@media screen and (min-width: 1100px) {
+    /* About Us *****************************************************************************/
+    section.about-us div {
+        padding: 14em 0 14em 0;
+    }
+
+    section.about-us div h1 {
+        font-size: 2.5rem;
+    }
+
+    section.about-us div h1 span {
+        font-size: 2.4rem;
+    }
+
+    section.about-us div p {
+        font-size: 1.5rem;
+        letter-spacing: 7px;
+    }
+
+    section.about-us article:nth-child(2) {
+        margin: 3em 6em;
+    }
+
+    section.about-us article:nth-child(3) {
+        grid-template-columns: 1fr 5fr;
+        padding: 2em 5em 2em 5em;
+    }
+    /****************************************************************************************/
+
+    /* Seats and Prices *********************************************************************/
+    div.seats-and-prices > h1 {
+        width: 75%;
+        font-size: 50px;
+        letter-spacing: 4px;
+    }
+
+    div.seats-and-prices > h2 {
+        font-size: 40px;
+    }
+
+    div.seats-and-prices > article:nth-child(2) > p {
+        padding: 0 6em;
+    }
+
+    div.container-seats {
+        padding: 6em;
+    }
+
+    div.container-seats img {
+        width: 70%;
+    }
+
+    div.container-seats {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        'first-para standard-seat'
+        'first-class-seat second-para';
+        align-items: center;
+        justify-content: center;
+        grid-row-gap: 10em;
+    }
+
+    div.seats-and-prices article:nth-child(5) table {
+        width: 70%;
+        font-size: 16px;
+    }
+    /****************************************************************************************/
+
+    /* Now Showing **************************************************************************/
+    section.now-showing > h1 {
+        width: 75%;
+        font-size: 50px;
+        letter-spacing: 4px;
+    }
+
+    section.now-showing img {
+        display: block;
+        width: 90px;
+        padding-bottom: 2em;
+    }
+
+    div.container-now-showing {
+        grid-template-columns: auto auto;
+    }
+    /****************************************************************************************/
+
+    /* Movie Trailer ************************************************************************/
+    section.movie-trailer h1 {
+        width: 75%;
+        font-size: 50px;
+        letter-spacing: 4px;
+    }
+
+    section.movie-trailer > video {
+        padding: 0 2em;
+    }
+
+    section.movie-trailer > article {
+        padding: 10px 5em;
+    }
+    /****************************************************************************************/
+
+    /* Book Ticket **************************************************************************/
+    section.book-ticket h1 {
+        width: 75%;
+        font-size: 50px;
+        letter-spacing: 4px;
+    }
+
+    section.book-ticket form {
+        padding: 0 5em;
+    }
+
+    section.book-ticket [type=text] {
+        width: 49%;
+    }
+
+    section.book-ticket [type=submit] {
+        width: 30%;
+    }
+    /****************************************************************************************/
+
+    /* Footer *******************************************************************************/
+    div.container-footer {
+        padding: 1em 4em 4em 4em;
+    }
+    /****************************************************************************************/
+}
+/********************************************************************************************/
