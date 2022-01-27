@@ -86,7 +86,7 @@
 
             <h2>PRICES</h2>
             <article>
-                <?php priceModule(); ?>
+                <?php priceTableModule(); ?>
             </article>
             </div>
         </section>
@@ -97,10 +97,11 @@
             <div class='container-now-showing'>
                 <!-- Code sourced and adapted from: https://stackoverflow.com/questions/41302918/css-hover-focus-vs-click-event-on-mobile-touch-devices?rq=1 -->
                 <?php
-                movieModule("RMC");
-                movieModule("ACT");
-                movieModule("AHF");
-                movieModule("FAM");
+                global $movies;
+                $movies["RMC"]->movieModule();
+                $movies["ACT"]->movieModule();
+                $movies["AHF"]->movieModule();
+                $movies["FAM"]->movieModule();
                 ?>
             </div>
             <img src='../../media/lunardo-cinema-logo-tertiary.png' alt='Lunardo Cinema Logo'>

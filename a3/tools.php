@@ -18,30 +18,99 @@ function php2js($arr, $arrName)
     $arrJSON = json_encode($arr, JSON_PRETTY_PRINT);
     echo <<<"CDATA"
   <script>
-    let $arrName = $arrJSON;
+    var $arrName = $arrJSON;
   </script>
 CDATA;
 }
 
-class Movie
-{
-    public $movieID;
-    public $movieTitle;
-    public $movieShortSynopsis;
-    public $movieSynopsis;
-    public $movieRating;
-    public $moviePoster;
-    public $movieScreening = array();
+/*  * Code sourced and adapted from:
+    * https://stackoverflow.com/questions/50018014/passing-a-php-class-object-to-javascript-and-accessing-its-properties-in-javascr
+    */
 
-    function __construct($movieID, $movieTitle, $movieShortSynopsis, $movieSynopsis, $movieRating, $moviePoster, $movieScreening)
+class Movie implements JsonSerializable
+{
+    protected $movieID;
+    protected $movieTitle;
+    protected $movieShortSynopsis;
+    protected $movieSynopsis;
+    protected $movieRating;
+    protected $movieScreening = [];
+
+    function __construct($movieID, $movieTitle, $movieShortSynopsis, $movieSynopsis, $movieRating, $movieScreening)
     {
         $this->movieID = $movieID;
         $this->movieTitle = $movieTitle;
         $this->movieShortSynopsis = $movieShortSynopsis;
         $this->movieSynopsis = $movieSynopsis;
         $this->movieRating = $movieRating;
-        $this->moviePoster = $moviePoster;
         $this->movieScreening = $movieScreening;
+    }
+
+    function movieModule()
+    {
+        echo <<<CDATA
+             <div class='card' tabindex='1'>
+                <article>
+                    <img src='../../media/$this->movieID.png' alt='$this->movieTitle movie poster'>
+                    <h2>$this->movieTitle</h2>
+                    <h3>$this->movieRating</h3>
+                    <h4>Screenings</h4>
+                    <ul>
+CDATA;
+        foreach ($this->movieScreening as $day => $time) {
+            echo "<li>$day</li><li>$time</li>";
+        }
+        echo <<<CDATA
+                    </ul>
+                </article>
+                <article>
+                    <h2>$this->movieTitle</h2>
+                    <p>$this->movieShortSynopsis</p>
+                    <a href='booking.php?movieID=$this->movieID'>Book Ticket</a>
+                </article>
+             </div>
+CDATA;
+    }
+
+    function movieTrailerModule()
+    {
+        echo <<<CDATA
+        <h1>$this->movieTitle</h1>
+        <!-- Code sourced and adapted from: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_video -->
+        <video controls>
+            <source src='../../media/$this->movieID-trailer.mov' type='video/mp4'>
+            Your browser does not support the video tag.
+        </video>
+        <h2>The synopsis below may give away important plot points.</h2>
+        <article>
+            <h3>Synopsis</h3>
+            $this->movieSynopsis
+        </article>
+CDATA;
+    }
+
+    function radioButtonModule()
+    {
+        echo "<fieldset><legend>Screenings</legend>";
+        foreach ($this->movieScreening as $day => $time) {
+            if ($this->movieScreening[$day] === "No Screenings") {
+                continue;
+            } else {
+                echo "<input type='radio' id='$day' name='day-time' value='$day $time' onchange='priceCalc()'>";
+                echo "<label for='$day'>$day $time</label>";
+            }
+        }
+        echo "</fieldset>";
+    }
+
+    function jsonSerialize()
+    {
+        return [
+            'movieID' => $this->movieID,
+            'movieTitle' => $this->movieTitle,
+            'movieRating' => $this->movieRating,
+            'movieScreening' => $this->movieScreening
+        ];
     }
 }
 
@@ -79,7 +148,6 @@ $cyrano = new Movie("RMC",
             so he’s more than willing to go along with the charade. Although, it does bring up the point that at times,
             it’s hard to believe any of these characters are oblivious to what each other truly think or are doing.</p>",
     "PG-13 | Drama, Musical, Romance",
-    "cyrano-2021-movie-poster.png",
     ["MON" => "6PM", "TUE" => "6PM", "WED" => "No Screenings", "THU" => "No Screenings", "FRI" => "No Screenings", "SAT" => "3PM", "SUN" => "3PM"]);
 
 $dune = new Movie("ACT",
@@ -110,7 +178,6 @@ $dune = new Movie("ACT",
             including one where Duncan falls in battle. Duncan dismisses this as merely a dream, telling Paul that
             \"Everything important happens when we're awake\".</p>",
     "M | Action, Adventure, Drama, Sci-Fi",
-    "dune-2021-movie-cover.png",
     ["MON" => "9PM", "TUE" => "9PM", "WED" => "9PM", "THU" => "9PM", "FRI" => "9PM", "SAT" => "6PM", "SUN" => "6PM"]);
 
 $silentNight = new Movie("AHF",
@@ -138,7 +205,6 @@ $silentNight = new Movie("AHF",
             he will not unless she does too. The following morning everyone has died, except Arthur who opens his
             eyes.</p>",
     "MA15+ | Drama, Horror",
-    "silent-night-2021-movie-poster.png",
     ["MON" => "No Screenings", "TUE" => "No Screenings", "WED" => "12PM", "THU" => "12PM", "FRI" => "12PM", "SAT" => "9PM", "SUN" => "9PM"]);
 
 $spiderManNoWayHome = new Movie("FAM",
@@ -179,21 +245,22 @@ $spiderManNoWayHome = new Movie("FAM",
             Parker, but instead summon an alternate Peter Parker from a different universe. A second attempt brings
             through another alternative.</p>",
     "M | Action, Adventure, Fantasy, Sci-Fi",
-    "spider-man-no-way-home-2021-movie-poster",
     ["MON" => "12PM", "TUE" => "12PM", "WED" => "6PM", "THU" => "6PM", "FRI" => "6PM", "SAT" => "12PM", "SUN" => "12PM"]);
 
+// Array containing movie objects
 $movies = ["RMC" => $cyrano,
     "ACT" => $dune,
     "AHF" => $silentNight,
     "FAM" => $spiderManNoWayHome];
 
-$seats = [
-    "STA" => ["Seat Type" => "Standard Adult", "Discounted Price" => 15.00, "Normal Price" => 20.50],
-    "STP" => ["Seat Type" => "Standard Concession", "Discounted Price" => 13.50, "Normal Price" => 18.00],
-    "STC" => ["Seat Type" => "Standard Child", "Discounted Price" => 12.00, "Normal Price" => 16.50],
-    "FCA" => ["Seat Type" => "First Class Adult", "Discounted Price" => 24.00, "Normal Price" => 30.00],
-    "FCP" => ["Seat Type" => "First Class Concession", "Discounted Price" => 22.50, "Normal Price" => 27.00],
-    "FCC" => ["Seat Type" => "First Class Child", "Discounted Price" => 21.00, "Normal Price" => 24.00],
+// Prices and seats
+$prices = [
+    "STA" => ["Standard Adult" => ["Discount" => 15.00, "Normal" => 20.50]],
+    "STP" => ["Standard Concession" => ["Discount" => 13.50, "Normal" => 18.00]],
+    "STC" => ["Standard Child" => ["Discount" => 12.00, "Normal" => 16.50]],
+    "FCA" => ["First Class Adult" => ["Discount" => 24.00, "Normal" => 30.00]],
+    "FCP" => ["First Class Concession" => ["Discount" => 22.50, "Normal" => 27.00]],
+    "FCC" => ["First Class Child" => ["Discount" => 21.00, "Normal" => 24.00]]
 ];
 
 // Head module
@@ -206,16 +273,16 @@ function headModule()
     <link id='wireframecss' type='text/css' rel='stylesheet' href='../wireframe.css' disabled>
 CDATA;
 
-    echo "<link id='stylecssMain' type='text/css' rel='stylesheet' href='css/main.css?t=" . filemtime("css/main.css") . "'>";
+    echo "<link id='stylecss' type='text/css' rel='stylesheet' href='css/main.css?t=" . filemtime("css/main.css") . "'>";
     echo "<link id='stylecssScreenMedium' type='text/css' rel='stylesheet' href='css/media-screen-medium.css?t=" . filemtime("css/media-screen-medium.css") . "'>";
     echo "<link id='stylecssScreenLarge' type='text/css' rel='stylesheet' href='css/media-screen-large.css?t=" . filemtime("css/media-screen-large.css") . "'>";
 
     echo <<<CDATA
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link rel='icon' href='../../media/lunardo-cinema-logo-primary.png' type='image/x-icon'>
-    <script src='../wireframe.js'></script>
-    <script src='script/main.js'></script>
-    <script src='script/validation.js'></script>
+    <script src='../wireframe.js' defer></script>
+    <script src='script/main.js' defer></script>
+    <script src='script/validation.js' defer></script>
 CDATA;
 }
 
@@ -237,39 +304,10 @@ function headerModule()
 CDATA;
 }
 
-// Movie module
-function movieModule($movieID)
+// Price table module
+function priceTableModule()
 {
-    global $movies;
-    $movieObject = $movies[$movieID];
-    echo <<<CDATA
-    <div class='card' tabindex='1'>
-                    <article>
-                        <img src='../../media/$movieObject->movieID.png' alt='$movieObject->movieTitle movie poster'>
-                        <h2>$movieObject->movieTitle</h2>
-                        <h3>$movieObject->movieRating</h3>
-                        <h4>Screenings</h4>
-                    <ul>
-CDATA;
-    foreach ($movieObject->movieScreening as $day => $time) {
-        echo "<li>$day</li>
-              <li>$time</li>";
-    }
-    echo <<<CDATA
-                    </ul>
-                    </article>
-                    <article>
-                        <h2>$movieObject->movieTitle</h2>
-                        <p>$movieObject->movieShortSynopsis</p>
-                        <a href='booking.php?movieID=$movieID'>Book Ticket</a>
-                    </article>
-                </div>
-CDATA;
-}
-
-function priceModule()
-{
-    global $seats;
+    global $prices;
     echo <<<CDATA
     <p>We offer discounted pricing during weekdays afternoons and all day on Mondays.</p>
     <table>
@@ -282,62 +320,14 @@ function priceModule()
         </thead>
         <tbody>
 CDATA;
-    foreach ($seats as $type => $price) {
-        echo "<tr><td>${price["Seat Type"]}</td><td>\$${price["Discounted Price"]}</td><td>\$${price["Normal Price"]}</td></tr>";
+    foreach ($prices as $seatID => $seatsAndPrices) {
+        foreach ($seatsAndPrices as $seatType => $price)
+            echo "<tr><td>$seatType</td><td>\$${price["Discount"]}</td><td>\$${price["Normal"]}</td></tr>";
     }
-    echo <<<CDATA
+    echo "</tbody></table>";
 
-        </tbody>
-    </table>
-CDATA;
 
 }
-
-// Movie trailer module
-function movieTrailerModule($movieID)
-{
-    global $movies;
-    $movieObject = $movies[$movieID];
-    echo <<<CDATA
-        <h1>$movieObject->movieTitle</h1>
-        <!-- Code sourced and adapted from: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_video -->
-        <video controls>
-            <source src='../../media/$movieObject->movieID-trailer.mov' type='video/mp4'>
-            Your browser does not support the video tag.
-        </video>
-        <h2>The synopsis below may give away important plot points.</h2>
-        <article>
-            <h3>Synopsis</h3>
-                $movieObject->movieSynopsis
-        </article>
-CDATA;
-
-}
-
-
-function radioModule($movieID)
-{
-    global $movies;
-    $movieObject = $movies[$movieID];
-
-    echo <<<CDATA
-<fieldset>
-                <legend>Screenings</legend>
-CDATA;
-    foreach ($movieObject->movieScreening as $day => $time) {
-        if ($movieObject->movieScreening[$day] === "No Screenings") {
-            continue;
-        } else {
-            echo "<input type='radio' id='$day' name='day-time' value='$day $time'>";
-            echo "<label for='$day'>$day $time</label>";
-        }
-    }
-    echo <<<CDATA
-</fieldset>
-CDATA;
-
-}
-
 
 // Footer module
 function footerModule()

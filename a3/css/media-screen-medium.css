@@ -62,16 +62,15 @@
         border-radius: 10px;
     }
 
-    nav ul li a.current {
-        color: var(--color-green);
-        background-color: var(--color-blue-secondary);
-    }
-
-
     /*  * Code sourced and adapted from:
         * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
 
     nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
+        color: var(--color-green);
+        background-color: var(--color-blue-secondary);
+    }
+
+    nav ul li a:link.current, nav ul li a:visited.current {
         color: var(--color-green);
         background-color: var(--color-blue-secondary);
     }

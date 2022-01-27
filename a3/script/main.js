@@ -79,3 +79,35 @@ window.onscroll = function () {
         }
     }
 }
+
+function priceCalc () {
+    let total = 0;
+    let movie = moviesJS[movie_GET["movieID"]]["movieTitle"];
+    let screenings = moviesJS[movie_GET["movieID"]]["movieScreening"];
+    let seatSTA = parseInt(document.getElementById('seatSTA').value);
+    let seatSTP = parseInt(document.getElementById('seatSTP').value);
+    let seatSTC = parseInt(document.getElementById('seatSTC').value);
+    let seatFCA = parseInt(document.getElementById('seatFCA').value);
+    let seatFCP = parseInt(document.getElementById('seatFCP').value);
+    let seatFCC = parseInt(document.getElementById('seatFCC').value);
+
+    let dayTime = document.querySelector( 'input[name="day-time"]:checked' ).value;
+
+    for (let day in screenings) {
+        if (screenings[day] === "No Screenings"){
+            continue;
+        }
+        else {
+            console.log(day);
+        }
+    }
+
+    console.log(seatSTA);
+    console.log(seatSTP);
+    console.log(seatSTC);
+    console.log(seatFCA);
+    console.log(seatFCP);
+    console.log(seatFCC);
+    console.log(dayTime);
+    console.log(movie);
+}
