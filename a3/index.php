@@ -16,7 +16,7 @@
         <ul>
             <li><a href='index.php' onclick='removeResponsive()'>Home</a></li>
             <li><a href='#aboutUs' onclick='removeResponsive()'>About</a></li>
-            <li><a href='#seatsAndPrices' onclick='removeResponsive()'>Seats & Prices</a></li>
+            <li><a href='#seatsAndPrices' onclick='removeResponsive()'>Seats and Prices</a></li>
             <li><a href='#nowShowing' onclick='removeResponsive()'>Now Showing</a></li>
         </ul>
     </nav>
@@ -55,39 +55,44 @@
 
         <section id='seatsAndPrices'>
             <div class='seats-and-prices'>
-            <h1>SEATS & PRICES</h1>
-            <article>
-                <p>
-                    Cinema halls are glorified with our new seats to ensure your comfort and the luxury of the cinematic
-                    experience. Watch your favourite movies from the comfort of our new standard leather seats, or
-                    upgrade to our new first-class recliner seats for maximum comfort and ergonomic to take your cinema
-                    experience to the next level.
-                </p>
-            </article>
-
-            <article>
-                <div class='container-seats'>
-                    <h2>Standard Seats</h2>
-                    <img src='../../media/standard-seat.png' alt='Picture of standard seat'/>
+                <h1>SEATS AND PRICES</h1>
+                <article>
                     <p>
-                        Our brand new <span>Standard Seats</span> are spaced out generously to provide broader legroom
-                        and are ergonomically designed with a foldable armrest and a cupholder for convenience and peace
-                        of mind.
+                        Cinema halls are glorified with our new seats to ensure your comfort and the luxury of the
+                        cinematic
+                        experience. Watch your favourite movies from the comfort of our new standard leather seats, or
+                        upgrade to our new first-class recliner seats for maximum comfort and ergonomic to take your
+                        cinema
+                        experience to the next level.
                     </p>
+                </article>
 
-                    <h2>First-Class Seats</h2>
-                    <img src='../../media/first-class-seat.png' alt='Picture of first-class seat'/>
-                    <p>
-                        Our brand new <span>First-class Seats</span> provide an ergonomic design, full leather, fully
-                        reclinable motor-operated seats that take your cinematic experience to the next level.
-                    </p>
-                </div>
-            </article>
+                <article>
+                    <div class='container-seats'>
+                        <h2>Standard Seats</h2>
+                        <img src='../../media/standard-seat.png' alt='Picture of standard seat'/>
+                        <p>
+                            Our brand new <span>Standard Seats</span> are spaced out generously to provide broader
+                            legroom
+                            and are ergonomically designed with a foldable armrest and a cupholder for convenience and
+                            peace
+                            of mind.
+                        </p>
 
-            <h2>PRICES</h2>
-            <article>
-                <?php priceTableModule(); ?>
-            </article>
+                        <h2>First-Class Seats</h2>
+                        <img src='../../media/first-class-seat.png' alt='Picture of first-class seat'/>
+                        <p>
+                            Our brand new <span>First-class Seats</span> provide an ergonomic design, full leather,
+                            fully
+                            reclinable motor-operated seats that take your cinematic experience to the next level.
+                        </p>
+                    </div>
+                </article>
+
+                <h2>PRICES</h2>
+                <article>
+                    <?php priceTableModule(); ?>
+                </article>
             </div>
         </section>
 
@@ -98,10 +103,10 @@
                 <!-- Code sourced and adapted from: https://stackoverflow.com/questions/41302918/css-hover-focus-vs-click-event-on-mobile-touch-devices?rq=1 -->
                 <?php
                 global $movies;
-                $movies["RMC"]->movieModule();
-                $movies["ACT"]->movieModule();
-                $movies["AHF"]->movieModule();
-                $movies["FAM"]->movieModule();
+                    $movies["RMC"]->movieModule();
+                    $movies["ACT"]->movieModule();
+                    $movies["AHF"]->movieModule();
+                    $movies["FAM"]->movieModule();
                 ?>
             </div>
             <img src='../../media/lunardo-cinema-logo-tertiary.png' alt='Lunardo Cinema Logo'>

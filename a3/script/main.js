@@ -80,34 +80,103 @@ window.onscroll = function () {
     }
 }
 
-function priceCalc () {
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/external_tools/546
+    */
+
+// Maximum number of seats
+const maxQty = 10;
+
+// Increment the number of seats
+function increment(seatID) {
+    let qtySeat = document.getElementById("qty" + seatID);
+    let qty = parseInt(qtySeat.value);
+    if (isNaN(qty) || ++qty < 1) {
+        qtySeat.value = "1";
+    } else {
+        qtySeat.value = (qty < maxQty) ? qty : maxQty
+    }
+}
+
+// Decrement number of seats
+function decrement(seatID) {
+    let qtySeat = document.getElementById("qty" + seatID);
+    let qty = parseInt(qtySeat.value);
+    if (isNaN(qty) || --qty < 1) {
+        qtySeat.value = "";
+    } else {
+        qtySeat.value = (qty < maxQty) ? qty : maxQty
+    }
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/js/tryit.asp?filename=tryjs_string_substring
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk07?module_item_id=3565022
+    */
+
+// Calculate the ticket price and display to document
+function priceCalc() {
+
+    let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
     let total = 0;
-    let movie = moviesJS[movie_GET["movieID"]]["movieTitle"];
-    let screenings = moviesJS[movie_GET["movieID"]]["movieScreening"];
-    let seatSTA = parseInt(document.getElementById('seatSTA').value);
-    let seatSTP = parseInt(document.getElementById('seatSTP').value);
-    let seatSTC = parseInt(document.getElementById('seatSTC').value);
-    let seatFCA = parseInt(document.getElementById('seatFCA').value);
-    let seatFCP = parseInt(document.getElementById('seatFCP').value);
-    let seatFCC = parseInt(document.getElementById('seatFCC').value);
 
-    let dayTime = document.querySelector( 'input[name="day-time"]:checked' ).value;
+    const dayTime = document.querySelector('input[name="day-time"]:checked').value;
 
-    for (let day in screenings) {
-        if (screenings[day] === "No Screenings"){
-            continue;
-        }
-        else {
-            console.log(day);
-        }
+    let day = dayTime.substr(0, 3);
+    let time = dayTime.substr(4, 5);
+
+    let STA = parseInt(document.getElementById("qtySTA").value);
+    let qtySTA = isNaN(STA) ? 0 : STA;
+
+    let STP = parseInt(document.getElementById('qtySTP').value);
+    let qtySTP = isNaN(STP) ? 0 : STP;
+
+    let STC = parseInt(document.getElementById('qtySTC').value);
+    let qtySTC = isNaN(STC) ? 0 : STC;
+
+    let FCA = parseInt(document.getElementById('qtyFCA').value);
+    let qtyFCA = isNaN(FCA) ? 0 : FCA;
+
+    let FCP = parseInt(document.getElementById('qtyFCP').value);
+    let qtyFCP = isNaN(FCP) ? 0 : FCP;
+
+    let FCC = parseInt(document.getElementById('qtyFCC').value);
+    let qtyFCC = isNaN(FCC) ? 0 : FCC;
+
+    switch (day) {
+        case "MON":
+            pricingType = "Discount";
+            break;
+        case "TUE":
+        case "WED":
+        case "THU":
+        case "FRI":
+            switch (time) {
+                case "12PM":
+                    pricingType = "Discount";
+                    break;
+                default:
+                    pricingType = "Normal";
+                    break;
+            }
+            break;
+        default:
+            pricingType = "Normal";
+            break;
     }
 
-    console.log(seatSTA);
-    console.log(seatSTP);
-    console.log(seatSTC);
-    console.log(seatFCA);
-    console.log(seatFCP);
-    console.log(seatFCC);
-    console.log(dayTime);
-    console.log(movie);
+    priceSTA = pricesJS["STA"]["Standard Adult"][pricingType];
+    priceSTP = pricesJS["STP"]["Standard Concession"][pricingType];
+    priceSTC = pricesJS["STC"]["Standard Child"][pricingType];
+    priceFCA = pricesJS["FCA"]["First Class Adult"][pricingType];
+    priceFCP = pricesJS["FCP"]["First Class Concession"][pricingType];
+    priceFCC = pricesJS["FCC"]["First Class Child"][pricingType];
+
+    total = qtySTA * priceSTA + qtySTP * priceSTP + qtySTC * priceSTC + qtyFCA * priceFCA + qtyFCP * priceFCP + qtyFCC * priceFCC;
+
+    document.getElementById("ticketContainer").style.display = "block";
+    document.getElementById("movieTitle").innerHTML = moviesJS[movie_GET["movieID"]]["movieTitle"];
+    document.getElementById("movieRating").innerHTML = moviesJS[movie_GET["movieID"]]["movieRating"];
+    document.getElementById("screening").innerHTML = "Screening: " + dayTime;
+    document.getElementById("total").innerText = "Total: $" + total.toFixed(2);
 }

@@ -255,10 +255,32 @@
         justify-content: center;
     }
 
+    section.book-ticket fieldset input[type=radio] + label {
+        border-bottom: 2px solid var(--color-green);
+    }
+
+    section.book-ticket fieldset input[type=radio]:checked + label {
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+
     div.grid-container-book-seat {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: auto auto;
         gap: 1em;
+    }
+
+    section.book-ticket fieldset > p [type=text] {
+        flex-grow: initial;
+        width: 25vw;
+    }
+
+    div.ticket-container {
+        box-shadow: 10px 15px var(--color-black);
+        border: black 1px solid;
+    }
+
+    section.book-ticket fieldset > p [type=button] {
+        flex-grow: 1;
     }
 
     section.book-ticket [type=submit] {

@@ -294,20 +294,18 @@ div.seats-and-prices {
     * https://www.w3schools.com/howto/howto_css_responsive_text.asp */
 
 div.seats-and-prices > h1 {
-    color: var(--color-black);
     font-family: var(--font-family-secondary);
     font-weight: 400;
     width: 100%;
     font-size: 6vw;
     margin: 0 auto;
-    text-align: center;
     line-height: 0;
+    text-align: center;
     padding: 1em;
 }
 
 div.seats-and-prices > h2 {
     font-family: var(--font-family-secondary);
-    color: var(--color-black);
     font-weight: 300;
     font-size: 1.3em;
     text-align: center;
@@ -317,13 +315,15 @@ div.seats-and-prices > h2 {
 /*  * Code sourced and adapted from:
     * https://www.youtube.com/watch?v=oYRda7UtuhA&t=1040s */
 
-div.seats-and-prices > h1::after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 100%;
-    background-color: var(--color-green);
-}
+/*div.seats-and-prices > h1::after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    height: 5px;*/
+/*    width: 0%;*/
+/*    margin: auto;*/
+/*    background-color: var(--color-green);*/
+/*    transition: 0.9s;*/
+/*}*/
 
 div.seats-and-prices > article:nth-child(1) p {
     text-align: justify;
@@ -408,17 +408,9 @@ section.now-showing > h1 {
     font-weight: 400;
     text-align: center;
     width: 100%;
-    font-size:6vw;
+    font-size: 6vw;
     line-height: 0;
     padding: 1em;
-}
-
-section.now-showing > h1::after {
-    content: "";
-    display: block;
-    height: 1px;
-    width: 100%;
-    background-color: var(--color-green);
 }
 
 section.now-showing > p {
@@ -582,17 +574,9 @@ section.movie-trailer > h1 {
     font-weight: 400;
     text-align: center;
     width: 100%;
-    font-size:6vw;
+    font-size: 6vw;
     line-height: 0;
     padding: 1em 0;
-}
-
-section.movie-trailer > h1::after {
-    content: "";
-    display: block;
-    height: 1px;
-    width: 100%;
-    background-color: var(--color-green);
 }
 
 section.movie-trailer video {
@@ -655,17 +639,9 @@ section.book-ticket > h1 {
     width: 100%;
     font-weight: 400;
     text-align: center;
-    font-size:6vw;
+    font-size: 6vw;
     line-height: 0;
     padding: 1em 0;
-}
-
-section.book-ticket > h1::after {
-    content: "";
-    display: block;
-    height: 1px;
-    width: 100%;
-    background-color: var(--color-green);
 }
 
 section.book-ticket form {
@@ -727,7 +703,36 @@ section.book-ticket fieldset input[type=radio]:checked + label {
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_form_focus2 */
 
-section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=number] {
+section.book-ticket p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+section.book-ticket fieldset > p [type=text] {
+    flex-grow: 1;
+    width: 30vw;
+}
+
+section.book-ticket fieldset > p [type=button] {
+    flex-grow: 2;
+    border: 1px var(--color-green) solid;
+    background-color: var(--color-white);
+    border-radius: var(--radius);
+    cursor: pointer;
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    opacity: 0.9;
+}
+
+section.book-ticket fieldset > p [type=button]:hover, section.book-ticket fieldset > p [type=button]:active, section.book-ticket fieldset > p [type=button]:focus {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    opacity: 1;
+}
+
+section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=button] {
     border: 1px var(--color-grey-primary) solid;
     border-radius: var(--radius);
     padding: 12px 20px;
@@ -737,9 +742,42 @@ section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=num
     opacity: 0.5;
 }
 
-section.book-ticket fieldset [type=text]:focus, section.book-ticket fieldset [type=number]:focus {
+section.book-ticket fieldset [type=text]:focus, section.book-ticket fieldset [type=button]:focus {
     border: 1px var(--color-green) solid;
     opacity: 1;
+}
+
+div.ticket-container {
+    display: none;
+    flex-direction: column;
+    padding: 1em;
+    margin: 0 0 1em 0;
+    background-color: var(--color-green);
+    border-radius: var(--radius);
+    color: var(--color-white);
+}
+
+div.ticket-container div {
+    display: flex;
+    padding: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.ticket-container h3 {
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    font-size: 20px;
+}
+
+div.ticket-container h4 {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+div.ticket-container h5 {
+    font-weight: 300;
+    font-size: 12px;
 }
 
 section.book-ticket [type=submit] {
@@ -751,6 +789,7 @@ section.book-ticket [type=submit] {
     color: var(--color-grey-primary);
     transition-duration: 0.4s;
     opacity: 0.9;
+    margin: 0 0 1em 0;
 }
 
 section.book-ticket [type=submit]:hover, section.book-ticket [type=submit]:active, section.book-ticket [type=submit]:focus {
@@ -861,6 +900,7 @@ aside h3 {
 
 aside pre {
     padding: 2em 3em;
+    font-size: 11px;
 }
 
 /********************************************************************************************/

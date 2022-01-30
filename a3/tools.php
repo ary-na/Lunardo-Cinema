@@ -18,7 +18,7 @@ function php2js($arr, $arrName)
     $arrJSON = json_encode($arr, JSON_PRETTY_PRINT);
     echo <<<"CDATA"
   <script>
-    var $arrName = $arrJSON;
+    let $arrName = $arrJSON;
   </script>
 CDATA;
 }
@@ -108,8 +108,7 @@ CDATA;
         return [
             'movieID' => $this->movieID,
             'movieTitle' => $this->movieTitle,
-            'movieRating' => $this->movieRating,
-            'movieScreening' => $this->movieScreening
+            'movieRating' => $this->movieRating
         ];
     }
 }
@@ -262,6 +261,15 @@ $prices = [
     "FCP" => ["First Class Concession" => ["Discount" => 22.50, "Normal" => 27.00]],
     "FCC" => ["First Class Child" => ["Discount" => 21.00, "Normal" => 24.00]]
 ];
+
+// Redirect home if Get contains the wrong Movie ID
+function redirectHome()
+{
+    global $movies;
+    if (!isset($_GET['movieID']) || !isset($movies[$_GET['movieID']])) {
+        header("Location: index.php");
+    }
+}
 
 // Head module
 function headModule()
