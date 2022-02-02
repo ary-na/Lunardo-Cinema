@@ -115,6 +115,10 @@
         padding: 0 5em;
     }
 
+    section.book-ticket fieldset > p [type=text] {
+        width: 320px;
+    }
+
     section.book-ticket [type=text], section.book-ticket [type=email] {
         width: 49%;
     }
