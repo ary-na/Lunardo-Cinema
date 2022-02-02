@@ -732,7 +732,7 @@ section.book-ticket fieldset > p [type=button]:hover, section.book-ticket fields
     opacity: 1;
 }
 
-section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=button] {
+section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=email], section.book-ticket fieldset [type=button] {
     border: 1px var(--color-grey-primary) solid;
     border-radius: var(--radius);
     padding: 12px 20px;
@@ -742,7 +742,7 @@ section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=but
     opacity: 0.5;
 }
 
-section.book-ticket fieldset [type=text]:focus, section.book-ticket fieldset [type=button]:focus {
+section.book-ticket fieldset [type=text]:focus, section.book-ticket fieldset [type=email]:focus, section.book-ticket fieldset [type=button]:focus {
     border: 1px var(--color-green) solid;
     opacity: 1;
 }

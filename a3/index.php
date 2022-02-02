@@ -1,16 +1,11 @@
 <?php include_once('tools.php'); ?>
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-    <title>Lunardo Cinema</title>
-    <?php headModule(); ?>
-</head>
+<head><?php headModule("Lunardo Cinema"); ?></head>
 
 <body>
 <div class='container-body'>
-    <header>
-        <?php headerModule(); ?>
-    </header>
+    <header><?php headerModule(); ?></header>
 
     <nav id='topNav'>
         <ul>
@@ -103,10 +98,10 @@
                 <!-- Code sourced and adapted from: https://stackoverflow.com/questions/41302918/css-hover-focus-vs-click-event-on-mobile-touch-devices?rq=1 -->
                 <?php
                 global $movies;
-                    $movies["RMC"]->movieModule();
-                    $movies["ACT"]->movieModule();
-                    $movies["AHF"]->movieModule();
-                    $movies["FAM"]->movieModule();
+                $movies["RMC"]->movieModule();
+                $movies["ACT"]->movieModule();
+                $movies["AHF"]->movieModule();
+                $movies["FAM"]->movieModule();
                 ?>
             </div>
             <img src='../../media/lunardo-cinema-logo-tertiary.png' alt='Lunardo Cinema Logo'>

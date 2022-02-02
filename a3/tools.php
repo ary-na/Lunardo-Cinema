@@ -46,6 +46,10 @@ class Movie implements JsonSerializable
         $this->movieScreening = $movieScreening;
     }
 
+    function getMovieTitle(){
+        return $this->movieTitle;
+    }
+
     function movieModule()
     {
         echo <<<CDATA
@@ -96,7 +100,7 @@ CDATA;
             if ($this->movieScreening[$day] === "No Screenings") {
                 continue;
             } else {
-                echo "<input type='radio' id='$day' name='day-time' value='$day $time' onchange='priceCalc()'>";
+                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();' required>";
                 echo "<label for='$day'>$day $time</label>";
             }
         }
@@ -262,6 +266,11 @@ $prices = [
     "FCC" => ["First Class Child" => ["Discount" => 21.00, "Normal" => 24.00]]
 ];
 
+// Include validation on POST request
+//if ($_SESSION["REQUEST_METHOD"] === "POST"){
+//    include_once('post-validation.php');
+//}
+
 // Redirect home if Get contains the wrong Movie ID
 function redirectHome()
 {
@@ -272,11 +281,12 @@ function redirectHome()
 }
 
 // Head module
-function headModule()
+function headModule($title)
 {
     echo <<<CDATA
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>$title</title>
     <!-- Keep wireframe.css for debugging, add your css to style.css -->
     <link id='wireframecss' type='text/css' rel='stylesheet' href='../wireframe.css' disabled>
 CDATA;

@@ -120,10 +120,12 @@ function priceCalc() {
     let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
     let total = 0;
 
-    const dayTime = document.querySelector('input[name="day-time"]:checked').value;
+    const dayTime = document.querySelector('input[name="day-time"]:checked');
+    let selectedDayTime = (dayTime === null) ? "" : dayTime.value;
 
-    let day = dayTime.substr(0, 3);
-    let time = dayTime.substr(4, 5);
+    let day = selectedDayTime.slice(0, 3);
+    let time = selectedDayTime.slice(-4);
+
 
     let STA = parseInt(document.getElementById("qtySTA").value);
     let qtySTA = isNaN(STA) ? 0 : STA;
@@ -174,9 +176,14 @@ function priceCalc() {
 
     total = qtySTA * priceSTA + qtySTP * priceSTP + qtySTC * priceSTC + qtyFCA * priceFCA + qtyFCP * priceFCP + qtyFCC * priceFCC;
 
-    document.getElementById("ticketContainer").style.display = "block";
-    document.getElementById("movieTitle").innerHTML = moviesJS[movie_GET["movieID"]]["movieTitle"];
-    document.getElementById("movieRating").innerHTML = moviesJS[movie_GET["movieID"]]["movieRating"];
-    document.getElementById("screening").innerHTML = "Screening: " + dayTime;
-    document.getElementById("total").innerText = "Total: $" + total.toFixed(2);
+    let valid = validateScreeningAndSeat();
+    if (valid === false) {
+        document.getElementById("ticketContainer").style.display = "none";
+    } else {
+        document.getElementById("ticketContainer").style.display = "block";
+        document.getElementById("movieTitle").innerHTML = moviesJS[movie_GET["movieID"]]["movieTitle"];
+        document.getElementById("movieRating").innerHTML = moviesJS[movie_GET["movieID"]]["movieRating"];
+        document.getElementById("screening").innerHTML = "Screening: " + selectedDayTime;
+        document.getElementById("total").innerText = "Total: $" + total.toFixed(2);
+    }
 }
