@@ -120,12 +120,12 @@ function priceCalc() {
     let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
     let total = 0;
 
-    const dayTime = document.querySelector('input[name="day-time"]:checked');
-    let selectedDayTime = (dayTime === null) ? "" : dayTime.value;
+    const screeningDayTime = document.querySelector('input[name="day-time"]:checked');
 
-    let day = selectedDayTime.slice(0, 3);
-    let time = selectedDayTime.slice(-4);
+    let selectedDayTime = (screeningDayTime === null) ? "" : screeningDayTime.value;
 
+    let screeningDay = selectedDayTime.slice(0, 3);
+    let screeningTime = selectedDayTime.slice(-4);
 
     let STA = parseInt(document.getElementById("qtySTA").value);
     let qtySTA = isNaN(STA) ? 0 : STA;
@@ -145,7 +145,8 @@ function priceCalc() {
     let FCC = parseInt(document.getElementById('qtyFCC').value);
     let qtyFCC = isNaN(FCC) ? 0 : FCC;
 
-    switch (day) {
+
+    switch (screeningDay) {
         case "MON":
             pricingType = "Discount";
             break;
@@ -153,7 +154,7 @@ function priceCalc() {
         case "WED":
         case "THU":
         case "FRI":
-            switch (time) {
+            switch (screeningTime) {
                 case "12PM":
                     pricingType = "Discount";
                     break;

@@ -17,9 +17,11 @@ function php2js($arr, $arrName)
 {
     $arrJSON = json_encode($arr, JSON_PRETTY_PRINT);
     echo <<<"CDATA"
-  <script>
+
+    <script>
     let $arrName = $arrJSON;
-  </script>
+    </script>
+
 CDATA;
 }
 
@@ -112,7 +114,8 @@ CDATA;
         return [
             'movieID' => $this->movieID,
             'movieTitle' => $this->movieTitle,
-            'movieRating' => $this->movieRating
+            'movieRating' => $this->movieRating,
+            'movieScreening' => $this->movieScreening
         ];
     }
 }

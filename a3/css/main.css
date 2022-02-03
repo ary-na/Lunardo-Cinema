@@ -644,6 +644,12 @@ section.book-ticket > h1 {
     padding: 1em 0;
 }
 
+section.book-ticket span {
+    color: var(--color-green);
+    font-weight: 500;
+    font-size: 13px;
+}
+
 section.book-ticket form {
     display: flex;
     flex-direction: column;

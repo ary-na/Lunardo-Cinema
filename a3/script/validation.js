@@ -7,6 +7,8 @@
     * https://stackoverflow.com/questions/1151032/javascript-blank-space-validation
     * https://www.codegrepper.com/code-examples/javascript/input+type+number+only+whole+numbers+react
     * https://stackoverflow.com/questions/16250915/how-to-call-two-functions-on-a-form-submit
+    * https://www.w3schools.com/jsref/jsref_includes_array.asp
+    * https://bobbyhadz.com/blog/javascript-check-if-key-exists-in-object
     */
 
 function validateForm() {
@@ -29,16 +31,16 @@ function validatePersonalInfo() {
     let valid = true;
 
     if (mobile === "" || !mobile.match(mobileRGEX)) {
-        document.getElementById("noError").innerHTML = "Please enter your Australian mobile number.";
+        document.getElementById("mobileNoError").innerHTML = "Please enter your Australian mobile number";
         document.getElementById("mobileNo").focus();
         document.getElementById("mobileNo").select();
         valid = false;
     } else {
-        document.getElementById("noError").innerHTML = "";
+        document.getElementById("mobileNoError").innerHTML = "";
     }
 
     if (email === "" || !email.match(emailRGEX)) {
-        document.getElementById("emailError").innerHTML = "Please enter your email.";
+        document.getElementById("emailError").innerHTML = "Please enter your email";
         document.getElementById("email").focus();
         document.getElementById("email").select();
         valid = false;
@@ -47,14 +49,13 @@ function validatePersonalInfo() {
     }
 
     if (name === "" || !name.match(nameRGEX)) {
-        document.getElementById("nameError").innerHTML = "Please enter your name.";
+        document.getElementById("nameError").innerHTML = "Please enter your name";
         document.getElementById("fullName").focus();
         document.getElementById("fullName").select();
         valid = false;
     } else {
         document.getElementById("nameError").innerHTML = "";
     }
-
     return valid;
 }
 
@@ -62,7 +63,14 @@ function validatePersonalInfo() {
 function validateScreeningAndSeat() {
 
     const ticketRGEX = /^[0-9\b]+$/;
-    const dayTime = document.querySelector('input[name="day-time"]:checked');
+    const movieScreening = moviesJS[movie_GET["movieID"]]["movieScreening"];
+
+    const screeningDayTime = document.querySelector('input[name="day-time"]:checked');
+
+    let selectedDayTime = (screeningDayTime === null) ? "" : screeningDayTime.value;
+    let screeningDay = selectedDayTime.slice(0, 3);
+    let screeningTime = selectedDayTime.slice(-4);
+
     const seats = document.getElementsByClassName('seats');
     const seatsVal = [seats[0].value, seats[1].value, seats[2].value, seats[3].value, seats[4].value, seats[5].value];
 
@@ -72,7 +80,7 @@ function validateScreeningAndSeat() {
     let valid = true;
 
     if (seatsEmpty === true) {
-        document.getElementById("seatError").innerHTML = "Please enter number of seats.";
+        document.getElementById("seatError").innerHTML = "Please enter number of seats";
         seats[0].focus();
         seats[0].select();
         valid = false;
@@ -84,11 +92,11 @@ function validateScreeningAndSeat() {
         if (seatsVal[i].trim() !== "") {
             if (isNaN(seatsVal[i])) {
                 seats[i].value = "";
-                document.getElementById("seatError").innerHTML = "Please enter a number.";
+                document.getElementById("seatError").innerHTML = "Please enter a number";
                 valid = false;
             } else if (!seatsVal[i].match(ticketRGEX) || (parseInt(seatsVal[i]) <= 0 || parseInt(seatsVal[i]) > 10)) {
                 seats[i].value = "";
-                document.getElementById("seatError").innerHTML = "Please enter a valid number.";
+                document.getElementById("seatError").innerHTML = "Please enter a valid number";
                 valid = false;
             } else {
                 document.getElementById("seatError").innerHTML = "";
@@ -96,12 +104,17 @@ function validateScreeningAndSeat() {
         }
     }
 
-    if (dayTime === null) {
-        document.getElementById("screeningError").innerHTML = "Please select a screening session.";
+    if (screeningDayTime === null) {
+        document.getElementById("screeningError").innerHTML = "Please select a screening session";
+        valid = false;
+    } else if (!(screeningDay.trim() in movieScreening)) {
+        document.getElementById("screeningError").innerHTML = "Invalid day, Please refresh your browser";
+        valid = false;
+    } else if (!(movieScreening[screeningDay].includes(screeningTime.trim()))) {
+        document.getElementById("screeningError").innerHTML = "Invalid time, Please refresh your browser";
         valid = false;
     } else {
         document.getElementById("screeningError").innerHTML = "";
     }
-
     return valid;
 }

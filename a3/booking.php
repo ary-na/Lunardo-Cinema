@@ -32,14 +32,12 @@ redirectHome();
         <h1>BOOKING FORM</h1>
         <!-- Code sourced and adapted from: https://titan.csit.rmit.edu.au/~e54061/wp/lectures/ -->
         <form id="bookingForm" name="booking" action='booking.php?movieID=<?= $_GET["movieID"] ?>' method='post'
-              onsubmit="return validateForm();" novalidate>
+              onsubmit="return validateForm();">
             <!-- Code sourced and adapted from: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_input_type_hidden -->
             <input type='hidden' id='movie' name='movie' value='<?= $_GET["movieID"] ?>'>
             <!-- Code sourced and adapted from: https://rmit.instructure.com/courses/85177/pages/workshop-wk05?module_item_id=3564997 -->
 
-            <?php
-            $movies[$_GET["movieID"]]->radioButtonModule();
-            ?>
+            <?php $movies[$_GET["movieID"]]->radioButtonModule(); ?>
             <span id="screeningError"></span>
 
             <div class='grid-container-book-seat'>
@@ -104,7 +102,7 @@ redirectHome();
                 <span id="emailError"></span>
                 <label for='mobileNo'>Mobile Number</label>
                 <input type='text' id='mobileNo' name='user[mobile]'">
-                <span id="noError"></span>
+                <span id="mobileNoError"></span>
             </fieldset>
 
             <div id="ticketContainer" class="ticket-container">
