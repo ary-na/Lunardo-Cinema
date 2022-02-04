@@ -1,5 +1,18 @@
 <?php
 include_once('tools.php');
+
+// Include validation on POST and call validation methods
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include_once('post-validation.php');
+
+    $fieldErrors = validateBooking();
+    $userInput = redisplayUserInput();
+
+//    if (empty($fieldErrors)) {
+//
+//    }
+}
+
 redirectHome();
 ?>
 <!DOCTYPE html>
@@ -38,7 +51,7 @@ redirectHome();
             <!-- Code sourced and adapted from: https://rmit.instructure.com/courses/85177/pages/workshop-wk05?module_item_id=3564997 -->
 
             <?php $movies[$_GET["movieID"]]->radioButtonModule(); ?>
-            <span id="screeningError"></span>
+            <span id="screeningError"><?= unsetFB($fieldErrors['day-time']) ?></span>
 
             <div class='grid-container-book-seat'>
                 <!-- Code sourced and adapted from:
@@ -89,20 +102,21 @@ redirectHome();
                         <input type="button" value="+" onclick="increment('FCC'); priceCalc();">
                     </p>
                 </fieldset>
-                <span id="seatError"></span>
+                <span id="seatError"><?= unsetFB($fieldErrors['seat']) ?></span>
             </div>
             <!-- Code sourced and adapted from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text -->
             <fieldset>
                 <legend>Personal Information</legend>
                 <label for='fullName'>Full Name:</label>
-                <input type='text' id='fullName' name='user[name]'">
-                <span id="nameError"></span>
+                <input type='text' id='fullName' name='user[name]' value='<?= unsetFB($userInput['user']['name']); ?>'>
+                <span id="nameError"><?= unsetFB($fieldErrors['user']['name']) ?></span>
                 <label for='email'>Email:</label>
-                <input type='text' id='email' name='user[email]'">
-                <span id="emailError"></span>
+                <input type='text' id='email' name='user[email]' value='<?= unsetFB($userInput['user']['email']); ?>'>
+                <span id="emailError"><?= unsetFB($fieldErrors['user']['email']) ?></span>
                 <label for='mobileNo'>Mobile Number</label>
-                <input type='text' id='mobileNo' name='user[mobile]'">
-                <span id="mobileNoError"></span>
+                <input type='text' id='mobileNo' name='user[mobile]'
+                       value='<?= unsetFB($userInput['user']['mobile']); ?>'>
+                <span id="mobileNoError"><?= unsetFB($fieldErrors['user']['mobile']) ?></span>
             </fieldset>
 
             <div id="ticketContainer" class="ticket-container">

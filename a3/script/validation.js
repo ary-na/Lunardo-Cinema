@@ -11,9 +11,9 @@
     * https://bobbyhadz.com/blog/javascript-check-if-key-exists-in-object
     */
 
-function validateForm() {
-    return validateScreeningAndSeat() && validatePersonalInfo();
-}
+// function validateForm() {
+//     return validateScreeningAndSeat() && validatePersonalInfo();
+// }
 
 // Screening and Seat validations
 function validateScreeningAndSeat() {

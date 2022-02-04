@@ -31,8 +31,14 @@ class Movie implements JsonSerializable
         $this->movieScreening = $movieScreening;
     }
 
-    function getMovieTitle(){
+    function getMovieTitle()
+    {
         return $this->movieTitle;
+    }
+
+    function getMovieScreening()
+    {
+        return $this->movieScreening;
     }
 
     function movieModule()
@@ -80,13 +86,13 @@ CDATA;
 
     function radioButtonModule()
     {
-        echo "<fieldset><legend>Screenings</legend>";
+        echo "<fieldset><legend>Screenings</legend>\n";
         foreach ($this->movieScreening as $day => $time) {
             if ($this->movieScreening[$day] === "No Screenings") {
                 continue;
             } else {
-                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'>";
-                echo "<label for='$day'>$day $time</label>";
+                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'>\n";
+                echo "<label for='$day'>$day $time</label>\n";
             }
         }
         echo "</fieldset>";
@@ -252,9 +258,14 @@ $prices = [
     "FCC" => ["First Class Child" => ["Discount" => 21.00, "Normal" => 24.00]]
 ];
 
-// Include validation on POST request
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    include_once('post-validation.php');
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk10?module_item_id=3768395
+    */
+
+// Return an empty string if variable is unset
+function unsetFB(&$str, $fallback = '')
+{
+    return (isset($str) ? $str : $fallback);
 }
 
 /*  * Code sourced and adapted from:
