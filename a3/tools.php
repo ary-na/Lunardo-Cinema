@@ -31,6 +31,10 @@ class Movie implements JsonSerializable
         $this->movieScreening = $movieScreening;
     }
 
+    function getMovieID(){
+        return $this->movieID;
+    }
+
     function getMovieTitle()
     {
         return $this->movieTitle;
@@ -258,6 +262,17 @@ $prices = [
     "FCC" => ["First Class Child" => ["Discount" => 21.00, "Normal" => 24.00]]
 ];
 
+// Pricing policy
+$pricingPolicy = [
+    "MON" => ["12PM" => "Discount", "6PM" => "Discount", "9PM" => "Discount"],
+    "TUE" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
+    "WED" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
+    "THU" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
+    "FRI" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
+    "SAT" => ["12PM" => "Full", "3PM" => "Full", "6PM" => "Full", "9PM" => "Full"],
+    "SUN" => ["12PM" => "Full", "3PM" => "Full", "6PM" => "Full", "9PM" => "Full"]
+];
+
 /*  * Code sourced and adapted from:
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk10?module_item_id=3768395
     */
@@ -283,6 +298,20 @@ function php2js($arr, $arrName)
     </script>
 
 CDATA;
+}
+
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/groups/405207/discussion_topics/1425247
+    */
+
+// Return pricing type
+function isFullDiscountedOrNotShowing($day, $time)
+{
+    global $pricingPolicy;
+    if (empty($pricingPolicy[$day][$time])) {
+        return "Not Showing";
+    }
+    return $pricingPolicy[$day][$time];
 }
 
 // Redirect home if Get contains the wrong Movie ID
