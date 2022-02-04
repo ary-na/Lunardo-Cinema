@@ -12,51 +12,7 @@
     */
 
 function validateForm() {
-    let valid = true;
-    valid = validateScreeningAndSeat() && validatePersonalInfo();
-    return valid;
-}
-
-// Personal Information validations
-function validatePersonalInfo() {
-
-    let name = document.forms["booking"]["user[name]"].value;
-    let email = document.forms["booking"]["user[email]"].value;
-    let mobile = document.forms["booking"]["user[mobile]"].value;
-
-    const nameRGEX = /^[a-zA-Z '.-]{1,255}$/;
-    const emailRGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-    const mobileRGEX = /^(\(04\)|04|\+614)( ?\d){8}$/;
-
-    let valid = true;
-
-    if (mobile === "" || !mobile.match(mobileRGEX)) {
-        document.getElementById("mobileNoError").innerHTML = "Please enter your Australian mobile number";
-        document.getElementById("mobileNo").focus();
-        document.getElementById("mobileNo").select();
-        valid = false;
-    } else {
-        document.getElementById("mobileNoError").innerHTML = "";
-    }
-
-    if (email === "" || !email.match(emailRGEX)) {
-        document.getElementById("emailError").innerHTML = "Please enter your email";
-        document.getElementById("email").focus();
-        document.getElementById("email").select();
-        valid = false;
-    } else {
-        document.getElementById("emailError").innerHTML = "";
-    }
-
-    if (name === "" || !name.match(nameRGEX)) {
-        document.getElementById("nameError").innerHTML = "Please enter your name";
-        document.getElementById("fullName").focus();
-        document.getElementById("fullName").select();
-        valid = false;
-    } else {
-        document.getElementById("nameError").innerHTML = "";
-    }
-    return valid;
+    return validateScreeningAndSeat() && validatePersonalInfo();
 }
 
 // Screening and Seat validations
@@ -115,6 +71,48 @@ function validateScreeningAndSeat() {
         valid = false;
     } else {
         document.getElementById("screeningError").innerHTML = "";
+    }
+    return valid;
+}
+
+// Personal Information validations
+function validatePersonalInfo() {
+
+    let name = document.forms["booking"]["user[name]"].value;
+    let email = document.forms["booking"]["user[email]"].value;
+    let mobile = document.forms["booking"]["user[mobile]"].value;
+
+    const nameRGEX = /^[a-zA-Z '.-]{1,255}$/;
+    const emailRGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    const mobileRGEX = /^(\(04\)|04|\+614)( ?\d){8}$/;
+
+    let valid = true;
+
+    if (mobile === "" || !mobile.match(mobileRGEX)) {
+        document.getElementById("mobileNoError").innerHTML = "Please enter your Australian mobile number";
+        document.getElementById("mobileNo").focus();
+        document.getElementById("mobileNo").select();
+        valid = false;
+    } else {
+        document.getElementById("mobileNoError").innerHTML = "";
+    }
+
+    if (email === "" || !email.match(emailRGEX)) {
+        document.getElementById("emailError").innerHTML = "Please enter your email";
+        document.getElementById("email").focus();
+        document.getElementById("email").select();
+        valid = false;
+    } else {
+        document.getElementById("emailError").innerHTML = "";
+    }
+
+    if (name === "" || !name.match(nameRGEX)) {
+        document.getElementById("nameError").innerHTML = "Please enter your name";
+        document.getElementById("fullName").focus();
+        document.getElementById("fullName").select();
+        valid = false;
+    } else {
+        document.getElementById("nameError").innerHTML = "";
     }
     return valid;
 }

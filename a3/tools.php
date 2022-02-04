@@ -9,23 +9,6 @@ session_start();
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 /*  * Code sourced and adapted from:
-    * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
-    */
-
-// Takes structured PHP variables and outputs the equivalent variable in a self-contained JavaScript element
-function php2js($arr, $arrName)
-{
-    $arrJSON = json_encode($arr, JSON_PRETTY_PRINT);
-    echo <<<"CDATA"
-
-    <script>
-    let $arrName = $arrJSON;
-    </script>
-
-CDATA;
-}
-
-/*  * Code sourced and adapted from:
     * https://stackoverflow.com/questions/50018014/passing-a-php-class-object-to-javascript-and-accessing-its-properties-in-javascr
     */
 
@@ -102,7 +85,7 @@ CDATA;
             if ($this->movieScreening[$day] === "No Screenings") {
                 continue;
             } else {
-                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();' required>";
+                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'>";
                 echo "<label for='$day'>$day $time</label>";
             }
         }
@@ -259,7 +242,7 @@ $movies = ["RMC" => $cyrano,
     "AHF" => $silentNight,
     "FAM" => $spiderManNoWayHome];
 
-// Prices and seats
+// Seat Prices
 $prices = [
     "STA" => ["Standard Adult" => ["Discount" => 15.00, "Normal" => 20.50]],
     "STP" => ["Standard Concession" => ["Discount" => 13.50, "Normal" => 18.00]],
@@ -270,9 +253,26 @@ $prices = [
 ];
 
 // Include validation on POST request
-//if ($_SESSION["REQUEST_METHOD"] === "POST"){
-//    include_once('post-validation.php');
-//}
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    include_once('post-validation.php');
+}
+
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
+    */
+
+// Takes structured PHP variables and outputs the equivalent variable in a self-contained JavaScript element
+function php2js($arr, $arrName)
+{
+    $arrJSON = json_encode($arr, JSON_PRETTY_PRINT);
+    echo <<<"CDATA"
+
+    <script>
+    let $arrName = $arrJSON;
+    </script>
+
+CDATA;
+}
 
 // Redirect home if Get contains the wrong Movie ID
 function redirectHome()
