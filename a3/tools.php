@@ -31,7 +31,8 @@ class Movie implements JsonSerializable
         $this->movieScreening = $movieScreening;
     }
 
-    function getMovieID(){
+    function getMovieID()
+    {
         return $this->movieID;
     }
 
@@ -95,7 +96,7 @@ CDATA;
             if ($this->movieScreening[$day] === "No Screenings") {
                 continue;
             } else {
-                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'>\n";
+                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'" . setChecked($_POST['day-time'], $day . " " . $time) . ">\n";
                 echo "<label for='$day'>$day $time</label>\n";
             }
         }
@@ -254,12 +255,12 @@ $movies = ["RMC" => $cyrano,
 
 // Seat Prices
 $prices = [
-    "STA" => ["Standard Adult" => ["Discount" => 15.00, "Normal" => 20.50]],
-    "STP" => ["Standard Concession" => ["Discount" => 13.50, "Normal" => 18.00]],
-    "STC" => ["Standard Child" => ["Discount" => 12.00, "Normal" => 16.50]],
-    "FCA" => ["First Class Adult" => ["Discount" => 24.00, "Normal" => 30.00]],
-    "FCP" => ["First Class Concession" => ["Discount" => 22.50, "Normal" => 27.00]],
-    "FCC" => ["First Class Child" => ["Discount" => 21.00, "Normal" => 24.00]]
+    "STA" => ["Standard Adult" => ["Discount" => 15.00, "Full" => 20.50]],
+    "STP" => ["Standard Concession" => ["Discount" => 13.50, "Full" => 18.00]],
+    "STC" => ["Standard Child" => ["Discount" => 12.00, "Full" => 16.50]],
+    "FCA" => ["First Class Adult" => ["Discount" => 24.00, "Full" => 30.00]],
+    "FCP" => ["First Class Concession" => ["Discount" => 22.50, "Full" => 27.00]],
+    "FCC" => ["First Class Child" => ["Discount" => 21.00, "Full" => 24.00]]
 ];
 
 // Pricing policy
@@ -281,6 +282,16 @@ $pricingPolicy = [
 function unsetFB(&$str, $fallback = '')
 {
     return (isset($str) ? $str : $fallback);
+}
+
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk10?module_item_id=3768395
+    */
+
+// Check selected radio button on POST
+function setChecked(&$str, $val)
+{
+    return (isset($str) && $str === $val ? 'checked' : '');
 }
 
 /*  * Code sourced and adapted from:
