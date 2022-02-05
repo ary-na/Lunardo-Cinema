@@ -111,9 +111,23 @@ function redisplayUserInput()
 {
     $userInput = [];
 
+    $seatSTA = filter_var($_POST['seats']['STA'], FILTER_SANITIZE_NUMBER_INT);
+    $seatSTP = filter_var($_POST['seats']['STP'], FILTER_SANITIZE_NUMBER_INT);
+    $seatSTC = filter_var($_POST['seats']['STC'], FILTER_SANITIZE_NUMBER_INT);
+    $seatFCA = filter_var($_POST['seats']['FCA'], FILTER_SANITIZE_NUMBER_INT);
+    $seatFCP = filter_var($_POST['seats']['FCP'], FILTER_SANITIZE_NUMBER_INT);
+    $seatFCC = filter_var($_POST['seats']['FCC'], FILTER_SANITIZE_NUMBER_INT);
+
     $name = filter_var($_POST['user']['name'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['user']['email'], FILTER_SANITIZE_EMAIL);
     $mobile = filter_var($_POST['user']['mobile'], FILTER_SANITIZE_NUMBER_INT);
+
+    $userInput['seats']['STA'] = $seatSTA;
+    $userInput['seats']['STP'] = $seatSTP;
+    $userInput['seats']['STC'] = $seatSTC;
+    $userInput['seats']['FCA'] = $seatFCA;
+    $userInput['seats']['FCP'] = $seatFCP;
+    $userInput['seats']['FCC'] = $seatFCC;
 
     $userInput['user']['name'] = $name;
     $userInput['user']['email'] = $email;
