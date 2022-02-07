@@ -161,7 +161,7 @@
                 <!-- Code sourced and adapted from: https://stackoverflow.com/questions/41302918/css-hover-focus-vs-click-event-on-mobile-touch-devices?rq=1 -->
                 <div class='card' tabindex='1'>
                     <article>
-                        <img src='../../media/cyrano-2021-movie-poster.png' alt='Cyrano 2021 movie poster'>
+                        <img src='../../media/RMC.png' alt='Cyrano 2021 movie poster'>
                         <h2>Cyrano (2021)</h2>
                         <h3>PG-13 | Drama, Musical, Romance</h3>
                         <h4>Times</h4>
@@ -190,7 +190,7 @@
 
                 <div class='card' tabindex='1'>
                     <article>
-                        <img src='../../media/dune-2021-movie-cover.png' alt='Dune 2021 movie poster'>
+                        <img src='../../media/ACT.png' alt='Dune 2021 movie poster'>
                         <h2>Dune (2021)</h2>
                         <h3>M | Action, Adventure, Drama, Sci-Fi</h3>
                         <h4>Times</h4>
@@ -220,7 +220,7 @@
 
                 <div class='card' tabindex='1'>
                     <article>
-                        <img src='../../media/silent-night-2021-movie-poster.png' alt='Silent Night 2021 movie poster'>
+                        <img src='../../media/AHF.png' alt='Silent Night 2021 movie poster'>
                         <h2>Silent Night (2021)</h2>
                         <h3>MA15+ | Drama, Horror</h3>
                         <h4>Times</h4>
@@ -247,7 +247,7 @@
 
                 <div class='card' tabindex='1'>
                     <article>
-                        <img src='../../media/spider-man-no-way-home-2021-movie-poster.png'
+                        <img src='../../media/FAM.png'
                              alt='Spider-Man No Way Home 2021 movie poster'>
                         <h2>Spider-Man: No Way Home (2021)</h2>
                         <h3>M | Action, Adventure, Fantasy, Sci-Fi</h3>

@@ -40,7 +40,7 @@
         <h1>DUNE</h1>
         <!-- Code sourced and adapted from: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_video -->
         <video controls>
-            <source src='../../../media/dune-2021-trailer.mov' type='video/mp4'>
+            <source src='../../../media/ACT-trailer.mov' type='video/mp4'>
             Your browser does not support the video tag.
         </video>
         <h2>The synopsis below may give away important plot points.</h2>
