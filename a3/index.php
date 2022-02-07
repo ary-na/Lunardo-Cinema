@@ -1,20 +1,7 @@
-<?php include_once('tools.php'); ?>
-<!DOCTYPE html>
-<html lang='en'>
-<head><?php headModule("Lunardo Cinema"); ?></head>
-
-<body>
-<div class='container-body'>
-    <header><?php headerModule(); ?></header>
-
-    <nav id='topNav'>
-        <ul>
-            <li><a href='index.php' onclick='removeResponsive()'>Home</a></li>
-            <li><a href='#aboutUs' onclick='removeResponsive()'>About</a></li>
-            <li><a href='#seatsAndPrices' onclick='removeResponsive()'>Seats and Prices</a></li>
-            <li><a href='#nowShowing' onclick='removeResponsive()'>Now Showing</a></li>
-        </ul>
-    </nav>
+<?php
+include_once('tools.php');
+topModule("Lunardo Cinema");
+?>
 
     <main>
         <section id='aboutUs' class='about-us'>
@@ -108,13 +95,4 @@
         </section>
     </main>
 
-    <footer><?php footerModule(); ?></footer>
-</div>
-<aside id='debug'>
-    <?php
-    debugModule();
-    printCodeModule();
-    ?>
-</aside>
-</body>
-</html>
+<?php endModule(); ?>

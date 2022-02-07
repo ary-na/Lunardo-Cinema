@@ -59,8 +59,6 @@ function validateBooking()
             $errors['day-time'] = "Not Showing";
         } else if (!array_search(trim($screeningTime), $screening)) {
             header('Location: index.php');
-        } else {
-            $errors['day-time'] = "";
         }
     } else {
         $errors['day-time'] = "Please select a screening session";
@@ -69,39 +67,31 @@ function validateBooking()
     // Check number of seats validity
     if (empty($seatSTA) && empty($seatSTP) && empty($seatSTC) && empty($seatFCA) && empty($seatFCP) && empty($seatFCC)) {
         $errors['seat'] = "Please enter number of seats";
-    } else if (!(empty($seatSTA) && empty($seatSTP) && empty($seatSTC) && empty($seatFCA) && empty($seatFCP) && empty($seatFCC))) {
+    } else {
         $seats = [$seatSTA, $seatSTP, $seatSTC, $seatFCA, $seatFCP, $seatFCC];
         foreach ($seats as $seatID => $seatNumber) {
-            if (!preg_match($seatNoRGEX, $seatNumber) || $seatNumber <= 0 || $seatNumber > 10) {
-                $errors['seat'] = "Please enter a valid seat number";
-            } else {
-                $errors['seat'] = "";
-                break;
+            if (!empty($seatNumber)) {
+                if (!preg_match($seatNoRGEX, $seatNumber) || $seatNumber <= 0 || $seatNumber > 10) {
+                    $errors['seat'] = "Please enter a valid seat number";
+                    break;
+                }
             }
         }
-    } else {
-        $errors['seat'] = "";
     }
 
     // Check full name validity
     if (empty($name) || !(preg_match($nameRGEX, $name))) {
         $errors['user']['name'] = "Please enter your name";
-    } else {
-        $errors['user']['name'] = "";
     }
 
     // Check email validity
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['user']['email'] = "Please enter your email";
-    } else {
-        $errors['user']['email'] = "";
     }
 
     // Check Australian mobile number validity
     if (empty($mobile) || !(preg_match($mobileRGEX, $mobile))) {
         $errors['user']['mobile'] = "Please enter your Australian mobile number";
-    } else {
-        $errors['user']['mobile'] = "";
     }
     return $errors;
 }
@@ -142,5 +132,6 @@ function sanitizeData($userInput)
     $userInput = trim($userInput);
     $userInput = stripslashes($userInput);
     $userInput = htmlspecialchars($userInput);
+    //$userInput = htmlentities($userInput, ENT_QUOTES);
     return $userInput;
 }

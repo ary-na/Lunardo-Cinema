@@ -334,10 +334,50 @@ function redirectHome()
     }
 }
 
-// Head module
-function headModule($title)
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk11?module_item_id=3565052
+    */
+
+// Include validation on POST and call validation methods
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    require('post-validation.php');
+    $fieldErrors = validateBooking();
+    $userInput = redisplayUserInput();
+
+    if (empty($fieldErrors)) {
+
+        $_SESSION["movie"] = $_POST["movie"];
+        $_SESSION["day-time"] = $_POST["day-time"];
+
+        $_SESSION["seats"]["STA"] = $_POST["seats"]["STA"];
+        $_SESSION["seats"]["STP"] = $_POST["seats"]["STP"];
+        $_SESSION["seats"]["STC"] = $_POST["seats"]["STC"];
+        $_SESSION["seats"]["FCA"] = $_POST["seats"]["FCA"];
+        $_SESSION["seats"]["FCP"] = $_POST["seats"]["FCP"];
+        $_SESSION["seats"]["FCC"] = $_POST["seats"]["FCC"];
+
+        $_SESSION["user"]["name"] = $_POST["user"]["name"];
+        $_SESSION["user"]["email"] = $_POST["user"]["email"];
+        $_SESSION["user"]["mobile"] = $_POST["user"]["mobile"];
+
+        header("Location: receipt.php");
+    }
+}
+
+/*  * Code sourced and adapted from:
+    * https://stackoverflow.com/questions/13032930/how-to-get-current-php-page-name
+    * https://titan.csit.rmit.edu.au/~e54061/secure/
+    */
+
+// Top module
+function topModule($title)
 {
+    global $movies, $prices, $pricingPolicy;
+
     echo <<<CDATA
+    <!DOCTYPE html>
+    <html lang='en'>
+    <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>$title</title>
@@ -356,14 +396,17 @@ CDATA;
     <script src='script/main.js' defer></script>
     <script src='script/validation.js' defer></script>
 CDATA;
-}
+    php2js($movies, 'moviesJS');
+    php2js($prices, 'pricesJS');
+    php2js($pricingPolicy, 'pricingPolicyJS');
+    php2js($_GET, 'movie_GET');
 
-// Header module
-function headerModule()
-{
     echo <<<CDATA
+    </head>
 
-        <img src='../../media/lunardo-cinema-logo-primary.png' alt='Lunardo Cinema Logo'/>
+    <body>
+    <header>
+            <img src='../../media/lunardo-cinema-logo-primary.png' alt='Lunardo Cinema Logo'/>
         <h1>LUNARDO</h1>
         <div class='icon'>
             <a href='javascript:void(0);' id='iconBars' onclick='addResponsive()'>
@@ -373,7 +416,33 @@ function headerModule()
                 <i class='fa fa-close'></i>
             </a>
         </div>
+    </header>
 CDATA;
+
+    $homeNavLinks = <<<CDATA
+    <nav id='topNav'>
+        <ul>
+            <li><a href='index.php' onclick='removeResponsive()'>Home</a></li>
+            <li><a href='#aboutUs' onclick='removeResponsive()'>About</a></li>
+            <li><a href='#seatsAndPrices' onclick='removeResponsive()'>Seats and Prices</a></li>
+            <li><a href='#nowShowing' onclick='removeResponsive()'>Now Showing</a></li>
+        </ul>
+    </nav>
+CDATA;
+
+    $bookingNavLinks = <<<CDATA
+    <nav class='top-nav' id='topNav'>
+        <ul>
+            <li><a href='index.php'>Home</a></li>
+        </ul>
+    </nav>
+CDATA;
+
+    if (basename($_SERVER['PHP_SELF']) === "index.php") {
+        echo $homeNavLinks;
+    } else {
+        echo $bookingNavLinks;
+    }
 }
 
 // Price table module
@@ -394,17 +463,23 @@ function priceTableModule()
 CDATA;
     foreach ($prices as $seatID => $seatsAndPrices) {
         foreach ($seatsAndPrices as $seatType => $price)
-            echo "<tr><td>$seatType</td><td>\$${price["Discount"]}</td><td>\$${price["Normal"]}</td></tr>";
+            echo "<tr><td>$seatType</td><td>\$${price["Discount"]}</td><td>\$${price["Full"]}</td></tr>";
     }
     echo "</tbody></table>";
 
 
 }
 
-// Footer module
-function footerModule()
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
+    */
+
+// End module
+function endModule()
 {
     echo <<<CDATA
+<footer>
 <div class='container-footer'>
             <h1>LUNARDO <span>Cinema</span></h1>
             <div>
@@ -436,17 +511,11 @@ CDATA;
         <div>
             <button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button>
         </div>
-
+</footer>
 CDATA;
-}
 
-/*  * Code sourced and adapted from:
-    * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
-    */
-
-// Prints GET/POST/SESSION global arrays contents
-function debugModule()
-{
+    // Prints GET/POST/SESSION global arrays contents
+    echo "<aside id='debug'>";
     echo "<h3>Debug Area</h3><pre>";
     echo "GET Contains:\n";
     print_r($_GET);
@@ -455,19 +524,13 @@ function debugModule()
     echo "SESSION Contains:\n";
     print_r($_SESSION);
     echo "</pre>";
-}
 
-/*  * Code sourced and adapted from:
-    * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
-    */
-
-// Prints an output of PHP code using an ordered list
-function printCodeModule()
-{
+    // Prints an output of PHP code using an ordered list
     $allLinesOfCode = file($_SERVER['SCRIPT_FILENAME']);
     echo "<h3>PHP Code</h3><pre><ol>";
     foreach ($allLinesOfCode as $oneLineOfCode) {
         echo "<li>" . rtrim(htmlentities($oneLineOfCode)) . "</li>";
     }
     echo "</ol></pre>";
+    echo "</aside></body></html>";
 }

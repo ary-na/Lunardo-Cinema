@@ -54,9 +54,9 @@ body {
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named */
 
-body.container-body {
-    grid-template-columns: 1fr;
-}
+/*body.container-body {*/
+/*    grid-template-columns: 1fr;*/
+/*}*/
 
 /********************************************************************************************/
 
