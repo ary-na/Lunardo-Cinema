@@ -96,11 +96,24 @@ CDATA;
             if ($this->movieScreening[$day] === "No Screenings") {
                 continue;
             } else {
-                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'" . setChecked($_POST['day-time'], $day . " " . $time) . ">\n";
+                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'" . $this->setChecked($day . " " . $time) . ">\n";
                 echo "<label for='$day'>$day $time</label>\n";
             }
         }
         echo "</fieldset>";
+    }
+
+    function setChecked($val)
+    {
+        if (isset($_POST['day-time'])) {
+            if ($_POST['day-time'] === $val) {
+                return 'checked';
+            } else {
+                return '';
+            }
+        } else {
+            return '';
+        }
     }
 
     function jsonSerialize()
@@ -254,25 +267,21 @@ $movies = ["RMC" => $cyrano,
     "FAM" => $spiderManNoWayHome];
 
 // Seat Prices
-$prices = [
-    "STA" => ["Standard Adult" => ["Discount" => 15.00, "Full" => 20.50]],
+$prices = ["STA" => ["Standard Adult" => ["Discount" => 15.00, "Full" => 20.50]],
     "STP" => ["Standard Concession" => ["Discount" => 13.50, "Full" => 18.00]],
     "STC" => ["Standard Child" => ["Discount" => 12.00, "Full" => 16.50]],
     "FCA" => ["First Class Adult" => ["Discount" => 24.00, "Full" => 30.00]],
     "FCP" => ["First Class Concession" => ["Discount" => 22.50, "Full" => 27.00]],
-    "FCC" => ["First Class Child" => ["Discount" => 21.00, "Full" => 24.00]]
-];
+    "FCC" => ["First Class Child" => ["Discount" => 21.00, "Full" => 24.00]]];
 
 // Pricing policy
-$pricingPolicy = [
-    "MON" => ["12PM" => "Discount", "6PM" => "Discount", "9PM" => "Discount"],
+$pricingPolicy = ["MON" => ["12PM" => "Discount", "6PM" => "Discount", "9PM" => "Discount"],
     "TUE" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
     "WED" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
     "THU" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
     "FRI" => ["12PM" => "Discount", "6PM" => "Full", "9PM" => "Full"],
     "SAT" => ["12PM" => "Full", "3PM" => "Full", "6PM" => "Full", "9PM" => "Full"],
-    "SUN" => ["12PM" => "Full", "3PM" => "Full", "6PM" => "Full", "9PM" => "Full"]
-];
+    "SUN" => ["12PM" => "Full", "3PM" => "Full", "6PM" => "Full", "9PM" => "Full"]];
 
 /*  * Code sourced and adapted from:
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk10?module_item_id=3768395
@@ -289,10 +298,10 @@ function unsetFB(&$str, $fallback = '')
     */
 
 // Check selected radio button on POST
-function setChecked(&$str, $val)
-{
-    return (isset($str) && $str === $val ? 'checked' : '');
-}
+//function setChecked(&$str, $val)
+//{
+//    return (isset($str) && $str === $val ? 'checked' : '');
+//}
 
 /*  * Code sourced and adapted from:
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk08?module_item_id=3565034
@@ -340,26 +349,13 @@ function redirectHome()
 
 // Include validation on POST and call validation methods
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require('post-validation.php');
+    require_once('post-validation.php');
     $fieldErrors = validateBooking();
     $userInput = redisplayUserInput();
 
     if (empty($fieldErrors)) {
 
-        $_SESSION["movie"] = $_POST["movie"];
-        $_SESSION["day-time"] = $_POST["day-time"];
-
-        $_SESSION["seats"]["STA"] = $_POST["seats"]["STA"];
-        $_SESSION["seats"]["STP"] = $_POST["seats"]["STP"];
-        $_SESSION["seats"]["STC"] = $_POST["seats"]["STC"];
-        $_SESSION["seats"]["FCA"] = $_POST["seats"]["FCA"];
-        $_SESSION["seats"]["FCP"] = $_POST["seats"]["FCP"];
-        $_SESSION["seats"]["FCC"] = $_POST["seats"]["FCC"];
-
-        $_SESSION["user"]["name"] = $_POST["user"]["name"];
-        $_SESSION["user"]["email"] = $_POST["user"]["email"];
-        $_SESSION["user"]["mobile"] = $_POST["user"]["mobile"];
-
+        $_SESSION['booking'] = $_POST;
         header("Location: receipt.php");
     }
 }
