@@ -121,12 +121,13 @@ function priceCalc() {
     let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
     let total = 0;
 
-    const screeningDayTime = document.querySelector('input[name="day-time"]:checked');
+    const screeningDay = document.querySelector('input[name="day"]:checked');
+    const movieScreening = moviesJS[movie_GET["movieID"]]["movieScreening"];
 
-    let selectedDayTime = (screeningDayTime === null) ? "" : screeningDayTime.value;
+    let selectedDay = (screeningDay === null) ? "" : screeningDay.value;
 
-    let screeningDay = selectedDayTime.slice(0, 3);
-    let screeningTime = selectedDayTime.slice(-4);
+    // let screeningDay = selectedDayTime.slice(0, 3);
+    // let screeningTime = selectedDayTime.slice(-4);
 
     let STA = parseInt(document.getElementById("qtySTA").value);
     let qtySTA = isNaN(STA) ? 0 : STA;
@@ -146,27 +147,27 @@ function priceCalc() {
     let FCC = parseInt(document.getElementById('qtyFCC').value);
     let qtyFCC = isNaN(FCC) ? 0 : FCC;
 
-
-    pricingType = isFullDiscountedOrNotShowing(screeningDay, screeningTime);
-    // console.log(pricingType);
-
-    priceSTA = pricesJS["STA"]["Standard Adult"][pricingType];
-    priceSTP = pricesJS["STP"]["Standard Concession"][pricingType];
-    priceSTC = pricesJS["STC"]["Standard Child"][pricingType];
-    priceFCA = pricesJS["FCA"]["First Class Adult"][pricingType];
-    priceFCP = pricesJS["FCP"]["First Class Concession"][pricingType];
-    priceFCC = pricesJS["FCC"]["First Class Child"][pricingType];
-
-    total = qtySTA * priceSTA + qtySTP * priceSTP + qtySTC * priceSTC + qtyFCA * priceFCA + qtyFCP * priceFCP + qtyFCC * priceFCC;
-
     let valid = validateScreeningAndSeat();
     if (valid === false) {
         document.getElementById("ticketContainer").style.display = "none";
     } else {
+
+        pricingType = isFullDiscountedOrNotShowing(selectedDay, movieScreening[selectedDay]);
+        // console.log(pricingType);
+
+        priceSTA = pricesJS["STA"]["Standard Adult"][pricingType];
+        priceSTP = pricesJS["STP"]["Standard Concession"][pricingType];
+        priceSTC = pricesJS["STC"]["Standard Child"][pricingType];
+        priceFCA = pricesJS["FCA"]["First Class Adult"][pricingType];
+        priceFCP = pricesJS["FCP"]["First Class Concession"][pricingType];
+        priceFCC = pricesJS["FCC"]["First Class Child"][pricingType];
+
+        total = qtySTA * priceSTA + qtySTP * priceSTP + qtySTC * priceSTC + qtyFCA * priceFCA + qtyFCP * priceFCP + qtyFCC * priceFCC;
+
         document.getElementById("ticketContainer").style.display = "block";
         document.getElementById("movieTitle").innerHTML = moviesJS[movie_GET["movieID"]]["movieTitle"];
         document.getElementById("movieRating").innerHTML = moviesJS[movie_GET["movieID"]]["movieRating"];
-        document.getElementById("screening").innerHTML = "Screening: " + selectedDayTime;
+        document.getElementById("screening").innerHTML = "Screening: " + selectedDay + " " + movieScreening[selectedDay];
         document.getElementById("total").innerText = "Total: $" + total.toFixed(2);
     }
 }

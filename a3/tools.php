@@ -96,7 +96,7 @@ CDATA;
             if ($this->movieScreening[$day] === "No Screenings") {
                 continue;
             } else {
-                echo "<input type='radio' id='$day' class='radio-day-time' name='day-time' value='$day $time' onclick='priceCalc();'" . $this->setChecked($day . " " . $time) . ">\n";
+                echo "<input type='radio' id='$day' class='radio-day-time' name='day' value='$day' onclick='priceCalc();'" . $this->setChecked($day) . ">\n";
                 echo "<label for='$day'>$day $time</label>\n";
             }
         }
@@ -105,8 +105,8 @@ CDATA;
 
     function setChecked($val)
     {
-        if (isset($_POST['day-time'])) {
-            if ($_POST['day-time'] === $val) {
+        if (isset($_POST['day'])) {
+            if ($_POST['day'] === $val) {
                 return 'checked';
             } else {
                 return '';
@@ -339,6 +339,14 @@ function redirectHome()
 {
     global $movies;
     if (!isset($_GET['movieID']) || !isset($movies[$_GET['movieID']])) {
+        header("Location: index.php");
+    }
+}
+
+// Redirect home is Session is empty
+function noSession()
+{
+    if (!isset($_SESSION['booking'])) {
         header("Location: index.php");
     }
 }

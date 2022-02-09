@@ -21,11 +21,11 @@ function validateScreeningAndSeat() {
     const ticketRGEX = /^[0-9\b]+$/;
     const movieScreening = moviesJS[movie_GET["movieID"]]["movieScreening"];
 
-    const screeningDayTime = document.querySelector('input[name="day-time"]:checked');
+    const screeningDay = document.querySelector('input[name="day"]:checked');
 
-    let selectedDayTime = (screeningDayTime === null) ? "" : screeningDayTime.value;
-    let screeningDay = selectedDayTime.slice(0, 3);
-    let screeningTime = selectedDayTime.slice(-4);
+    let selectedDay = (screeningDay === null) ? "" : screeningDay.value;
+    // let screeningDay = selectedDayTime.slice(0, 3);
+    // let screeningTime = selectedDayTime.slice(-4);
 
     const seats = document.getElementsByClassName('seats');
     const seatsVal = [seats[0].value, seats[1].value, seats[2].value, seats[3].value, seats[4].value, seats[5].value];
@@ -60,16 +60,23 @@ function validateScreeningAndSeat() {
         }
     }
 
-    if (screeningDayTime === null) {
+    if (screeningDay === null) {
         document.getElementById("screeningError").innerHTML = "Please select a screening session";
         valid = false;
-    } else if (!(screeningDay.trim() in movieScreening)) {
+    } else if (movieScreening[selectedDay] === undefined) {
         document.getElementById("screeningError").innerHTML = "Invalid day, Please refresh your browser";
         valid = false;
-    } else if (!(movieScreening[screeningDay].includes(screeningTime.trim()))) {
-        document.getElementById("screeningError").innerHTML = "Invalid time, Please refresh your browser";
+    }
+    else if(movieScreening[selectedDay] === "No Screenings") {
+        document.getElementById("screeningError").innerHTML = "No Screenings, Please refresh your browser";
         valid = false;
-    } else {
+    }
+    // else if (!(selectedDay in movieScreening))
+    // else if (!(movieScreening[screeningDay].includes(screeningTime.trim()))) {
+    //     document.getElementById("screeningError").innerHTML = "Invalid time, Please refresh your browser";
+    //     valid = false;
+    // }
+    else {
         document.getElementById("screeningError").innerHTML = "";
     }
     return valid;

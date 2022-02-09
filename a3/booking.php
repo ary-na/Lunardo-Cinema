@@ -20,7 +20,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
             <!-- Code sourced and adapted from: https://rmit.instructure.com/courses/85177/pages/workshop-wk05?module_item_id=3564997 -->
 
             <?php $movies[$_GET["movieID"]]->radioButtonModule(); ?>
-            <span id="screeningError"><?= unsetFB($fieldErrors['day-time']) ?></span>
+            <span id="screeningError"><?= unsetFB($fieldErrors['day']) ?></span>
 
             <div class='grid-container-book-seat'>
                 <!-- Code sourced and adapted from:

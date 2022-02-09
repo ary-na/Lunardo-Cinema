@@ -45,23 +45,28 @@ function validateBooking()
     }
 
     // Check selected day and time validity
-    if (isset($_POST['day-time'])) {
+    if (isset($_POST['day'])) {
 
         $screening = $movies[$movie]->getMovieScreening();
-        $dayTime = sanitizeData($_POST['day-time']);
+        $dayTime = sanitizeData($_POST['day']);
 
-        $screeningDay = substr($dayTime, 0, 3);
-        $screeningTime = substr($dayTime, -4);
+//        $screeningDay = substr($dayTime, 0, 3);
+//        $screeningTime = substr($dayTime, -4);
 
-        if (!array_key_exists($screeningDay, $screening)) {
+        if(!isset($screening[$dayTime])) {
             header('Location: index.php');
-        } else if ($screening[$screeningDay] === "No Screenings") {
-            $errors['day-time'] = "Not Showing";
-        } else if (!array_search(trim($screeningTime), $screening)) {
-            header('Location: index.php');
+        } else if($screening[$dayTime] === "No Screenings"){
+            $errors['day'] = "Not Showing";
         }
+//        if (!array_key_exists($screeningDay, $screening)) {
+//            header('Location: index.php');
+//        } else if ($screening[$screeningDay] === "No Screenings") {
+//            $errors['day-time'] = "Not Showing";
+//        } else if (!array_search(trim($screeningTime), $screening)) {
+//            header('Location: index.php');
+//        }
     } else {
-        $errors['day-time'] = "Please select a screening session";
+        $errors['day'] = "Please select a screening session";
     }
 
     // Check number of seats validity
