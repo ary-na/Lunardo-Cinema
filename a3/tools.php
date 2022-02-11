@@ -89,6 +89,14 @@ CDATA;
 CDATA;
     }
 
+    function receiptModule()
+    {
+        echo <<<CDATA
+        <img src='../../media/$this->movieID.png' alt='$this->movieTitle movie poster'>;
+CDATA;
+
+    }
+
     function radioButtonModule()
     {
         echo "<fieldset><legend>Screenings</legend>\n";
@@ -328,10 +336,9 @@ CDATA;
 function isFullDiscountedOrNotShowing($day, $time)
 {
     global $pricingPolicy;
-    if (empty($pricingPolicy[$day][$time])) {
-        return "Not Showing";
+    if (!empty($pricingPolicy[$day][$time])) {
+        return $pricingPolicy[$day][$time];
     }
-    return $pricingPolicy[$day][$time];
 }
 
 // Redirect home if Get contains the wrong Movie ID
@@ -472,6 +479,117 @@ CDATA;
     echo "</tbody></table>";
 
 
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/php/php_date.asp
+    * https://www.delftstack.com/howto/php/how-to-show-a-number-to-two-decimal-places-in-php/
+    */
+
+// Receipt module
+function receiptModule()
+{
+    $currentDate = date("d-m-Y");
+    global $movies, $prices;
+    $movieTitle = $movies[$_SESSION["booking"]["movie"]]->getMovieTitle();
+    $movieScreening = $movies[$_SESSION["booking"]["movie"]]->getMovieScreening();
+    $movieScreeningDay = $_SESSION["booking"]["day"];
+    $movieScreeningTime = $movieScreening[$movieScreeningDay];
+    $priceType = isFullDiscountedOrNotShowing($movieScreeningDay, $movieScreeningTime);
+
+
+    echo <<<CDATA
+        <section class="receipt-page">
+
+
+
+            <div class="receipt-header">
+                <img src="../../media/lunardo-cinema-logo-secondary.png">
+                <h6>$currentDate</h6>
+            </div>
+
+
+
+            <div class="receipt-body">
+
+                <h1>$movieTitle</h1>
+                <h4>$movieScreeningDay $movieScreeningTime</h4>
+
+
+                <div class="receipt-description">
+                <table>
+                
+                <thead>
+                <tr>
+                
+                <td></td>
+                <td></td>
+                <td></td>
+</tr>
+</thead>
+</table>
+                <div>Description</div>
+                <div>Qty</div>
+                <div>Price</div>
+
+                
+CDATA;
+
+    $total = 0;
+    foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
+        if (!empty($seatNo)) {
+            $seatDescription = "";
+            switch ($seatID) {
+                case "STA":
+                    $seatDescription = "Standard Adult";
+                    break;
+                case "STP":
+                    $seatDescription = "Standard Concession";
+                    break;
+                case "STC":
+                    $seatDescription = "Standard Child";
+                    break;
+                case "FCA":
+                    $seatDescription = "First Class Adult";
+                    break;
+                case "FCP":
+                    $seatDescription = "First Class Concession";
+                    break;
+                case "FCC":
+                    $seatDescription = "First Class Child";
+                    break;
+            }
+            $price = $prices[$seatID][$seatDescription][$priceType];
+            $formatPrice = number_format($price, 2);
+            $total += $price * $seatNo;
+            $formatTotal = number_format($total, 2);
+            echo "<div>$seatDescription</div>";
+            echo "<div>$seatNo</div>";
+            echo "<div>\$$formatPrice</div>";
+        }
+    }
+    echo "<div>Total</div>";
+    echo "<div>\$$formatTotal</div>";
+
+    echo <<<CDATA
+</div>
+            </div>
+
+
+
+
+
+            <div class="receipt-footer">
+                <div>Lunardo Cinema</div>
+                <div>Address</div>
+                <div>04230243432</div>
+            </div>
+
+
+
+
+        </section>
+CDATA;
 }
 
 /*  * Code sourced and adapted from:

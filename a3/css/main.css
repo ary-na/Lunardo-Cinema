@@ -806,6 +806,70 @@ section.book-ticket [type=submit]:hover, section.book-ticket [type=submit]:activ
 
 /********************************************************************************************/
 
+/* Receipt ***********************************************************************************/
+section.receipt-page {
+    margin: 0 auto;
+    max-width: 1400px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 1em;
+}
+
+div.receipt-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px blue solid;
+}
+
+div.receipt-header img {
+    width: 90px;
+    padding: 1em;
+}
+
+div.receipt-header h6 {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 1em;
+}
+
+div.receipt-body {
+    display: flex;
+    flex-direction: column;
+    border: pink 2px solid;
+    padding: 1em;
+}
+
+div.receipt-body h1 {
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    font-size: 20px;
+    padding-top: 1em;
+}
+
+div.receipt-body h4 {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--font-family-secondary);
+    padding-bottom: 1em;
+
+}
+
+ div.receipt-description {
+
+ }
+
+div.receipt-description div {
+
+}
+
+div.receipt-description div:last-child {
+
+}
+
+/********************************************************************************************/
+
 /* Footer ***********************************************************************************/
 footer {
     background-color: var(--color-grey-secondary);

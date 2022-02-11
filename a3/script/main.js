@@ -118,41 +118,41 @@ function decrement(seatID) {
 // Calculate the ticket price and display to document
 function priceCalc() {
 
-    let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
-    let total = 0;
-
-    const screeningDay = document.querySelector('input[name="day"]:checked');
-    const movieScreening = moviesJS[movie_GET["movieID"]]["movieScreening"];
-
-    let selectedDay = (screeningDay === null) ? "" : screeningDay.value;
-
-    // let screeningDay = selectedDayTime.slice(0, 3);
-    // let screeningTime = selectedDayTime.slice(-4);
-
-    let STA = parseInt(document.getElementById("qtySTA").value);
-    let qtySTA = isNaN(STA) ? 0 : STA;
-
-    let STP = parseInt(document.getElementById('qtySTP').value);
-    let qtySTP = isNaN(STP) ? 0 : STP;
-
-    let STC = parseInt(document.getElementById('qtySTC').value);
-    let qtySTC = isNaN(STC) ? 0 : STC;
-
-    let FCA = parseInt(document.getElementById('qtyFCA').value);
-    let qtyFCA = isNaN(FCA) ? 0 : FCA;
-
-    let FCP = parseInt(document.getElementById('qtyFCP').value);
-    let qtyFCP = isNaN(FCP) ? 0 : FCP;
-
-    let FCC = parseInt(document.getElementById('qtyFCC').value);
-    let qtyFCC = isNaN(FCC) ? 0 : FCC;
-
     let valid = validateScreeningAndSeat();
     if (valid === false) {
         document.getElementById("ticketContainer").style.display = "none";
     } else {
 
-        pricingType = isFullDiscountedOrNotShowing(selectedDay, movieScreening[selectedDay]);
+        let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
+        let total = 0;
+
+        // let selectedDay = (screeningDay === null) ? "" : screeningDay.value;
+        // let screeningDay = selectedDayTime.slice(0, 3);
+        // let screeningTime = selectedDayTime.slice(-4);
+
+        let STA = document.getElementById("qtySTA").value;
+        //let qtySTA = isNaN(STA) ? 0 : STA;
+
+        let STP = document.getElementById('qtySTP').value;
+        //let qtySTP = isNaN(STP) ? 0 : STP;
+
+        let STC = document.getElementById('qtySTC').value;
+        //let qtySTC = isNaN(STC) ? 0 : STC;
+
+        let FCA = document.getElementById('qtyFCA').value;
+        //let qtyFCA = isNaN(FCA) ? 0 : FCA;
+
+        let FCP = document.getElementById('qtyFCP').value;
+        //let qtyFCP = isNaN(FCP) ? 0 : FCP;
+
+        let FCC = document.getElementById('qtyFCC').value;
+        //let qtyFCC = isNaN(FCC) ? 0 : FCC;
+
+
+        const screeningDay = document.querySelector('input[name="day"]:checked').value;
+        const movieScreening = moviesJS[movie_GET["movieID"]]["movieScreening"];
+
+        pricingType = isFullDiscountedOrNotShowing(screeningDay, movieScreening[screeningDay]);
         // console.log(pricingType);
 
         priceSTA = pricesJS["STA"]["Standard Adult"][pricingType];
@@ -162,20 +162,25 @@ function priceCalc() {
         priceFCP = pricesJS["FCP"]["First Class Concession"][pricingType];
         priceFCC = pricesJS["FCC"]["First Class Child"][pricingType];
 
-        total = qtySTA * priceSTA + qtySTP * priceSTP + qtySTC * priceSTC + qtyFCA * priceFCA + qtyFCP * priceFCP + qtyFCC * priceFCC;
+        total += STA * priceSTA;
+        total += STP * priceSTP;
+        total += STC * priceSTC;
+        total += FCA * priceFCA;
+        total += FCP * priceFCP;
+        total += FCC * priceFCC;
+
 
         document.getElementById("ticketContainer").style.display = "block";
         document.getElementById("movieTitle").innerHTML = moviesJS[movie_GET["movieID"]]["movieTitle"];
         document.getElementById("movieRating").innerHTML = moviesJS[movie_GET["movieID"]]["movieRating"];
-        document.getElementById("screening").innerHTML = "Screening: " + selectedDay + " " + movieScreening[selectedDay];
+        document.getElementById("screening").innerHTML = "Screening: " + screeningDay + " " + movieScreening[screeningDay];
         document.getElementById("total").innerText = "Total: $" + total.toFixed(2);
     }
 }
 
 // Return pricing type
-function isFullDiscountedOrNotShowing(day, time)
-{
-    if (typeof pricingPolicyJS[day][time.trim()] !== undefined) {
-        return pricingPolicyJS[day][time.trim()];
+function isFullDiscountedOrNotShowing(day, time) {
+    if (typeof pricingPolicyJS[day][time] !== undefined) {
+        return pricingPolicyJS[day][time];
     }
 }
