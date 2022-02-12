@@ -5,7 +5,7 @@
     * https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
     */
 
-@page  {
+@page {
     size: A4;
     margin: 0;
 }
@@ -13,19 +13,27 @@
 @media print {
 
     html, body {
+        background: none;
         width: 210mm;
         height: 297mm;
     }
 
-    header, nav, footer, aside, h1.receipt-ticket-page-h1 {
-        display: none;
-    }
-
-    div.receipt {
+    section.receipt-page, div.receipt {
+        display: block;
+        break-after: page;
         page-break-after: always;
     }
 
     div.ticket {
-        page-break-after: always;
+        display: block;
+    }
+
+    div.ticket > div {
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+
+    header, nav, footer, aside, h1.receipt-ticket-page-h1 {
+        display: none;
     }
 }

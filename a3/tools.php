@@ -511,19 +511,17 @@ function receiptAndTicketModule()
 
 
     echo <<<CDATA
-        <section class="receipt-page">
-<h1 class="receipt-ticket-page-h1">Receipt</h1>
+    <section class="receipt-page">
+    <h1 class="receipt-ticket-page-h1">Receipt</h1>
 
-<div class="receipt">
+    <div class="receipt">
 
-            <div class="receipt-header">
-                <img src="../../media/lunardo-cinema-logo-secondary.png">
-                <h6>$currentDate</h6>
-            </div>
+        <div class="receipt-header">
+            <img src="../../media/lunardo-cinema-logo-secondary.png">
+            <h6>$currentDate</h6>
+        </div>
 
-
-
-            <div class="receipt-body">
+        <div class="receipt-body">
             
             <div>
                 <h3>Name: </h3>  
@@ -534,21 +532,19 @@ function receiptAndTicketModule()
                 <h2>$mobile</h2>
             </div>
 
-                <h2>$movieTitle</h2>
-                <h4>$movieScreeningDay $movieScreeningTime</h4>
+            <h2>$movieTitle</h2>
+            <h4>$movieScreeningDay $movieScreeningTime</h4>
 
-
-                <div class="receipt-description">
+            <div class="receipt-description">
                 <table>   
-                <thead>
-                <tr>
-                <td>Description</td>
-                <td>Qty</td>
-                <td>Unit price</td>
-                </tr>
-                </thead>
+                    <thead>
+                        <tr>
+                            <td>Description</td>
+                            <td>Qty</td>
+                            <td>Unit price</td>
+                        </tr>
+                    </thead>
                 <tbody>
-     
 CDATA;
 
     $total = 0;
@@ -598,31 +594,27 @@ CDATA;
     echo "<td>\$$formatTotal</td></tr>";
 
     echo <<<CDATA
-</tbody>
-</table>          
+                </tbody>
+                </table>          
             </div>
-<!--            </div> check this line, there is a bug here-->
-            <div class="receipt-footer">
+        </div>
+        <div class="receipt-footer">
             <img src="../../media/Lunardo-logo-white.png" alt="Lunardo Cinema Logo">
-                <h1>LUNARDO Cinema Pty LTD.</h1> 
-                <div>
+            <h1>LUNARDO Cinema Pty LTD.</h1> 
+            <div>
                 <h3>8 Lunar Street Lu Vic 1234</h3>
                 <h3>(03) 4321 9876</h3>  
                 <h3>info@lunardo.com.au</h3>
-                </div> 
-            </div>
+            </div> 
+        </div>
+    </div>
+    </section>
 
-
-</div>
-        </section>
-
-        <section class="ticket-page">
-<h1 class="receipt-ticket-page-h1">Tickets</h1>
-
-<div class="ticket">
+    <section class="ticket-page">
+    <h1 class="receipt-ticket-page-h1">Tickets</h1>
+    <div class="ticket">
 
 CDATA;
-
 
     foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
         if (!empty($seatNo)) {
@@ -653,19 +645,17 @@ CDATA;
             echo "<div>                
                     <h3>$movieTitle</h3>   
                     <h5>$movieRating</h5>
-                  <div>
-                    <h4>$movieScreeningDay $movieScreeningTime</h4>  
-                    <h3>$seatDescription</h3>
+                    <div>
+                        <h4>$movieScreeningDay $movieScreeningTime</h4>  
+                        <h3>$seatDescription</h3>
                     </div>
                     <h3>LUNARDO - $movieID</h3>
                   </div>";
         }
     }
-
-
     echo <<<CDATA
-</div>
-</section>
+    </div>
+    </section>
 CDATA;
 }
 

@@ -831,7 +831,6 @@ section.receipt-page > h1, section.ticket-page > h1 {
 }
 
 div.receipt, div.ticket {
-    position: relative;
     border: 0.01px solid var(--color-grey-primary);
 }
 
@@ -904,7 +903,7 @@ div.receipt-body > h2 {
 div.receipt-body > h4 {
     font-size: 20px;
     font-weight: 300;
-    font-family: var(--font-family-secondary);
+    font-family: var(--font-family-primary);
     padding-bottom: 1em;
     text-align: center;
 
@@ -947,11 +946,11 @@ div.receipt-footer > h1 {
     font-size: 20px;
 }
 
-div.receipt-footer div {
+div.receipt-footer > div {
     display: flex;
     flex-direction: column;
     border-top: 1px solid var(--color-green);
-    padding-top:1em;
+    padding: 1em;
 }
 
 div.receipt-footer div > h3 {
@@ -983,7 +982,7 @@ div.ticket > div:hover {
 }
 
 div.ticket > div > h3 {
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 400;
     text-align: center;
     font-family: var(--font-family-secondary);
@@ -999,15 +998,15 @@ div.ticket > div h5 {
 div.ticket > div div {
     display: grid;
     grid-template-columns: auto auto;
+    gap:50px;
     align-items: center;
     font-weight: 300;
-    font-family: var(--font-family-secondary);
     text-align: center;
 }
 
 div.ticket > div div h3 {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     color:var(--color-green);
 }
 
@@ -1017,7 +1016,7 @@ div.ticket > div div h4 {
 }
 
 div.ticket > div > h3:last-child {
-    font-size: 30px;
+    font-size: 50px;
     font-family: 'Libre Barcode 39 Extended Text', cursive;
 }
 
