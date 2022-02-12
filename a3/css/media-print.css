@@ -26,6 +26,8 @@
 
     div.ticket {
         display: block;
+        page-break-after: avoid;
+        break-after: avoid;
     }
 
     div.ticket > div {

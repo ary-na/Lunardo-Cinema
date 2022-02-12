@@ -923,6 +923,12 @@ div.receipt-description table {
     transition: 0.5s;
 }
 
+div.receipt-description table thead {
+    background-color: var(--color-green);
+    text-align: center;
+    color:var(--color-white);
+}
+
 div.receipt-description table:hover {
     box-shadow: 10px 15px var(--color-green);
 }

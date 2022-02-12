@@ -333,6 +333,40 @@ function php2js($arr, $arrName)
 CDATA;
 }
 
+//function returnTotal($seat, $seatType)
+//{
+//
+//
+//}
+
+// Returns the type of the seat
+function returnSeatType($seatID)
+{
+    $seatDescription = "";
+
+    switch ($seatID) {
+        case "STA":
+            $seatDescription = "Standard Adult";
+            break;
+        case "STP":
+            $seatDescription = "Standard Concession";
+            break;
+        case "STC":
+            $seatDescription = "Standard Child";
+            break;
+        case "FCA":
+            $seatDescription = "First Class Adult";
+            break;
+        case "FCP":
+            $seatDescription = "First Class Concession";
+            break;
+        case "FCC":
+            $seatDescription = "First Class Child";
+            break;
+    }
+    return $seatDescription;
+}
+
 /*  * Code sourced and adapted from:
     * https://rmit.instructure.com/groups/405207/discussion_topics/1425247
     */
@@ -364,7 +398,23 @@ function noSession()
 }
 
 /*  * Code sourced and adapted from:
+    * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/
+    * https://www.w3schools.com/php/func_filesystem_fputcsv.asp
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk12?module_item_id=3565060
+    */
+
+function writeToFile($fileName, $bookingDetails)
+{
+    if (($fp = fopen($fileName, "a")) && flock($fp, LOCK_EX) !== false) {
+        fputcsv($fp, $bookingDetails, "\t");
+        flock($fp, LOCK_UN);
+        fclose($fp);
+    }
+}
+
+/*  * Code sourced and adapted from:
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk11?module_item_id=3565052
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk12?module_item_id=3565060
     */
 
 // Include validation on POST and call validation methods
@@ -374,8 +424,71 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $userInput = redisplayUserInput();
 
     if (empty($fieldErrors)) {
-
         $_SESSION['booking'] = $_POST;
+
+
+        if (!empty($_SESSION['booking'])) {
+            $orderDate = date("d-m-Y h:i");
+
+            $movieID = $movies[$_SESSION["booking"]["movie"]]->getMovieID();
+
+            $movieScreening = $movies[$_SESSION["booking"]["movie"]]->getMovieScreening();
+            $movieScreeningDay = $_SESSION["booking"]["day"];
+            $movieScreeningTime = $movieScreening[$movieScreeningDay];
+
+            $priceType = isFullDiscountedOrNotShowing($movieScreeningDay, $movieScreeningTime);
+
+            $total = 0;
+
+            foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
+                $seatDescription = returnSeatType($seatID);
+
+                $price = $prices[$seatID][$seatDescription][$priceType];
+
+                $total += $price * $seatNo;
+                $formatTotal = number_format($total, 2);
+
+            }
+
+            $GST = $total * (10 / 100);
+            $formatGST = number_format($GST, 2);
+
+            $subtotal = $formatTotal - $formatGST;
+            $formatSubtotal = number_format($subtotal, 2);
+
+            $qtySTA = $_SESSION["booking"]["seats"]["STA"] === "" ? 0 : $_SESSION["booking"]["seats"]["STA"];
+            $qtySTP = $_SESSION["booking"]["seats"]["STP"] === "" ? 0 : $_SESSION["booking"]["seats"]["STP"];
+            $qtySTC = $_SESSION["booking"]["seats"]["STC"] === "" ? 0 : $_SESSION["booking"]["seats"]["STC"];
+            $qtyFCA = $_SESSION["booking"]["seats"]["FCA"] === "" ? 0 : $_SESSION["booking"]["seats"]["FCA"];
+            $qtyFCP = $_SESSION["booking"]["seats"]["FCP"] === "" ? 0 : $_SESSION["booking"]["seats"]["FCP"];
+            $qtyFCC = $_SESSION["booking"]["seats"]["FCC"] === "" ? 0 : $_SESSION["booking"]["seats"]["FCC"];
+
+            $bookingDetails = array(
+                $orderDate,
+                $_SESSION["booking"]["user"]["name"],
+                $_SESSION["booking"]["user"]["email"],
+                $_SESSION["booking"]["user"]["mobile"],
+                $movieID,
+                $_SESSION["booking"]["day"],
+                $movieScreeningTime,
+                $qtySTA,
+                number_format($prices["STA"]["Standard Adult"][$priceType] * $qtySTA, 2),
+                $qtySTP,
+                number_format($prices["STP"]["Standard Concession"][$priceType] * $qtySTP, 2),
+                $qtySTC,
+                number_format($prices["STC"]["Standard Child"][$priceType] * $qtySTC, 2),
+                $qtyFCA,
+                number_format($prices["FCA"]["First Class Adult"][$priceType] * $qtyFCA, 2),
+                $qtyFCP,
+                number_format($prices["FCP"]["First Class Concession"][$priceType] * $qtyFCP, 2),
+                $qtyFCC,
+                number_format($prices["FCC"]["First Class Child"][$priceType] * $qtyFCC, 2),
+                $formatSubtotal,
+                $formatGST,
+                $formatTotal
+            );
+            writeToFile("bookings.txt", $bookingDetails);
+        }
         header("Location: receipt.php");
     }
 }
@@ -497,16 +610,21 @@ CDATA;
 function receiptAndTicketModule()
 {
     $currentDate = date("d-m-Y");
+
     global $movies, $prices;
+
     $name = ucfirst($_SESSION["booking"]["user"]["name"]);
     $email = $_SESSION["booking"]["user"]["email"];
     $mobile = $_SESSION["booking"]["user"]["mobile"];
+
     $movieID = $movies[$_SESSION["booking"]["movie"]]->getMovieID();
     $movieTitle = $movies[$_SESSION["booking"]["movie"]]->getMovieTitle();
     $movieRating = $movies[$_SESSION["booking"]["movie"]]->getMovieRating();
+
     $movieScreening = $movies[$_SESSION["booking"]["movie"]]->getMovieScreening();
     $movieScreeningDay = $_SESSION["booking"]["day"];
     $movieScreeningTime = $movieScreening[$movieScreeningDay];
+
     $priceType = isFullDiscountedOrNotShowing($movieScreeningDay, $movieScreeningTime);
 
 
@@ -542,6 +660,7 @@ function receiptAndTicketModule()
                             <td>Description</td>
                             <td>Qty</td>
                             <td>Unit price</td>
+                            <td>Total price</td>
                         </tr>
                     </thead>
                 <tbody>
@@ -550,47 +669,36 @@ CDATA;
     $total = 0;
     foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
         if (!empty($seatNo)) {
-            $seatDescription = "";
-            switch ($seatID) {
-                case "STA":
-                    $seatDescription = "Standard Adult";
-                    break;
-                case "STP":
-                    $seatDescription = "Standard Concession";
-                    break;
-                case "STC":
-                    $seatDescription = "Standard Child";
-                    break;
-                case "FCA":
-                    $seatDescription = "First Class Adult";
-                    break;
-                case "FCP":
-                    $seatDescription = "First Class Concession";
-                    break;
-                case "FCC":
-                    $seatDescription = "First Class Child";
-                    break;
-            }
+            $seatDescription = returnSeatType($seatID);
+
             $price = $prices[$seatID][$seatDescription][$priceType];
             $formatPrice = number_format($price, 2);
+
+            $totalPrice = $price * $seatNo;
+            $formatTotalPrice = number_format($totalPrice, 2);
+
             $total += $price * $seatNo;
             $formatTotal = number_format($total, 2);
-            $GST = $total * 10 / 100;
+
+            $GST = $total * (10 / 100);
             $formatGST = number_format($GST, 2);
+
             $subtotal = $formatTotal - $formatGST;
             $formatSubtotal = number_format($subtotal, 2);
+
             echo "<tr><td>$seatDescription</td>";
             echo "<td>$seatNo</td>";
-            echo "<td>\$$formatPrice</td></tr>";
+            echo "<td>\$$formatPrice</td>";
+            echo "<td>\$$formatTotalPrice</td></tr>";
         }
     }
-    echo "<tr><td colspan='2'>Subtotal</td>";
+    echo "<tr><td colspan='3'>Subtotal</td>";
     echo "<td>\$$formatSubtotal</td></tr>";
 
-    echo "<tr><td colspan='2'>GST (10%)</td>";
+    echo "<tr><td colspan='3'>GST (10%)</td>";
     echo "<td>\$$formatGST</td></tr>";
 
-    echo "<tr><td colspan='2'>Total</td>";
+    echo "<tr><td colspan='3'>Total</td>";
     echo "<td>\$$formatTotal</td></tr>";
 
     echo <<<CDATA
@@ -618,39 +726,19 @@ CDATA;
 
     foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
         if (!empty($seatNo)) {
-            $seatDescription = "";
-            switch ($seatID) {
-                case "STA":
-                    $seatDescription = "Standard Adult";
-                    break;
-                case "STP":
-                    $seatDescription = "Standard Concession";
-                    break;
-                case "STC":
-                    $seatDescription = "Standard Child";
-                    break;
-                case "FCA":
-                    $seatDescription = "First Class Adult";
-                    break;
-                case "FCP":
-                    $seatDescription = "First Class Concession";
-                    break;
-                case "FCC":
-                    $seatDescription = "First Class Child";
-                    break;
-            }
-        }
+            $seatDescription = returnSeatType($seatID);
 
-        for ($i = 0; $i < $seatNo; $i++) {
-            echo "<div>                
-                    <h3>$movieTitle</h3>   
-                    <h5>$movieRating</h5>
-                    <div>
-                        <h4>$movieScreeningDay $movieScreeningTime</h4>  
-                        <h3>$seatDescription</h3>
-                    </div>
-                    <h3>LUNARDO - $movieID</h3>
-                  </div>";
+            for ($i = 0; $i < $seatNo; $i++) {
+                echo "<div>                
+                        <h3>$movieTitle</h3>   
+                        <h5>$movieRating</h5>
+                        <div>
+                            <h4>$movieScreeningDay $movieScreeningTime</h4>  
+                            <h3>$seatDescription</h3>
+                        </div>
+                        <h3>LUNARDO - $movieID</h3>
+                      </div>";
+            }
         }
     }
     echo <<<CDATA
