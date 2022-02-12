@@ -41,6 +41,11 @@ class Movie implements JsonSerializable
         return $this->movieTitle;
     }
 
+    function getMovieRating()
+    {
+        return $this->movieRating;
+    }
+
     function getMovieScreening()
     {
         return $this->movieScreening;
@@ -89,13 +94,13 @@ CDATA;
 CDATA;
     }
 
-    function receiptModule()
-    {
-        echo <<<CDATA
-        <img src='../../media/$this->movieID.png' alt='$this->movieTitle movie poster'>;
-CDATA;
-
-    }
+//    function receiptModule()
+//    {
+//        echo <<<CDATA
+//        <img src='../../media/$this->movieID.png' alt='$this->movieTitle movie poster'>;
+//CDATA;
+//
+//    }
 
     function radioButtonModule()
     {
@@ -399,6 +404,7 @@ CDATA;
     echo "<link id='stylecss' type='text/css' rel='stylesheet' href='css/main.css?t=" . filemtime("css/main.css") . "'>";
     echo "<link id='stylecssScreenMedium' type='text/css' rel='stylesheet' href='css/media-screen-medium.css?t=" . filemtime("css/media-screen-medium.css") . "'>";
     echo "<link id='stylecssScreenLarge' type='text/css' rel='stylesheet' href='css/media-screen-large.css?t=" . filemtime("css/media-screen-large.css") . "'>";
+    echo "<link id='stylecssPrint' type='text/css' rel='stylesheet' href='css/media-print.css?t=" . filemtime("css/media-print.css") . "'>";
 
     echo <<<CDATA
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -484,14 +490,20 @@ CDATA;
 /*  * Code sourced and adapted from:
     * https://www.w3schools.com/php/php_date.asp
     * https://www.delftstack.com/howto/php/how-to-show-a-number-to-two-decimal-places-in-php/
+    * https://www.w3schools.com/php/func_string_ucfirst.asp
     */
 
 // Receipt module
-function receiptModule()
+function receiptAndTicketModule()
 {
     $currentDate = date("d-m-Y");
     global $movies, $prices;
+    $name = ucfirst($_SESSION["booking"]["user"]["name"]);
+    $email = $_SESSION["booking"]["user"]["email"];
+    $mobile = $_SESSION["booking"]["user"]["mobile"];
+    $movieID = $movies[$_SESSION["booking"]["movie"]]->getMovieID();
     $movieTitle = $movies[$_SESSION["booking"]["movie"]]->getMovieTitle();
+    $movieRating = $movies[$_SESSION["booking"]["movie"]]->getMovieRating();
     $movieScreening = $movies[$_SESSION["booking"]["movie"]]->getMovieScreening();
     $movieScreeningDay = $_SESSION["booking"]["day"];
     $movieScreeningTime = $movieScreening[$movieScreeningDay];
@@ -500,8 +512,9 @@ function receiptModule()
 
     echo <<<CDATA
         <section class="receipt-page">
+<h1 class="receipt-ticket-page-h1">Receipt</h1>
 
-
+<div class="receipt">
 
             <div class="receipt-header">
                 <img src="../../media/lunardo-cinema-logo-secondary.png">
@@ -511,28 +524,31 @@ function receiptModule()
 
 
             <div class="receipt-body">
+            
+            <div>
+                <h3>Name: </h3>  
+                <h2>$name</h2>
+                <h3>E-mail: </h3>  
+                <h2>$email</h2>
+                <h3>Mobile: </h3> 
+                <h2>$mobile</h2>
+            </div>
 
-                <h1>$movieTitle</h1>
+                <h2>$movieTitle</h2>
                 <h4>$movieScreeningDay $movieScreeningTime</h4>
 
 
                 <div class="receipt-description">
-                <table>
-                
+                <table>   
                 <thead>
                 <tr>
-                
-                <td></td>
-                <td></td>
-                <td></td>
-</tr>
-</thead>
-</table>
-                <div>Description</div>
-                <div>Qty</div>
-                <div>Price</div>
-
-                
+                <td>Description</td>
+                <td>Qty</td>
+                <td>Unit price</td>
+                </tr>
+                </thead>
+                <tbody>
+     
 CDATA;
 
     $total = 0;
@@ -563,32 +579,93 @@ CDATA;
             $formatPrice = number_format($price, 2);
             $total += $price * $seatNo;
             $formatTotal = number_format($total, 2);
-            echo "<div>$seatDescription</div>";
-            echo "<div>$seatNo</div>";
-            echo "<div>\$$formatPrice</div>";
+            $GST = $total * 10 / 100;
+            $formatGST = number_format($GST, 2);
+            $subtotal = $formatTotal - $formatGST;
+            $formatSubtotal = number_format($subtotal, 2);
+            echo "<tr><td>$seatDescription</td>";
+            echo "<td>$seatNo</td>";
+            echo "<td>\$$formatPrice</td></tr>";
         }
     }
-    echo "<div>Total</div>";
-    echo "<div>\$$formatTotal</div>";
+    echo "<tr><td colspan='2'>Subtotal</td>";
+    echo "<td>\$$formatSubtotal</td></tr>";
+
+    echo "<tr><td colspan='2'>GST (10%)</td>";
+    echo "<td>\$$formatGST</td></tr>";
+
+    echo "<tr><td colspan='2'>Total</td>";
+    echo "<td>\$$formatTotal</td></tr>";
+
+    echo <<<CDATA
+</tbody>
+</table>          
+            </div>
+<!--            </div> check this line, there is a bug here-->
+            <div class="receipt-footer">
+            <img src="../../media/Lunardo-logo-white.png" alt="Lunardo Cinema Logo">
+                <h1>LUNARDO Cinema Pty LTD.</h1> 
+                <div>
+                <h3>8 Lunar Street Lu Vic 1234</h3>
+                <h3>(03) 4321 9876</h3>  
+                <h3>info@lunardo.com.au</h3>
+                </div> 
+            </div>
+
+
+</div>
+        </section>
+
+        <section class="ticket-page">
+<h1 class="receipt-ticket-page-h1">Tickets</h1>
+
+<div class="ticket">
+
+CDATA;
+
+
+    foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
+        if (!empty($seatNo)) {
+            $seatDescription = "";
+            switch ($seatID) {
+                case "STA":
+                    $seatDescription = "Standard Adult";
+                    break;
+                case "STP":
+                    $seatDescription = "Standard Concession";
+                    break;
+                case "STC":
+                    $seatDescription = "Standard Child";
+                    break;
+                case "FCA":
+                    $seatDescription = "First Class Adult";
+                    break;
+                case "FCP":
+                    $seatDescription = "First Class Concession";
+                    break;
+                case "FCC":
+                    $seatDescription = "First Class Child";
+                    break;
+            }
+        }
+
+        for ($i = 0; $i < $seatNo; $i++) {
+            echo "<div>                
+                    <h3>$movieTitle</h3>   
+                    <h5>$movieRating</h5>
+                  <div>
+                    <h4>$movieScreeningDay $movieScreeningTime</h4>  
+                    <h3>$seatDescription</h3>
+                    </div>
+                    <h3>LUNARDO - $movieID</h3>
+                  </div>";
+        }
+    }
+
 
     echo <<<CDATA
 </div>
-            </div>
-
-
-
-
-
-            <div class="receipt-footer">
-                <div>Lunardo Cinema</div>
-                <div>Address</div>
-                <div>04230243432</div>
-            </div>
-
-
-
-
-        </section>
+</section>
 CDATA;
 }
 

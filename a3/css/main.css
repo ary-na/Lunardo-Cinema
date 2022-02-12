@@ -2,6 +2,10 @@
     * https://fonts.google.com/?sort=popularity */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&family=Libre+Barcode+39+Extended+Text&display=swap');
 
 /*  * Code sourced and adapted from:
     * https://www.youtube.com/watch?v=QBfblbmTTF4
@@ -806,8 +810,8 @@ section.book-ticket [type=submit]:hover, section.book-ticket [type=submit]:activ
 
 /********************************************************************************************/
 
-/* Receipt ***********************************************************************************/
-section.receipt-page {
+/* Receipt and Tickets **********************************************************************/
+section.receipt-page, section.ticket-page {
     margin: 0 auto;
     max-width: 1400px;
     background-color: var(--color-white);
@@ -815,12 +819,28 @@ section.receipt-page {
     padding: 1em;
 }
 
+section.receipt-page > h1, section.ticket-page > h1 {
+    margin: 0 auto;
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    font-size: 6vw;
+    line-height: 0;
+    padding: 1em;
+}
+
+div.receipt, div.ticket {
+    position: relative;
+    border: 0.01px solid var(--color-grey-primary);
+}
+
 div.receipt-header {
+    padding: 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px blue solid;
 }
 
 div.receipt-header img {
@@ -829,43 +849,176 @@ div.receipt-header img {
 }
 
 div.receipt-header h6 {
-    font-weight: 400;
-    font-size: 12px;
+    font-weight: 200;
+    font-size: 14px;
     padding: 1em;
 }
 
 div.receipt-body {
     display: flex;
     flex-direction: column;
-    border: pink 2px solid;
     padding: 1em;
 }
 
-div.receipt-body h1 {
-    font-family: var(--font-family-secondary);
-    font-weight: 400;
-    font-size: 20px;
-    padding-top: 1em;
+div.receipt-body div span {
+    font-size: 12px;
+    color: var(--color-grey-primary);
 }
 
-div.receipt-body h4 {
-    font-size: 16px;
+div.receipt-body > div:first-child {
+    margin: 0;
+    padding-bottom: 1em;
+    font-size: 20px;
+    color: var(--color-blue-secondary);
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+div.receipt-body > div:first-child h2 {
+    font-family: var(--font-family-primary);
+    font-weight: 300;
+    line-height: 1;
+    font-size: 15px;
+    padding-top: 1em;
+    align-self: center;
+}
+
+div.receipt-body > div:first-child h3 {
+    font-family: var(--font-family-primary);
+    color: var(--color-grey-primary);
+    font-weight: 200;
+    line-height: 1;
+    padding-top: 1em;
+    font-size: 15px;
+    align-self: center;
+}
+
+div.receipt-body > h2 {
+    font-family: var(--font-family-secondary);
     font-weight: 400;
+    font-size: 30px;
+    padding-top: 1em;
+    text-align: center;
+}
+
+div.receipt-body > h4 {
+    font-size: 20px;
+    font-weight: 300;
     font-family: var(--font-family-secondary);
     padding-bottom: 1em;
+    text-align: center;
 
 }
 
- div.receipt-description {
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/css_table.asp */
 
- }
-
-div.receipt-description div {
-
+div.receipt-description table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    padding: 1em;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 0.01px solid var(--color-blue-secondary);
+    box-shadow: 0 0 var(--color-green);
+    transition: 0.5s;
 }
 
-div.receipt-description div:last-child {
+div.receipt-description table:hover {
+    box-shadow: 10px 15px var(--color-green);
+}
 
+div.receipt-description table tr td {
+    padding:1em;
+    border: 0.01px var(--color-blue-secondary) solid;
+}
+
+div.receipt-footer > img {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    padding: 2em 1em 1em 1em;
+}
+
+div.receipt-footer > h1 {
+    text-align: center;
+    padding-bottom: 1em;
+    font-weight: 200;
+    font-size: 20px;
+}
+
+div.receipt-footer div {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-green);
+    padding-top:1em;
+}
+
+div.receipt-footer div > h3 {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+div.ticket {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 1em;
+}
+
+div.ticket > div {
+    border: dashed 1px var(--color-green);
+    border-radius: var(--radius);
+    background-image: url("../../../media/Lunardo-logo-white.png");
+    background-size: 20%;
+    background-repeat: repeat;
+    padding:1em;
+    margin: 1em;
+    box-shadow: 0 0 var(--color-green);
+    transition: 0.5s;
+}
+
+div.ticket > div:hover {
+    box-shadow: 10px 15px var(--color-green);
+}
+
+div.ticket > div > h3 {
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    font-family: var(--font-family-secondary);
+}
+
+div.ticket > div h5 {
+    font-size: 12px;
+    font-weight: 200;
+    text-align: center;
+    color: var(--color-grey-primary);
+}
+
+div.ticket > div div {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    font-weight: 300;
+    font-family: var(--font-family-secondary);
+    text-align: center;
+}
+
+div.ticket > div div h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color:var(--color-green);
+}
+
+div.ticket > div div h4 {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+div.ticket > div > h3:last-child {
+    font-size: 30px;
+    font-family: 'Libre Barcode 39 Extended Text', cursive;
 }
 
 /********************************************************************************************/
