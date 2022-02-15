@@ -441,13 +441,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $total = 0;
 
             foreach ($_SESSION["booking"]["seats"] as $seatID => $seatNo) {
-                $seatDescription = returnSeatType($seatID);
+                if (!empty($seatNo)) {
+                    $seatDescription = returnSeatType($seatID);
 
-                $price = $prices[$seatID][$seatDescription][$priceType];
+                    $price = $prices[$seatID][$seatDescription][$priceType];
 
-                $total += $price * $seatNo;
-                $formatTotal = number_format($total, 2);
-
+                    $total += $price * $seatNo;
+                    $formatTotal = number_format($total, 2);
+                }
             }
 
             $GST = $total * (10 / 100);
