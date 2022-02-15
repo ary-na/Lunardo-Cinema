@@ -1,3 +1,2 @@
-Order Date	Name	Email	Mobile	Movie Code	Day of Movie	Time of Movie	#STA	$STA	#STP	$STP	#STC	$STC	#FCA	$FCA	#FCP	$FCP	#FCC	$FCC	Subtotal	GST	Total
-"14-02-2022 07:52"	dfs	sdf@dsf.com	0432023023	AHF	WED	12PM	2	30.00	0	0.00	0	0.00	0	0.00	0	0.00	0	0.00	27.00	3.00	30.00
-"15-02-2022 09:05"	sdf	sdf@sfd.com	0410824745	RMC	MON	6PM	1	15.00	0	0.00	0	0.00	0	0.00	0	0.00	0	0.00	13.50	1.50	15.00
+"Order Date"	Name	Email	Mobile	"Movie Code"	"Day of Movie"	"Time of Movie"	#STA	$STA	#STP	$STP	#STC	$STC	#FCA	$FCA	#FCP	$FCP	#FCC	$FCC	Subtotal	GST	Total
+"15-02-2022 10:14"	dsffsdf	sdf@sfd.com	0410824745	ACT	THU	9PM	3	61.50	3	54.00	2	33.00	0	0.00	0	0.00	0	0.00	133.65	14.85	148.50

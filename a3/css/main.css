@@ -843,7 +843,7 @@ div.receipt-header {
 }
 
 div.receipt-header img {
-    width: 90px;
+    width: 120px;
     padding: 1em;
 }
 
@@ -936,6 +936,10 @@ div.receipt-description table:hover {
 div.receipt-description table tr td {
     padding:1em;
     border: 0.01px var(--color-blue-secondary) solid;
+}
+
+div.receipt-description table tfoot tr > td:last-child {
+    font-weight: 500;
 }
 
 div.receipt-footer > img {

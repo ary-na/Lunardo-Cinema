@@ -377,6 +377,8 @@ function isFullDiscountedOrNotShowing($day, $time)
     global $pricingPolicy;
     if (!empty($pricingPolicy[$day][$time])) {
         return $pricingPolicy[$day][$time];
+    } else {
+        return "Not Showing";
     }
 }
 
@@ -401,11 +403,16 @@ function noSession()
     * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/
     * https://www.w3schools.com/php/func_filesystem_fputcsv.asp
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk12?module_item_id=3565060
+    * https://www.php.net/manual/en/function.filesize.php
     */
 
 function writeToFile($fileName, $bookingDetails)
 {
+    $headings = ["Order Date", "Name", "Email", "Mobile", "Movie Code", "Day of Movie", "Time of Movie", "#STA", "\$STA", "#STP", "\$STP", "#STC", "\$STC", "#FCA", "\$FCA", "#FCP", "\$FCP", "#FCC", "\$FCC", "Subtotal", "GST", "Total"];
     if (($fp = fopen($fileName, "a")) && flock($fp, LOCK_EX) !== false) {
+        if (filesize($fileName) === 0) {
+            fputcsv($fp, $headings, "\t");
+        }
         fputcsv($fp, $bookingDetails, "\t");
         flock($fp, LOCK_UN);
         fclose($fp);
@@ -636,7 +643,7 @@ function receiptAndTicketModule()
     <div class="receipt">
 
         <div class="receipt-header">
-            <img src="../../media/lunardo-cinema-logo-secondary.png">
+            <img src="../../media/lunardo-cinema-logo-secondary.png" alt="Lunardo Cinema Logo">
             <h6>$currentDate</h6>
         </div>
 
@@ -693,14 +700,14 @@ CDATA;
             echo "<td>\$$formatTotalPrice</td></tr>";
         }
     }
-    echo "<tr><td colspan='3'>Subtotal</td>";
+    echo "<tfoot><tr><td colspan='3'>Subtotal</td>";
     echo "<td>\$$formatSubtotal</td></tr>";
 
     echo "<tr><td colspan='3'>GST (10%)</td>";
     echo "<td>\$$formatGST</td></tr>";
 
     echo "<tr><td colspan='3'>Total</td>";
-    echo "<td>\$$formatTotal</td></tr>";
+    echo "<td>\$$formatTotal</td></tr></tfoot>";
 
     echo <<<CDATA
                 </tbody>
