@@ -1,2 +1,1 @@
 "Order Date"	Name	Email	Mobile	"Movie Code"	"Day of Movie"	"Time of Movie"	#STA	$STA	#STP	$STP	#STC	$STC	#FCA	$FCA	#FCP	$FCP	#FCC	$FCC	Subtotal	GST	Total
-"15-02-2022 10:14"	dsffsdf	sdf@sfd.com	0410824745	ACT	THU	9PM	3	61.50	3	54.00	2	33.00	0	0.00	0	0.00	0	0.00	133.65	14.85	148.50

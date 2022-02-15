@@ -461,7 +461,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $GST = $total * (10 / 100);
             $formatGST = number_format($GST, 2);
 
-            $subtotal = $formatTotal - $formatGST;
+            $subtotal = $total - $GST;
             $formatSubtotal = number_format($subtotal, 2);
 
             $qtySTA = $_SESSION["booking"]["seats"]["STA"] === "" ? 0 : $_SESSION["booking"]["seats"]["STA"];
@@ -601,7 +601,9 @@ function priceTableModule()
 CDATA;
     foreach ($prices as $seatID => $seatsAndPrices) {
         foreach ($seatsAndPrices as $seatType => $price)
-            echo "<tr><td>$seatType</td><td>\$${price["Discount"]}</td><td>\$${price["Full"]}</td></tr>";
+            $formatPriceDiscount = number_format($price["Discount"], 2);
+            $formatPriceFull = number_format($price["Full"], 2);
+            echo "<tr><td>$seatType</td><td>\$$formatPriceDiscount</td><td>\$$formatPriceFull</td></tr>";
     }
     echo "</tbody></table>";
 
@@ -691,7 +693,7 @@ CDATA;
             $GST = $total * (10 / 100);
             $formatGST = number_format($GST, 2);
 
-            $subtotal = $formatTotal - $formatGST;
+            $subtotal = $total - $GST;
             $formatSubtotal = number_format($subtotal, 2);
 
             echo "<tr><td>$seatDescription</td>";
