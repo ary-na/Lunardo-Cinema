@@ -231,7 +231,7 @@ const main = document.querySelector("main");
 if (main.classList.contains('localStorage')) {
     //console.log("Inside this if block");
     // Check if local storage contains data
-    if (localStorage.length > 0) {
+    if ("userName" in localStorage) {
         // Set local storage values to text fields using window function
         document.getElementById("rememberMe").checked = true;
         document.getElementById("rememberMeLabel").innerHTML = "Forget me";
