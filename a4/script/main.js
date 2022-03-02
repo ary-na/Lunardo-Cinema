@@ -113,17 +113,23 @@ function decrement(seatID) {
     * https://www.w3schools.com/js/tryit.asp?filename=tryjs_string_substring
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk07?module_item_id=3565022
     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+    * https://stackoverflow.com/questions/16985841/how-can-i-select-all-elements-with-the-same-class-name
     */
 
 // Calculate the ticket price and display to document
 function priceCalc() {
 
     let valid = validateScreeningAndSeat();
+    let subtotalSeat = document.getElementsByClassName("subtotal-seat");
     if (valid === false) {
+        // Set display style to none if not valid
         document.getElementById("ticketContainer").style.display = "none";
+        for (let i = 0; i < subtotalSeat.length; i++) {
+            subtotalSeat[i].style.display = "none";
+        }
     } else {
-
-        let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC;
+        let pricingType, priceSTA, priceSTP, priceSTC, priceFCA, priceFCP, priceFCC, subtotalSTA, subtotalSTP,
+            subtotalSTC, subtotalFCA, subtotalFCP, subtotalFCC;
         let total = 0;
 
         // let selectedDay = (screeningDay === null) ? "" : screeningDay.value;
@@ -155,6 +161,7 @@ function priceCalc() {
         pricingType = isFullDiscountedOrNotShowing(screeningDay, movieScreening[screeningDay]);
         // console.log(pricingType);
 
+        // Return price on price type for each seat
         priceSTA = pricesJS["STA"]["Standard Adult"][pricingType];
         priceSTP = pricesJS["STP"]["Standard Concession"][pricingType];
         priceSTC = pricesJS["STC"]["Standard Child"][pricingType];
@@ -162,6 +169,15 @@ function priceCalc() {
         priceFCP = pricesJS["FCP"]["First Class Concession"][pricingType];
         priceFCC = pricesJS["FCC"]["First Class Child"][pricingType];
 
+        // Calculate total per seat
+        subtotalSTA = STA * priceSTA;
+        subtotalSTP = STP * priceSTP;
+        subtotalSTC = STC * priceSTC;
+        subtotalFCA = FCA * priceFCA;
+        subtotalFCP = FCP * priceFCP;
+        subtotalFCC = FCC * priceFCC;
+
+        // Calculate total
         total += STA * priceSTA;
         total += STP * priceSTP;
         total += STC * priceSTC;
@@ -170,11 +186,23 @@ function priceCalc() {
         total += FCC * priceFCC;
 
 
+        // Set display style to block if valid
+        for (let i = 0; i < subtotalSeat.length; i++) {
+            subtotalSeat[i].style.display = "block";
+        }
+
+        // Display details
+        document.getElementById("subtotalSTA").innerHTML = `Total: $${subtotalSTA.toFixed(2)}`;
+        document.getElementById("subtotalSTP").innerHTML = `Total: $${subtotalSTP.toFixed(2)}`;
+        document.getElementById("subtotalSTC").innerHTML = `Total: $${subtotalSTC.toFixed(2)}`;
+        document.getElementById("subtotalFCA").innerHTML = `Total: $${subtotalFCA.toFixed(2)}`;
+        document.getElementById("subtotalFCP").innerHTML = `Total: $${subtotalFCP.toFixed(2)}`;
+        document.getElementById("subtotalFCC").innerHTML = `Total: $${subtotalFCC.toFixed(2)}`;
         document.getElementById("ticketContainer").style.display = "block";
         document.getElementById("movieTitle").innerHTML = moviesJS[movie_GET["movieID"]]["movieTitle"];
         document.getElementById("movieRating").innerHTML = moviesJS[movie_GET["movieID"]]["movieRating"];
-        document.getElementById("screening").innerHTML = "Screening: " + screeningDay + " " + movieScreening[screeningDay];
-        document.getElementById("total").innerText = "Total: $" + total.toFixed(2);
+        document.getElementById("screening").innerHTML = `Screening: ${screeningDay} ${movieScreening[screeningDay]}`;
+        document.getElementById("total").innerHTML = `Total: $${total.toFixed(2)}`;
     }
 }
 

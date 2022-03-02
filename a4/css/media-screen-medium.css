@@ -275,8 +275,11 @@
     }
 
     div.ticket-container {
+        transition: 0.5s;
+    }
+
+    div.ticket-container:hover {
         box-shadow: 10px 15px var(--color-black);
-        border: black 1px solid;
     }
 
     section.book-ticket fieldset > p [type=button] {

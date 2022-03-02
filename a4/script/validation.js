@@ -54,8 +54,6 @@ function validateScreeningAndSeat() {
                 seats[i].value = "";
                 document.getElementById("seatError").innerHTML = "Please enter a valid number";
                 valid = false;
-            } else {
-                document.getElementById("seatError").innerHTML = "";
             }
         }
     }
@@ -66,15 +64,14 @@ function validateScreeningAndSeat() {
     } else if (movieScreening[selectedDay] === undefined) {
         document.getElementById("screeningError").innerHTML = "Invalid day, Please refresh your browser";
         valid = false;
-    }
-    else if(movieScreening[selectedDay] === "No Screenings") {
+    } else if (movieScreening[selectedDay] === "No Screenings") {
         document.getElementById("screeningError").innerHTML = "No Screenings, Please refresh your browser";
         valid = false;
     }
-    // else if (!(selectedDay in movieScreening))
-    // else if (!(movieScreening[screeningDay].includes(screeningTime.trim()))) {
-    //     document.getElementById("screeningError").innerHTML = "Invalid time, Please refresh your browser";
-    //     valid = false;
+        // else if (!(selectedDay in movieScreening))
+        // else if (!(movieScreening[screeningDay].includes(screeningTime.trim()))) {
+        //     document.getElementById("screeningError").innerHTML = "Invalid time, Please refresh your browser";
+        //     valid = false;
     // }
     else {
         document.getElementById("screeningError").innerHTML = "";

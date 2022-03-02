@@ -36,7 +36,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                                value='<?= unsetFB($userInput['seats']['STA']); ?>'>
                         <input type="button" value="+" onclick="increment('STA'); priceCalc();">
                     </p>
-
+                    <span class="subtotal-seat" id="subtotalSTA"></span>
                     <label for='qtySTP'>Standard Concession</label>
                     <p>
                         <input type="button" value="-" onclick="decrement('STP'); priceCalc();">
@@ -44,6 +44,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                                value='<?= unsetFB($userInput['seats']['STP']); ?>'>
                         <input type="button" value="+" onclick="increment('STP'); priceCalc();">
                     </p>
+                    <span class="subtotal-seat" id="subtotalSTP"></span>
                     <label for='qtySTC'>Standard Child</label>
                     <p>
                         <input type="button" value="-" onclick="decrement('STC'); priceCalc();">
@@ -51,6 +52,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                                value='<?= unsetFB($userInput['seats']['STC']); ?>'>
                         <input type="button" value="+" onclick="increment('STC'); priceCalc();">
                     </p>
+                    <span class="subtotal-seat" id="subtotalSTC"></span>
                 </fieldset>
 
                 <fieldset>
@@ -62,6 +64,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                                value='<?= unsetFB($userInput['seats']['FCA']); ?>'>
                         <input type="button" value="+" onclick="increment('FCA'); priceCalc();">
                     </p>
+                    <span class="subtotal-seat" id="subtotalFCA"></span>
                     <label for='qtyFCP'>First Class Concession</label>
                     <p>
                         <input type="button" value="-" onclick="decrement('FCP'); priceCalc();">
@@ -69,6 +72,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                                value='<?= unsetFB($userInput['seats']['FCP']); ?>'>
                         <input type="button" value="+" onclick="increment('FCP'); priceCalc();">
                     </p>
+                    <span class="subtotal-seat" id="subtotalFCP"></span>
                     <label for='qtyFCC'>First Class Child</label>
                     <p>
                         <input type="button" value="-" onclick="decrement('FCC'); priceCalc();">
@@ -76,6 +80,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                                value='<?= unsetFB($userInput['seats']['FCC']); ?>'>
                         <input type="button" value="+" onclick="increment('FCC'); priceCalc();">
                     </p>
+                    <span class="subtotal-seat" id="subtotalFCC"></span>
                 </fieldset>
                 <span id="seatError"><?= unsetFB($fieldErrors['seat']) ?></span>
             </div>
