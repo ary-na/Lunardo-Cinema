@@ -1,0 +1,1138 @@
+/*  * Code sourced and adapted from:
+    * https://fonts.google.com/?sort=popularity */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&family=Libre+Barcode+39+Extended+Text&display=swap');
+
+/*  * Code sourced and adapted from:
+    * https://www.youtube.com/watch?v=QBfblbmTTF4
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_smooth_scroll */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss3_var */
+
+:root {
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-grey-primary: #969C9C;
+    --color-grey-secondary: #DBEDF3;
+    --color-grey-tertiary: #0000001E;
+    --color-blue-primary: #283149;
+    --color-blue-secondary: #262E45;
+    --color-blue-tertiary: #404B69;
+    --color-green: #00818A;
+    --font-family-primary: 'Inter', sans-serif;
+    --font-family-secondary: 'Raleway', sans-serif;
+    --font-family-tertiary: 'Quicksand', sans-serif;
+    --font-weight-primary: 300;
+    --font-weight-secondary: 400;
+    --font-weight-tertiary: 200;
+    --font-size-h1: 1.5em;
+    --font-size-h2: 20px;
+    --font-size-body: 15px;
+    --padding-primary: 1em;
+    --radius: 2px;
+}
+
+/********************************************************************************************/
+
+/* Mobile: Body *****************************************************************************/
+body {
+    background-color: var(--color-blue-primary);
+    color: var(--color-grey-secondary);
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-primary);
+    line-height: 2;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named */
+
+/*body.container-body {*/
+/*    grid-template-columns: 1fr;*/
+/*}*/
+
+/********************************************************************************************/
+
+/* Mobile: Header ***************************************************************************/
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_justify-content_flex-end
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2
+    * https://stackoverflow.com/questions/36271967/how-to-prevent-content-from-re-sizing-a-flex-item */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--padding-primary);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: var(--color-blue-primary);
+    z-index: 5;
+    box-shadow: 0 4px 2px 0 var(--color-grey-tertiary);
+}
+
+header img {
+    display: none;
+}
+
+header h1 {
+    font-family: var(--font-family-tertiary);
+    font-weight: var(--font-weight-secondary);
+    font-size: var(--font-size-h1);
+}
+
+div.icon {
+    display: block;
+    font-size: 18px;
+}
+
+#iconClose {
+    display: none;
+}
+
+i.fa-bars, i.fa-close {
+    color: var(--color-grey-primary);
+    padding: 10px 0 10px 10px;
+}
+
+i.fa-bars:hover, i.fa-close:hover {
+    color: var(--color-grey-secondary);
+}
+
+/********************************************************************************************/
+
+/* Mobile: Nav ******************************************************************************/
+nav {
+    display: none;
+    z-index: 4;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.tutorialrepublic.com/faq/how-to-remove-the-space-between-inline-block-elements-in-css.php */
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_overlay */
+
+nav.responsive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: var(--color-blue-primary);
+    padding: var(--padding-primary);
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    z-index: 4;
+}
+
+nav.responsive ul {
+    width: 100%;
+}
+
+nav.responsive ul li {
+    display: block;
+}
+
+nav.responsive ul li a:link, nav.responsive ul li a:visited {
+    display: block;
+    text-decoration: none;
+    color: var(--color-grey-primary);
+    text-align: center;
+    font-size: 20px;
+    padding: 0.5em 0;
+}
+
+nav.responsive ul li a:hover, nav.responsive ul li a:active, nav.responsive ul li a:focus {
+    color: var(--color-grey-secondary);
+    background-color: var(--color-blue-secondary);
+    border-radius: var(--radius);
+    transition: 0.5s;
+}
+
+/********************************************************************************************/
+
+/* Main *************************************************************************************/
+main {
+    margin: 0 auto;
+}
+
+main section {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/********************************************************************************************/
+
+/* About Us *********************************************************************************/
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/CSS/css_grid_item.asp */
+
+section.about-us {
+    margin: 0 auto;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    'about-us-div'
+    'about-us-div'
+    'about-us-div'
+    'about-us-div'
+    'first-article'
+    'second-article';
+    align-content: space-evenly;
+}
+
+/*  * Code sourced and adapted from:
+    * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
+    * https://www.w3schools.com/CSSref/tryit.asp?filename=trycss_background-position
+    * https://www.w3docs.com/snippets/css/how-to-center-the-content-in-grid.html */
+
+section.about-us div {
+    grid-area: about-us-div;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url("../../../media/lunardo-cinema-logo-secondary.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 12em 0;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_font_responsive */
+
+section.about-us div h1 {
+    font-size: 1.5rem;
+    font-family: var(--font-family-secondary);
+    font-weight: var(--font-weight-tertiary);
+}
+
+section.about-us div h1 span {
+    font-size: 1.6rem;
+    font-family: var(--font-family-tertiary);
+    font-weight: var(--font-weight-secondary);
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/cssref/pr_text_letter-spacing.asp */
+
+section.about-us div p {
+    font-size: 0.8rem;
+    font-weight: 100;
+    letter-spacing: 5px;
+}
+
+section.about-us article:nth-child(2) {
+    grid-area: first-article;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    padding: 3em;
+    gap: 1em;
+    background-color: var(--color-blue-secondary);
+}
+
+section.about-us article:nth-child(3) {
+    grid-area: second-article;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    padding: 2em;
+}
+
+section.about-us article:nth-child(3) img {
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+}
+
+/********************************************************************************************/
+
+/* Seats and Prices *************************************************************************/
+#seatsAndPrices {
+    background-color: var(--color-white);
+}
+
+div.seats-and-prices {
+    margin: 0 auto;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: var(--padding-primary);
+    gap: 2em;
+    text-align: justify;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/howto_css_responsive_text.asp */
+
+div.seats-and-prices > h1 {
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    width: 100%;
+    font-size: 6vw;
+    margin: 0 auto;
+    line-height: 0;
+    text-align: center;
+    padding: 1em;
+}
+
+div.seats-and-prices > h2 {
+    font-family: var(--font-family-secondary);
+    font-weight: 300;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 1em;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.youtube.com/watch?v=oYRda7UtuhA&t=1040s */
+
+/*div.seats-and-prices > h1::after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    height: 5px;*/
+/*    width: 0%;*/
+/*    margin: auto;*/
+/*    background-color: var(--color-green);*/
+/*    transition: 0.9s;*/
+/*}*/
+
+div.seats-and-prices > article:nth-child(1) p {
+    text-align: justify;
+    padding-top: 10px;
+}
+
+div.container-seats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2em;
+}
+
+div.container-seats h2 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-black);
+    font-weight: 300;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 1em;
+}
+
+div.container-seats span {
+    color: var(--color-green);
+    font-weight: 400;
+}
+
+div.container-seats img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+div.container-seats p {
+    text-align: justify;
+    padding: 1em;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_image */
+
+div.container-seats > img:nth-child(5) {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+div.seats-and-prices article:nth-child(5) {
+    width: 100%;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_border
+    * https://www.w3schools.com/csS/tryit.asp?filename=trycss_buttons_shadow
+    * https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_box-shadow
+    */
+
+div.seats-and-prices article:nth-child(5) table {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: 10px 15px var(--color-green);
+    border: 1px solid var(--color-blue-secondary);
+    padding: 1em;
+    font-size: 13px;
+    margin: 2em 0;
+}
+
+/********************************************************************************************/
+
+/* Now Showing ******************************************************************************/
+section.now-showing {
+    margin: 0 auto;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding-primary);
+    gap: 2em;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+section.now-showing > h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-grey-secondary);
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    font-size: 6vw;
+    line-height: 0;
+    padding: 1em;
+}
+
+section.now-showing > p {
+    text-align: center;
+}
+
+div.container-now-showing {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5em;
+    margin: 3em 0;
+}
+
+div.card {
+    width: 350px;
+    height: 800px;
+    position: relative;
+}
+
+div.card > article {
+    width: 350px;
+    height: 800px;
+    position: absolute;
+    transition: 0.5s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background-color: var(--color-blue-secondary);
+}
+
+/*  * Code sourced and adapted from:
+    * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/ */
+
+div.card article:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*  * Code sourced and adapted from:
+    * https://developer.mozilla.org/en-US/docs/Learn/CSS/Howto/Fill_a_box_with_an_image */
+
+div.card article > img {
+    width: 350px;
+    padding: 2px;
+}
+
+div.card article > h2 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+div.card article:nth-child(1) > h2 {
+    line-height: 0;
+}
+
+div.card article:nth-child(1) > h3 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 0.8em;
+    line-height: 0;
+}
+
+div.card article:nth-child(1) > h4 {
+    display: none;
+}
+
+div.card article > ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--color-blue-primary);
+    font-size: 10px;
+    font-weight: 500;
+}
+
+div.card article > ul li {
+    list-style: none;
+    padding: 0 10px;
+    border: 2px var(--color-blue-secondary) solid;
+    color: var(--color-grey-secondary);
+}
+
+div.card > article:nth-child(1) {
+    transform: rotateY(0deg);
+}
+
+div.card > article:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--color-blue-secondary);
+    transform: rotateY(180deg);
+    overflow-y: scroll;
+}
+
+div.card > article:nth-child(2) > h2 {
+    background-color: var(--color-green);
+    color: var(--color-grey-secondary);
+    padding: 1em;
+}
+
+div.card > article:nth-child(2) > p {
+    text-align: justify;
+    padding: 1em;
+}
+
+/*  * Code sourced and adapted from:
+    * https://stackoverflow.com/questions/3087975/how-to-change-the-cursor-into-a-hand-when-a-user-hovers-over-a-list-item
+    * https://www.w3schools.com/csS/css3_buttons.asp */
+
+div.card article:nth-child(2) a {
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    margin: auto 1em 1em;
+    border-radius: var(--radius);
+    padding: 10px;
+    border: 1px var(--color-green) solid;
+    background-color: var(--color-blue-secondary);
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    opacity: 0.9;
+}
+
+div.card > article:nth-child(2) a:hover, div.card > a:nth-child(2) button:active, div.card > article:nth-child(2) a:focus {
+    background-color: var(--color-green);
+    color: var(--color-grey-secondary);
+    opacity: 1;
+}
+
+div.card:hover > article:nth-child(1), article.card:active > article:nth-child(1), article.card:focus > article:nth-child(1) {
+    transform: rotateY(180deg);
+}
+
+div.card:hover > article:nth-child(2), div.card:active > article:nth-child(2), div.card:focus > article:nth-child(2) {
+    transform: rotateY(360deg);
+}
+
+section.now-showing > img {
+    display: none;
+}
+
+/********************************************************************************************/
+
+/* Movie Trailer ****************************************************************************/
+section.movie-trailer {
+    margin: 0 auto;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    gap: 1em;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+section.movie-trailer > h1 {
+    font-family: var(--font-family-secondary);
+    color: var(--color-white);
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    font-size: 6vw;
+    line-height: 0;
+    padding: 1em 0;
+}
+
+section.movie-trailer video {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+section.movie-trailer > h2 {
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+    padding: 1em;
+    background-color: var(--color-blue-secondary);
+}
+
+section.movie-trailer > article h3 {
+    font-style: var(--font-family-tertiary);
+    font-size: 14px;
+
+}
+
+section.movie-trailer > article p {
+    text-align: justify;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+#readMoreDiv {
+    display: none;
+}
+
+section.movie-trailer > article a {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+section.movie-trailer > article a:hover {
+    color: var(--color-green);
+}
+
+/********************************************************************************************/
+
+/* Book Ticket ******************************************************************************/
+section.book-ticket {
+    margin: 0 auto;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 1em;
+}
+
+section.book-ticket > h1 {
+    font-family: var(--font-family-secondary);
+    width: 100%;
+    font-weight: 400;
+    text-align: center;
+    font-size: 6vw;
+    line-height: 0;
+    padding: 1em 0;
+}
+
+section.book-ticket span {
+    color: var(--color-green);
+    font-weight: 500;
+    font-size: 13px;
+}
+
+section.book-ticket form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content: center;
+    justify-content: space-around;
+}
+
+section.book-ticket form fieldset {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+
+section.book-ticket fieldset {
+    width: fit-content;
+    border-width: 0;
+    padding: 1em 0;
+}
+
+section.book-ticket fieldset legend {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+section.book-ticket fieldset label {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--color-grey-primary);
+}
+
+/*  * Code sourced and adapted from:
+    * https://rmit.instructure.com/courses/85177/pages/workshop-wk05?module_item_id=3564997 */
+
+section.book-ticket fieldset input[type=radio] {
+    display: none;
+}
+
+section.book-ticket fieldset input[type=radio] + label {
+    text-align: center;
+    cursor: pointer;
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    padding: 12px 20px;
+    opacity: 0.9;
+}
+
+section.book-ticket fieldset input[type=radio]:checked + label {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    opacity: 1;
+    border-radius: var(--radius);
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/tryit.asp?filename=trycss_form_focus2 */
+
+section.book-ticket p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+section.book-ticket fieldset > p [type=text] {
+    flex-grow: 1;
+    width: 30vw;
+}
+
+section.book-ticket fieldset > p [type=button] {
+    flex-grow: 2;
+    border: 1px var(--color-green) solid;
+    background-color: var(--color-white);
+    border-radius: var(--radius);
+    cursor: pointer;
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    opacity: 0.9;
+}
+
+section.book-ticket fieldset > p [type=button]:hover, section.book-ticket fieldset > p [type=button]:active, section.book-ticket fieldset > p [type=button]:focus {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    opacity: 1;
+}
+
+section.book-ticket fieldset [type=text], section.book-ticket fieldset [type=email], section.book-ticket fieldset [type=button] {
+    border: 1px var(--color-grey-primary) solid;
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    margin: 4px 0;
+    outline: none;
+    transition: 0.5s;
+    opacity: 0.5;
+}
+
+section.book-ticket fieldset [type=text]:focus, section.book-ticket fieldset [type=email]:focus, section.book-ticket fieldset [type=button]:focus {
+    border: 1px var(--color-green) solid;
+    opacity: 1;
+}
+
+div.ticket-container {
+    display: none;
+    flex-direction: column;
+    padding: 1em;
+    margin: 0 0 1em 0;
+    background-color: var(--color-green);
+    border-radius: var(--radius);
+    color: var(--color-white);
+}
+
+div.ticket-container div {
+    display: flex;
+    padding: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.ticket-container h3 {
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    font-size: 20px;
+}
+
+div.ticket-container h4 {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+div.ticket-container h5 {
+    font-weight: 300;
+    font-size: 12px;
+}
+
+section.book-ticket [type=submit] {
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: 10px;
+    border: 1px var(--color-green) solid;
+    background-color: var(--color-white);
+    color: var(--color-grey-primary);
+    transition-duration: 0.4s;
+    opacity: 0.9;
+    margin: 0 0 1em 0;
+}
+
+section.book-ticket [type=submit]:hover, section.book-ticket [type=submit]:active, section.book-ticket [type=submit]:focus {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    opacity: 1;
+}
+
+/********************************************************************************************/
+
+/* Receipt and Tickets **********************************************************************/
+section.receipt-page, section.ticket-page {
+    margin: 0 auto;
+    max-width: 1400px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 1em;
+}
+
+section.receipt-page > h1, section.ticket-page > h1 {
+    margin: 0 auto;
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    font-size: 6vw;
+    line-height: 0;
+    padding: 1em;
+}
+
+div.receipt, div.ticket {
+    border: 0.01px solid var(--color-grey-primary);
+}
+
+div.receipt-header {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.receipt-header img {
+    width: 120px;
+    padding: 1em;
+}
+
+div.receipt-header h6 {
+    font-weight: 200;
+    font-size: 14px;
+    padding: 1em;
+}
+
+div.receipt-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+div.receipt-body div span {
+    font-size: 12px;
+    color: var(--color-grey-primary);
+}
+
+div.receipt-body > div:first-child {
+    margin: 0;
+    padding-bottom: 1em;
+    font-size: 20px;
+    color: var(--color-blue-secondary);
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+div.receipt-body > div:first-child h2 {
+    font-family: var(--font-family-primary);
+    font-weight: 300;
+    line-height: 1;
+    font-size: 15px;
+    padding-top: 1em;
+    align-self: center;
+}
+
+div.receipt-body > div:first-child h3 {
+    font-family: var(--font-family-primary);
+    color: var(--color-grey-primary);
+    font-weight: 200;
+    line-height: 1;
+    padding-top: 1em;
+    font-size: 15px;
+    align-self: center;
+}
+
+div.receipt-body > h2 {
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    font-size: 30px;
+    padding-top: 1em;
+    text-align: center;
+}
+
+div.receipt-body > h4 {
+    font-size: 20px;
+    font-weight: 300;
+    font-family: var(--font-family-primary);
+    padding-bottom: 1em;
+    text-align: center;
+
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/css/css_table.asp */
+
+div.receipt-description table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    padding: 1em;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 0.01px solid var(--color-blue-secondary);
+    box-shadow: 0 0 var(--color-green);
+    transition: 0.5s;
+}
+
+div.receipt-description table thead {
+    background-color: var(--color-green);
+    text-align: center;
+    color:var(--color-white);
+}
+
+div.receipt-description table:hover {
+    box-shadow: 10px 15px var(--color-green);
+}
+
+div.receipt-description table tr td {
+    padding:1em;
+    border: 0.01px var(--color-blue-secondary) solid;
+}
+
+div.receipt-description table tfoot tr > td:last-child {
+    font-weight: 500;
+}
+
+div.receipt-footer > img {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    padding: 2em 1em 1em 1em;
+}
+
+div.receipt-footer > h1 {
+    text-align: center;
+    padding-bottom: 1em;
+    font-weight: 200;
+    font-size: 20px;
+}
+
+div.receipt-footer > div {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-green);
+    padding: 1em;
+}
+
+div.receipt-footer div > h3 {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+div.ticket {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 1em;
+}
+
+div.ticket > div {
+    border: dashed 1px var(--color-green);
+    border-radius: var(--radius);
+    background-image: url("../../../media/Lunardo-logo-white.png");
+    background-size: 20%;
+    background-repeat: repeat;
+    padding:1em;
+    margin: 1em;
+    box-shadow: 0 0 var(--color-green);
+    transition: 0.5s;
+}
+
+div.ticket > div:hover {
+    box-shadow: 10px 15px var(--color-green);
+}
+
+div.ticket > div > h3 {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    font-family: var(--font-family-secondary);
+}
+
+div.ticket > div h5 {
+    font-size: 12px;
+    font-weight: 200;
+    text-align: center;
+    color: var(--color-grey-primary);
+}
+
+div.ticket > div div {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap:50px;
+    align-items: center;
+    font-weight: 300;
+    text-align: center;
+}
+
+div.ticket > div div h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color:var(--color-green);
+}
+
+div.ticket > div div h4 {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+div.ticket > div > h3:last-child {
+    font-size: 50px;
+    font-family: 'Libre Barcode 39 Extended Text', cursive;
+}
+
+/********************************************************************************************/
+
+/* Footer ***********************************************************************************/
+footer {
+    background-color: var(--color-grey-secondary);
+    color: var(--color-blue-primary);
+    height: auto;
+    text-align: center;
+    font-size: 12px;
+    padding: 2em 3em;
+}
+
+div.container-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em 0 4em 0;
+}
+
+div.container-footer > h1 {
+    font-family: var(--font-family-tertiary);
+    font-weight: 400;
+    font-size: var(--font-size-h1);
+}
+
+div.container-footer > h1 span {
+    font-family: var(--font-family-secondary);
+    font-weight: 200;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+div.container-footer > div:nth-child(2) h2 {
+    font-weight: 200;
+    font-size: 14px;
+    text-align: left;
+    padding-top: 2em;
+    padding-bottom: 2px;
+}
+
+div.container-footer > div:nth-child(2) ul li {
+    text-align: left;
+    list-style: none;
+    font-weight: 200;
+    font-size: 12px;
+}
+
+div.container-footer > div:nth-child(2) ul li a {
+    text-decoration: none;
+    color: var(--color-blue-primary);
+    cursor: pointer;
+}
+
+div.container-footer > div:nth-child(2) ul li a:hover, div.container-footer > div:nth-child(2) ul li a:active, div.container-footer > div:nth-child(2) ul li a:focus {
+    color: var(--color-green);
+}
+
+footer > div:nth-child(2) {
+    padding-top: 2em;
+}
+
+footer > div:nth-child(2), footer > div:nth-child(3) {
+    font-size: 9px;
+}
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/csS/css3_buttons.asp */
+
+footer button {
+    cursor: pointer;
+    font-size: 8px;
+    border: 1px solid var(--color-blue-primary);
+    border-radius: var(--radius);
+    margin-top: 2em;
+    padding: 1em;
+    background-color: var(--color-grey-secondary);
+    color: var(--color-grey-primary);
+    transition-duration: 0.3s;
+}
+
+footer button:hover, footer button:focus {
+    color: var(--color-white);
+    background-color: var(--color-blue-primary);
+}
+
+/********************************************************************************************/
+
+/* Aside ************************************************************************************/
+aside {
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    padding: 1em;
+    /*display: none;*/
+}
+
+aside h3 {
+    font-size: 14px;
+    border-bottom: 1px var(--color-white) solid;
+}
+
+aside pre {
+    padding: 2em 3em;
+    font-size: 11px;
+}
+
+/********************************************************************************************/

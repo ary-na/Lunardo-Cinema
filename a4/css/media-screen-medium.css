@@ -1,0 +1,321 @@
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_topnav */
+
+/* Tablet: responsive layout ****************************************************************/
+@media screen and (min-width: 600px) {
+
+    /* Header *******************************************************************************/
+
+    /*  * Code sourced and adapted from:
+        * https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+
+    header {
+        position: static;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 0;
+    }
+
+    header img {
+        width: 65px;
+        display: block;
+    }
+
+    div.icon {
+        display: none;
+    }
+    /****************************************************************************************/
+
+    /* Nav **********************************************************************************/
+
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_navbar_on_image
+        * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_sticky_element */
+
+    nav {
+        display: block;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-blue-primary);
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        box-shadow: 0 4px 2px 0 var(--color-grey-tertiary);
+    }
+
+    nav ul {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1em;
+    }
+
+    nav ul li a:link, nav ul li a:visited {
+        font-size: 14px;
+        font-weight: 400;
+        text-decoration: none;
+        color: var(--color-grey-primary);
+        text-align: center;
+        padding: 1.3em;
+        border-radius: 10px;
+    }
+
+    /*  * Code sourced and adapted from:
+        * https://www.w3schools.com/howto/howto_css_navbar_border.asp */
+
+    nav ul li a:hover, nav ul li a:active, nav ul li a:focus {
+        color: var(--color-green);
+        background-color: var(--color-blue-secondary);
+    }
+
+    nav ul li a:link.current, nav ul li a:visited.current {
+        color: var(--color-green);
+        background-color: var(--color-blue-secondary);
+    }
+    /****************************************************************************************/
+
+    /* About Us *****************************************************************************/
+    section.about-us div {
+        padding: 12em 0;
+        background-size: 40%;
+    }
+
+    section.about-us div h1 {
+        font-size: 2rem;
+    }
+
+    section.about-us div h1 span {
+        font-size: 2.1rem;
+    }
+
+    section.about-us div p {
+        font-size: 1.2rem;
+        letter-spacing: 6px;
+    }
+    /****************************************************************************************/
+
+    /* Seats and Prices *********************************************************************/
+    div.seats-and-prices > h1 {
+        width: 90%;
+        font-size: 35px;
+        padding: 2.5em 0 2em 0;
+    }
+
+    div.seats-and-prices > h2 {
+        font-size: 30px;
+    }
+
+    div.seats-and-prices > article:nth-child(5) p {
+        text-align: center;
+    }
+
+    div.container-seats p:nth-child(3) {
+        grid-area: first-para;
+    }
+
+    div.container-seats p:nth-child(6) {
+        grid-area: second-para;
+    }
+
+    div.container-seats img:nth-child(2) {
+        grid-area: standard-seat;
+    }
+
+    div.container-seats img:nth-child(5) {
+        grid-area: first-class-seat;
+    }
+
+    /*  * Code sourced and adapted from:
+        * https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap */
+
+    div.container-seats {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas:
+        'first-para standard-seat'
+        'second-para first-class-seat';
+        align-items: center;
+        justify-content: center;
+        grid-row-gap: 5em;
+    }
+
+    div.container-seats h2 {
+        display: none;
+    }
+
+    div.container-seats img {
+        width: 100%;
+    }
+
+    div.container-seats > img:nth-child(5) {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
+    div.seats-and-prices article:nth-child(5) table {
+        width: 80%;
+        margin: 2em auto;
+        padding: 2em;
+        font-size: 15px;
+    }
+    /****************************************************************************************/
+
+    /* Now Showing **************************************************************************/
+    section.now-showing {
+        gap: 2em;
+    }
+
+    section.now-showing > h1 {
+        width: 90%;
+        font-size: 35px;
+        padding: 2.5em 0 2em 0;
+    }
+
+    div.container-now-showing {
+        gap: 4em;
+    }
+
+    div.card {
+        width: 500px;
+        height: 400px;
+    }
+
+    div.card article {
+        width: 500px;
+        height: 400px;
+    }
+
+    div.card article:nth-child(1) img {
+        width: initial;
+        height: 400px;
+        grid-area: movie-poster;
+    }
+
+    div.card article:nth-child(1) > h2 {
+        grid-area: movie-title;
+        line-height: initial;
+    }
+
+    div.card article:nth-child(1) > h3 {
+        grid-area: movie-rating;
+        line-height: initial;
+        align-self: start;
+    }
+
+    div.card article:nth-child(1) > h4 {
+        display: initial;
+        grid-area: time-h3;
+        font-size: 0.7em;
+        font-weight: 500;
+        text-align: center;
+        align-self: end;
+    }
+
+    div.card article:nth-child(1) > ul {
+        grid-area: movie-times;
+        align-self: end;
+    }
+
+    div.card > article:nth-child(1) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+        'movie-poster movie-title'
+        'movie-poster movie-title'
+        'movie-poster movie-rating'
+        'movie-poster time-h3'
+        'movie-poster movie-times';
+        align-items: center;
+        justify-content: center;
+    }
+    /****************************************************************************************/
+
+    /* Movie Trailer ************************************************************************/
+    section.movie-trailer h1 {
+        width: 90%;
+        font-size: 35px;
+        padding: 2.5em 0 2em 0;
+    }
+    /****************************************************************************************/
+
+    /* Booking Form *************************************************************************/
+    section.book-ticket form {
+        gap: 2em;
+    }
+
+    section.book-ticket > h1 {
+        width: 90%;
+        font-size: 35px;
+        padding: 2.5em 0 2em 0;
+    }
+
+    section.book-ticket form > fieldset:nth-child(2) {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    section.book-ticket fieldset input[type=radio] + label {
+        border-bottom: 2px solid var(--color-green);
+    }
+
+    section.book-ticket fieldset input[type=radio]:checked + label {
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    div.grid-container-book-seat {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 1em;
+    }
+
+    section.book-ticket fieldset > p [type=text] {
+        flex-grow: initial;
+        width: 25vw;
+    }
+
+    div.ticket-container {
+        box-shadow: 10px 15px var(--color-black);
+        border: black 1px solid;
+    }
+
+    section.book-ticket fieldset > p [type=button] {
+        flex-grow: 1;
+    }
+
+    section.book-ticket [type=submit] {
+        align-self: center;
+        width: 40%;
+    }
+    /****************************************************************************************/
+
+    /* Receipt and Tickets ******************************************************************/
+    section.receipt-page > h1, section.ticket-page > h1 {
+        width: 90%;
+        font-size: 35px;
+        padding: 2.5em 0 2em 0;
+    }
+
+    div.receipt-header img {
+        width: 130px;
+    }
+
+    div.receipt-body > div:first-child {
+        max-width: 350px;
+    }
+
+    /****************************************************************************************/
+
+    /* Footer *******************************************************************************/
+    div.container-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1em 2em 4em 2em;
+    }
+
+    div.container-footer > div:nth-child(2) h2 {
+        padding-top: 6em;
+    }
+    /****************************************************************************************/
+}
+/********************************************************************************************/
