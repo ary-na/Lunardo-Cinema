@@ -1,6 +1,7 @@
 <?php
 include_once('tools.php');
 topModule("Lunardo Cinema");
+unsetSession();
 ?>
 
     <main>

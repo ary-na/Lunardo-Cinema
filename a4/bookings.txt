@@ -1,2 +1,6 @@
 "Order Date"	Name	Email	Mobile	"Movie Code"	"Day of Movie"	"Time of Movie"	#STA	$STA	#STP	$STP	#STC	$STC	#FCA	$FCA	#FCP	$FCP	#FCC	$FCC	Subtotal	GST	Total
 "02-03-2022 05:56"	edf	sdf@sfd.com	0410824745	RMC	MON	6PM	2	30.00	0	0.00	2	24.00	0	0.00	0	0.00	0	0.00	48.60	5.40	54.00
+"02-03-2022 06:06"	Arianfdgdfg	sdf@dfsfdsf.com	0410524745	ACT	WED	9PM	0	0.00	0	0.00	3	49.50	3	90.00	0	0.00	0	0.00	125.55	13.95	139.50
+"02-03-2022 06:10"	Arianfdgdfg	sdf@dfsfdsf.com	0410524745	RMC	MON	6PM	0	0.00	1	13.50	3	36.00	4	96.00	0	0.00	0	0.00	130.95	14.55	145.50
+"02-03-2022 06:12"	Arianfdgdfg	sdf@dfsfdsf.com	0410524745	RMC	TUE	6PM	0	0.00	3	54.00	1	16.50	0	0.00	0	0.00	0	0.00	63.45	7.05	70.50
+"02-03-2022 06:14"	dgf	arian@md.com	0410234234	ACT	WED	9PM	0	0.00	2	36.00	0	0.00	0	0.00	0	0.00	0	0.00	32.40	3.60	36.00

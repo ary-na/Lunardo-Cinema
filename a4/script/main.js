@@ -223,14 +223,16 @@ function isFullDiscountedOrNotShowing(day, time) {
     * https://codetogo.io/how-to-check-if-element-has-class-in-javascript/
     * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/
     * https://www.codegrepper.com/code-examples/javascript/how+to+check+if+localstorage+is+empty
+    * https://www.w3schools.com/js/js_window.asp
     */
 
 // Check for the class localStorage
 const main = document.querySelector("main");
 if (main.classList.contains('localStorage')) {
     //console.log("Inside this if block");
-    // Check if local storage is not empty
+    // Check if local storage contains data
     if (localStorage.length > 0) {
+        // Set local storage values to text fields using window function
         document.getElementById("rememberMe").checked = true;
         document.getElementById("rememberMeLabel").innerHTML = "Forget me";
         document.getElementById("fullName").value = window.localStorage.getItem("userName");
@@ -255,6 +257,7 @@ function rememberUser() {
             rememberMe.checked = false;
         } else {
             if (rememberMe.checked) {
+                // Store user details to local storage
                 document.getElementById("rememberMeLabel").innerHTML = "Forget me";
                 let userName = document.getElementById("fullName").value;
                 let userEmail = document.getElementById("email").value;
@@ -263,6 +266,7 @@ function rememberUser() {
                 localStorage.setItem('userEmail', userEmail);
                 localStorage.setItem('userMobile', userMobile);
             } else {
+                // Remove user details from local storage
                 document.getElementById("rememberMeLabel").innerHTML = "Remember me";
                 localStorage.removeItem('userName');
                 localStorage.removeItem('userEmail');

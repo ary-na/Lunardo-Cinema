@@ -88,14 +88,13 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
             <fieldset>
                 <legend>Personal Information</legend>
                 <label for='fullName'>Full Name:</label>
-                <input type='text' id='fullName' name='user[name]' value='<?= unsetFB($userInput['user']['name']); ?>'>
+                <input type='text' id='fullName' name='user[name]' value='<?= unsetFB($userInput['user']['name']); ?>' onchange="rememberUser();">
                 <span id="nameError"><?= unsetFB($fieldErrors['user']['name']) ?></span>
                 <label for='email'>Email:</label>
-                <input type='text' id='email' name='user[email]' value='<?= unsetFB($userInput['user']['email']); ?>'>
+                <input type='text' id='email' name='user[email]' value='<?= unsetFB($userInput['user']['email']); ?>' onchange="rememberUser();">
                 <span id="emailError"><?= unsetFB($fieldErrors['user']['email']) ?></span>
                 <label for='mobileNo'>Mobile Number</label>
-                <input type='text' id='mobileNo' name='user[mobile]'
-                       value='<?= unsetFB($userInput['user']['mobile']); ?>'>
+                <input type='text' id='mobileNo' name='user[mobile]' value='<?= unsetFB($userInput['user']['mobile']); ?>' onchange="rememberUser();">
                 <span id="mobileNoError"><?= unsetFB($fieldErrors['user']['mobile']) ?></span>
             </fieldset>
 
@@ -111,7 +110,7 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
             </div>
             <div class="button-checkbox">
                 <input type="checkbox" id="rememberMe" name="remember-me" onclick="rememberUser();">
-                <label for='rememberMe' id="rememberMeLabel"></label>
+                <label for='rememberMe' id="rememberMeLabel">Remember me</label>
                 <input type='submit' value='Book'>
             </div>
         </form>

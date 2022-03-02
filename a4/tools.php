@@ -399,11 +399,20 @@ function noSession()
     }
 }
 
+// Unset session
+function unsetSession()
+{
+    if (isset($_SESSION["booking"])) {
+        unset($_SESSION["booking"]);
+    }
+}
+
 /*  * Code sourced and adapted from:
     * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/
     * https://www.w3schools.com/php/func_filesystem_fputcsv.asp
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk12?module_item_id=3565060
     * https://www.php.net/manual/en/function.filesize.php
+    * https://www.tutorialspoint.com/php/php_sessions.htm
     */
 
 function writeToFile($fileName, $bookingDetails)
@@ -602,8 +611,8 @@ CDATA;
     foreach ($prices as $seatID => $seatsAndPrices) {
         foreach ($seatsAndPrices as $seatType => $price)
             $formatPriceDiscount = number_format($price["Discount"], 2);
-            $formatPriceFull = number_format($price["Full"], 2);
-            echo "<tr><td>$seatType</td><td>\$$formatPriceDiscount</td><td>\$$formatPriceFull</td></tr>";
+        $formatPriceFull = number_format($price["Full"], 2);
+        echo "<tr><td>$seatType</td><td>\$$formatPriceDiscount</td><td>\$$formatPriceFull</td></tr>";
     }
     echo "</tbody></table>";
 
