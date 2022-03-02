@@ -1,1 +1,2 @@
 "Order Date"	Name	Email	Mobile	"Movie Code"	"Day of Movie"	"Time of Movie"	#STA	$STA	#STP	$STP	#STC	$STC	#FCA	$FCA	#FCP	$FCP	#FCC	$FCC	Subtotal	GST	Total
+"02-03-2022 05:56"	edf	sdf@sfd.com	0410824745	RMC	MON	6PM	2	30.00	0	0.00	2	24.00	0	0.00	0	0.00	0	0.00	48.60	5.40	54.00

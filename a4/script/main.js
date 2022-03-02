@@ -114,6 +114,7 @@ function decrement(seatID) {
     * https://rmit.instructure.com/courses/85177/pages/workshop-wk07?module_item_id=3565022
     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
     * https://stackoverflow.com/questions/16985841/how-can-i-select-all-elements-with-the-same-class-name
+    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
     */
 
 // Calculate the ticket price and display to document
@@ -210,5 +211,63 @@ function priceCalc() {
 function isFullDiscountedOrNotShowing(day, time) {
     if (typeof pricingPolicyJS[day][time] !== undefined) {
         return pricingPolicyJS[day][time];
+    }
+}
+
+
+/*  * Code sourced and adapted from:
+    * https://www.w3schools.com/jsref/prop_checkbox_checked.asp
+    * https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
+    * https://blog.logrocket.com/localstorage-javascript-complete-guide/
+    * https://stackoverflow.com/questions/5085567/what-is-the-hasclass-function-with-plain-javascript
+    * https://codetogo.io/how-to-check-if-element-has-class-in-javascript/
+    * https://titan.csit.rmit.edu.au/~e54061/wp/lectures/
+    * https://www.codegrepper.com/code-examples/javascript/how+to+check+if+localstorage+is+empty
+    */
+
+// Check for the class localStorage
+const main = document.querySelector("main");
+if (main.classList.contains('localStorage')) {
+    //console.log("Inside this if block");
+    // Check if local storage is not empty
+    if (localStorage.length > 0) {
+        document.getElementById("rememberMe").checked = true;
+        document.getElementById("rememberMeLabel").innerHTML = "Forget me";
+        document.getElementById("fullName").value = window.localStorage.getItem("userName");
+        document.getElementById("email").value = window.localStorage.getItem("userEmail");
+        document.getElementById("mobileNo").value = window.localStorage.getItem("userMobile");
+    }
+}
+
+// Store user details using local storage
+function rememberUser() {
+    // console.log(document.querySelector('input[name="remember-me"]:checked'));
+    const rememberMeLabel = document.getElementById("rememberMeLabel");
+    const rememberMe = document.getElementById("rememberMe")
+    // console.log(rememberMe.checked);
+
+    // Set checkbox to display none when web storage is undefined
+    if (typeof (Storage) === "undefined") {
+        rememberMeLabel.style.display = "none";
+    } else {
+        // Uncheck the checkbox if details are invalid
+        if (!validatePersonalInfo()) {
+            rememberMe.checked = false;
+        } else {
+            if (rememberMe.checked) {
+                document.getElementById("rememberMeLabel").innerHTML = "Forget me";
+                let userName = document.getElementById("fullName").value;
+                let userEmail = document.getElementById("email").value;
+                let userMobile = document.getElementById("mobileNo").value;
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('userEmail', userEmail);
+                localStorage.setItem('userMobile', userMobile);
+            } else {
+                document.getElementById("rememberMeLabel").innerHTML = "Remember me";
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userMobile');
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ global $movies, $prices, $pricingPolicy;
 topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
 ?>
 
-<main>
+<main class="localStorage">
     <section id='movieTrailer' class='movie-trailer'>
         <?php $movies[$_GET["movieID"]]->movieTrailerModule(); ?>
     </section>
@@ -109,8 +109,11 @@ topModule("Lunardo Cinema - " . $movies[$_GET["movieID"]]->getMovieTitle());
                     <h4 id="total"></h4>
                 </div>
             </div>
-
-            <input type='submit' value='Book'>
+            <div class="button-checkbox">
+                <input type="checkbox" id="rememberMe" name="remember-me" onclick="rememberUser();">
+                <label for='rememberMe' id="rememberMeLabel"></label>
+                <input type='submit' value='Book'>
+            </div>
         </form>
     </section>
 </main>

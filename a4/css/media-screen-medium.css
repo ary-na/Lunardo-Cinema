@@ -286,9 +286,15 @@
         flex-grow: 1;
     }
 
-    section.book-ticket [type=submit] {
-        align-self: center;
-        width: 40%;
+    /*section.book-ticket [type=submit] {*/
+    /*    align-self: center;*/
+    /*    width: 40%;*/
+    /*}*/
+
+    div.button-checkbox {
+        grid-template-columns: 1fr 4fr;
+        margin: 0 auto 1em auto;
+        width: 90%;
     }
     /****************************************************************************************/
 
