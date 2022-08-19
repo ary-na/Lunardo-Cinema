@@ -1,5 +1,7 @@
 # Lunardo-Cinema
 
+Please note: Media used to develop this website are excluded from the git repository.
+
 ## Screen Shots
 
 **Home Page**
