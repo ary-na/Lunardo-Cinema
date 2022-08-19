@@ -12,4 +12,4 @@
 ![Booking Form](Screen-Shots/Lunardo-Booking-Form.png)
 
 
-### Disclaimer: _This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia._
+Disclaimer: _This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia._
